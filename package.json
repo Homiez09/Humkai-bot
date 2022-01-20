@@ -1,4 +1,23 @@
 {
+  "name": "kamoo",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Homiez09/Kamoo-Bot.git"
+  },
+  "homepage": "https://github.com/Homiez09/Kamoo-Bot#readme",
+  "bugs": {
+    "url": "https://github.com/Homiez09/Kamoo-Bot/issues"
+  },
+  "author": "HomieZ09",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "format": "prettier --write \"src/**/*\"",
+    "prepare": "husky install"
+  },
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",
     "chalk": "^4.1.2",
@@ -10,22 +29,8 @@
     "figlet": "^1.5.2",
     "humanize-duration": "^3.27.1"
   },
-  "name": "kamoo",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Homiez09/Kamoo-Bot.git"
-  },
-  "author": "HomieZ09",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Homiez09/Kamoo-Bot/issues"
-  },
-  "homepage": "https://github.com/Homiez09/Kamoo-Bot#readme",
-  "description": ""
+  "devDependencies": {
+    "prettier": "^2.5.1",
+    "husky": "^7.0.0"
+  }
 }
