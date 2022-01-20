@@ -1,6 +1,5 @@
 const figlet = require('figlet');
 const chalk = require('chalk');
-const delay = require('delay');
 
 module.exports = (client) => {
   figlet(client.user.tag, function (err, data) {
@@ -12,7 +11,7 @@ module.exports = (client) => {
     console.log(chalk.red.bold(data));
   });
   console.log(`[SYSTEM] ${client.user.tag} - Ready!`);
-  client.user.setActivity('NeneBot - BETA', { type: 'PLAYING' });
-  client.user.setStatus('dnd');
+  client.user.setActivity('Humkai - BETA', { type: 'PLAYING' });
+  client.user.setStatus('online');
   // Set the bot's online/idle/dnd/invisible status
 };
