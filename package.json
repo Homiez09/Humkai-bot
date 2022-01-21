@@ -36,5 +36,11 @@
   "engines": {
     "node": "17.3.0",
     "npm": "8.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run test"
+    }
   }
 }
