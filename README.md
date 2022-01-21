@@ -1,2 +1,3 @@
-## DiscordJS-V13-Starter
-### Run registerSlash.js first and then run index.js
+### DiscordJS-V13-Starter
+<p>node src/registerSlash.js</p>
+<p>node .</p>
