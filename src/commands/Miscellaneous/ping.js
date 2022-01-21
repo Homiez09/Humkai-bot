@@ -14,6 +14,6 @@ module.exports = {
       )
       .setFooter(interaction.user.tag, interaction.user.displayAvatarURL());
 
-    interaction.reply({ embeds: [embed], ephemeral: false });
+    interacion.reply({ embeds: [embed], ephemeral: false });
   },
 };
