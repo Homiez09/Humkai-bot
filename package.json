@@ -14,7 +14,7 @@
   "author": "HomieZ09",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/registerSlash.js && node src/index.js",
     "format": "prettier --write \"src/**/*\"",
     "prepare": "husky install"
   },
@@ -36,11 +36,5 @@
   "engines": {
     "node": "17.3.0",
     "npm": "8.3.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint",
-      "pre-push": "npm run test"
-    }
   }
 }
