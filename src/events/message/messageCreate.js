@@ -49,7 +49,7 @@ module.exports = async (client, msg) => {
             `./src/assets/images/transparent/${msg.author.id}.png`,
             response.data,
           );
-          //console.log('Saved.'); 
+          //console.log('Saved.');
           // สร้างตัวแปร attachmemt1 เพื่อกำหนดที่อยู่ของรูปภาพที่จะส่งไปยังช่องแชท
           let attachment1 = new MessageAttachment(
             `./src/assets/images/transparent/${msg.author.id}.png`,

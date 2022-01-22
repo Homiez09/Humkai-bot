@@ -8,7 +8,7 @@ module.exports = async (client, oldState, newState) => {
   const member = await newState.guild.members.fetch(user.id);
 
   try {
-    if (!oldState.channel && newState.channel.id === '933676232820817922') {
+    if (!oldState.channel && newState.channel.name === 'Create New Room') {
       const channel = await newState.guild.channels.create(user.tag, {
         type: 'GUILD_VOICE',
         parent: newState.channel.parent,
