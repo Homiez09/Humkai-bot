@@ -55,7 +55,7 @@ module.exports = async (client, msg) => {
             });
         })
         .catch((error) => {
-          msg.reply('ยังไม่รองรับไฟล์นามสกุล .webp')
+          msg.reply('ยังไม่รองรับไฟล์นามสกุล .webp');
           return console.error('Request failed:', error);
         });
     });
