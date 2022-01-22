@@ -12,7 +12,10 @@ module.exports = {
           Date.now() - interaction.createdTimestamp
         }ms. API Latency is ${Math.round(client.ws.ping)}ms`,
       )
-      .setFooter(`Requested by ${interaction.user.tag}`, interaction.user.displayAvatarURL());
+      .setFooter(
+        `Requested by ${interaction.user.tag}`,
+        interaction.user.displayAvatarURL(),
+      );
 
     interaction.reply({ embeds: [embed], ephemeral: false });
   },
