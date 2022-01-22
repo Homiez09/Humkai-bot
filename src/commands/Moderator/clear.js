@@ -20,7 +20,7 @@ module.exports = {
     const messages = await interaction.channel.messages.fetch({
       limit: amount,
     });
-    await interaction.channel.bulkDelete(messages);
+    await interaction.channel.bulkDelete(messages, true);
     interaction.reply({
       content: `Cleared ${amount} messages.`,
       ephemeral: true,
