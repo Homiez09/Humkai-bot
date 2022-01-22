@@ -7,16 +7,21 @@ const FormData = require('form-data');
 require('dotenv').config();
 
 module.exports = async (client, msg) => {
+  /* เทส  */
   if (msg.channel.id == '875313424601612318') {
     if (msg.content == 'สวัสดี') {
       msg.channel.send('สวัสดีจ้า');
     }
   }
 
+  /* ลบพื้นหลัง */
+  // ใส่ Channel Id สำหรับ input รูปภาพ
   if (msg.channel.id == '881090796319813642') {
-    // ใส่ Channel Id สำหรับ input รูปภาพ
     msg.attachments.forEach((attachment) => {
+      // ดึง Url จากรูปภาพที่ user ส่ง
       const ImageLink = attachment.proxyURL;
+      // สร้างตัวแปรเพื่อเก็บนามสกุลของไฟล์ภาพ เช่น [png, jpg]
+      const FileExt = ImageLink.split('.')[-1];
       const formData = new FormData();
       formData.append('size', 'auto');
       formData.append('image_url', ImageLink);
@@ -39,11 +44,13 @@ module.exports = async (client, msg) => {
               response.status,
               response.statusText,
             );
+          // บันทึกรูปภาพที่เปลี่ยนพื้นหลังไว้ที่โฟลเดอร์
           fs.writeFileSync(
             `./src/assets/images/transparent/${msg.author.id}.png`,
             response.data,
           );
-          //console.log('Saved.');
+          //console.log('Saved.'); 
+          // สร้างตัวแปร attachmemt1 เพื่อกำหนดที่อยู่ของรูปภาพที่จะส่งไปยังช่องแชท
           let attachment1 = new MessageAttachment(
             `./src/assets/images/transparent/${msg.author.id}.png`,
           );
@@ -54,8 +61,9 @@ module.exports = async (client, msg) => {
               files: [attachment1],
             });
         })
+        // กรณีที่เว็บรองรับไฟล์นามสกุลนั้นๆ
         .catch((error) => {
-          msg.reply('ยังไม่รองรับไฟล์นามสกุล .webp');
+          msg.reply(`ยังไม่รองรับไฟล์นามสกุล ${FileExt}`);
           return console.error('Request failed:', error);
         });
     });
