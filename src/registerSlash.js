@@ -18,7 +18,7 @@ const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
   try {
     console.log('[SYSTEM] Started refreshing application (/) commands.');
     await rest.put(
-      Routes.applicationCommands(process.env.CLIENT_ID), // Global 
+      Routes.applicationCommands(process.env.CLIENT_ID), // Global
       /* Routes.applicationGuildCommands(
         process.env.CLIENT_ID,
         process.env.GUILD_ID,
