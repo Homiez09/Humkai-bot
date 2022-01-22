@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const { Client, Intents, Collection } = require('discord.js');
+const { DiscordTogether } = require('discord-together');
 
 const client = new Client({
   shards: 'auto',
@@ -17,7 +18,6 @@ const client = new Client({
     Intents.FLAGS.DIRECT_MESSAGE_TYPING,
   ],
 });
-const { DiscordTogether } = require('discord-together');
 
 client.slash = new Collection();
 client.commands = new Collection();
@@ -35,7 +35,7 @@ void (async () => {
   if (token) {
     await client.login(process.env.TOKEN);
   } else {
-    console.log(`can't found bot token :C`);
+    console.log(`Can't found bot token :C`);
 
     process.exit(1);
   }
