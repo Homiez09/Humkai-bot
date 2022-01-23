@@ -3,3 +3,8 @@
 
 # Folder
 /node_modules
+
+# Blocked
+src/System
+schemas
+commands/Moderator/giveaway.js

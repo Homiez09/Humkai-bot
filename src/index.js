@@ -28,6 +28,7 @@ client.together = new DiscordTogether(client);
   require(`./handlers/${file}`)(client);
 });
 
+require("./Systems/GiveawaySys")(client);
 // Main Function
 void (async () => {
   const token = process.env.TOKEN || ``;

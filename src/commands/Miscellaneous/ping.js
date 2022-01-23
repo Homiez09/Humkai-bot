@@ -16,7 +16,7 @@ module.exports = {
         `Requested by ${interaction.user.tag}`,
         interaction.user.displayAvatarURL(),
       );
-
+      
     interaction.reply({ embeds: [embed], ephemeral: false });
   },
 };
