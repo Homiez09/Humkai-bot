@@ -8,7 +8,7 @@ module.exports = {
       .setTitle('pong!')
       .setColor('GREEN')
       .setDescription(
-        `🏓Latency is ${
+        `Latency is ${
           Date.now() - interaction.createdTimestamp
         }ms. API Latency is ${Math.round(client.ws.ping)}ms`,
       )
