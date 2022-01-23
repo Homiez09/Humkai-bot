@@ -5,6 +5,6 @@
 /node_modules
 
 # Blocked
-src/Systems
-/schemas
-/commands/Moderator/giveaway.js
+/src/Systems
+/src/schemas
+/src/commands/Moderator/giveaway.js
