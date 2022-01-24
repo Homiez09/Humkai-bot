@@ -17,9 +17,13 @@ module.exports = async (client, msg) => {
   /* ลบพื้นหลัง */
   try {
     // รับค่า Channel ID ที่ input ไฟล์ภาพเข้ามา
-    const input_image = msg.guild.channels.cache.find(channel => channel.name === 'input-image').id;
+    const input_image = msg.guild.channels.cache.find(
+      (channel) => channel.name === 'input-image',
+    ).id;
     // รับค่า Channel ID ที่ input ไฟล์ภาพเข้ามา
-    const output_image = msg.guild.channels.cache.find(channel => channel.name === 'output-image').id;
+    const output_image = msg.guild.channels.cache.find(
+      (channel) => channel.name === 'output-image',
+    ).id;
     if (msg.channel.id == input_image) {
       msg.attachments.forEach((attachment) => {
         // ดึง Url จากรูปภาพที่ user ส่ง
@@ -29,7 +33,7 @@ module.exports = async (client, msg) => {
         const formData = new FormData();
         formData.append('size', 'auto');
         formData.append('image_url', ImageLink);
-  
+
         axios({
           method: 'post',
           url: 'https://api.remove.bg/v1.0/removebg',
@@ -71,7 +75,7 @@ module.exports = async (client, msg) => {
             return console.error('Request failed:', error);
           });
       });
-    }   
+    }
   } catch (error) {
     return;
   }
