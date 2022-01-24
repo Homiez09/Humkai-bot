@@ -7,7 +7,7 @@ module.exports = {
       type: 'GUILD_VOICE',
     });
     interaction.reply({
-      content: 'คลิกที่ Create New Room เพื่อสร้างห้องของตัวเอง',
+      content: `คลิกที่ <#${channel.id}> เพื่อสร้างห้องของตัวเอง`,
     });
   },
 };
