@@ -11,9 +11,12 @@ module.exports = {
       interaction.reply({
         content: `คุณเป็นสมาชิกเรียบร้อยแล้ว`,
         ephemeral: true,
-      });    
+      });
     } catch (error) {
-      
+      interaction.reply({
+        content: `กำหนดยศบอทให้อยู่สูงว่ายศอื่นๆ`,
+        ephemeral: true,
+      });
     }
   },
 };
