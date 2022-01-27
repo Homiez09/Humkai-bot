@@ -10,12 +10,12 @@ module.exports = async (client, interaction) => {
     if (!profileData) {
       let profile = await profileModel.create({
         userID: interaction.user.id,
-        coins: 1000,
+        coins: 500,
       });
-      console.log(`${interaction.user.id} Create New Profile.`)
+      console.log(`${interaction.user.id} Create New Profile.`);
     }
-  }catch(error) {
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
 
   if (interaction.isCommand()) {
@@ -55,7 +55,7 @@ module.exports = async (client, interaction) => {
 
           interaction.reply({ embeds: [embed], ephemeral: true });
         }
-      }     
+      }
       command.run(interaction, client, profileData);
     } catch (e) {
       console.log(e);
