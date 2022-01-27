@@ -1,13 +1,15 @@
-const { MessageAttachment } = require('discord.js');
+const { MessageAttachment, Message } = require('discord.js');
 
 const fs = require('fs');
 const axios = require('axios');
 const FormData = require('form-data');
+const mongoose = require('mongoose');
+const profileModel = require('../../schemas/profileDB');
 
 require('dotenv').config();
 
 module.exports = async (client, msg) => {
-  /* ลบพื้นหลัง */
+  /* Remove Background */
   try {
     const input_image = msg.guild.channels.cache.find(
       (channel) => channel.name === 'input-image',
@@ -40,15 +42,11 @@ module.exports = async (client, msg) => {
                 response.status,
                 response.statusText,
               );
-            let attachment1 = new MessageAttachment(
-              response.data
-            );
-            client.channels.cache
-              .get(output_image)
-              .send({
-                content: `<@${msg.author.id}> ลบพื้นหลังเรียบร้อย`,
-                files: [attachment1],
-              });
+            let attachment1 = new MessageAttachment(response.data);
+            client.channels.cache.get(output_image).send({
+              content: `<@${msg.author.id}> ลบพื้นหลังเรียบร้อย`,
+              files: [attachment1],
+            });
           })
           .catch((error) => {
             msg.reply(`รูปภาพที่ส่งมีนามสกุลไม่ถูกต้อง`);
@@ -59,4 +57,18 @@ module.exports = async (client, msg) => {
   } catch (error) {
     return;
   }
+
+  /* Add member profile to datebase */
+  /* let profileData;
+  try {
+    profileData = await profileModel.findOne({ userID: msg.author.id });
+    if (!profileData) {
+      let profile = await profileModel.create({
+        userID: msg.author.id,
+        coins: 1000,
+      });
+    }
+  }catch(error) {
+    console.log(error)
+  } */
 };

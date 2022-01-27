@@ -1,8 +1,23 @@
 require('dotenv').config();
 
 const { MessageEmbed } = require('discord.js');
+const profileModel = require('../../schemas/profileDB');
 
 module.exports = async (client, interaction) => {
+  let profileData;
+  try {
+    profileData = await profileModel.findOne({ userID: interaction.user.id });
+    if (!profileData) {
+      let profile = await profileModel.create({
+        userID: interaction.user.id,
+        coins: 1000,
+      });
+      console.log(`${interaction.user.id} Create New Profile.`)
+    }
+  }catch(error) {
+    console.log(error)
+  }
+
   if (interaction.isCommand()) {
     if (!client.slash.has(interaction.commandName)) return;
     if (!interaction.guild) return;
@@ -40,8 +55,8 @@ module.exports = async (client, interaction) => {
 
           interaction.reply({ embeds: [embed], ephemeral: true });
         }
-      }
-      command.run(interaction, client);
+      }     
+      command.run(interaction, client, profileData);
     } catch (e) {
       console.log(e);
       await interaction.reply({
