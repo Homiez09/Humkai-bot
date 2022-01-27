@@ -69,7 +69,7 @@ module.exports = async (client, msg) => {
       });
     }
     console.log(`${msg.author.id} Create New Profile.`);
-  }catch(error) {
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
 };
