@@ -37,7 +37,7 @@ module.exports = {
             {
               type: 'GUILD_CATEGORY',
             },
-          ); 
+          );
           let category_rebg = await interaction.guild.channels.create(
             'rebg by humkai',
             {

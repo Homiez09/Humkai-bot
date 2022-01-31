@@ -13,7 +13,10 @@ module.exports = async (client, interaction) => {
         coins: 500,
       });
       console.log(`${interaction.user.id} Create New Profile.`);
-      await interaction.reply({ content: `:white_check_mark: | เพิ่มข้อมูลของคุณแล้ว!`, ephemeral: true })
+      await interaction.reply({
+        content: `:white_check_mark: | เพิ่มข้อมูลของคุณแล้ว!`,
+        ephemeral: true,
+      });
     }
   } catch (error) {
     console.log(error);

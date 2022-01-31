@@ -4,24 +4,24 @@ module.exports = {
   description: 'เช็คยอดเงิน',
   run: async (interaction, client, profileData) => {
     try {
-      if(!profileData)
-      await interaction.reply({
-        embeds: [
-          await new MessageEmbed()
-            .setTitle('Your Wallet :coin:')
-            .addField(
-              'Balance ',
-              `:dollar: => ${profileData.coins}${process.env.CURRENCY}`,
-            )
-            .setColor('#0099ff')
-            .setFooter(
-              `Requested by ${interaction.user.tag}`,
-              interaction.user.displayAvatarURL(),
-            ),
-        ],
-      });
+      if (!profileData)
+        await interaction.reply({
+          embeds: [
+            await new MessageEmbed()
+              .setTitle('Your Wallet :coin:')
+              .addField(
+                'Balance ',
+                `:dollar: => ${profileData.coins}${process.env.CURRENCY}`,
+              )
+              .setColor('#0099ff')
+              .setFooter(
+                `Requested by ${interaction.user.tag}`,
+                interaction.user.displayAvatarURL(),
+              ),
+          ],
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
 };
