@@ -57,19 +57,4 @@ module.exports = async (client, msg) => {
   } catch (error) {
     return;
   }
-
-  /* Add member profile to datebase */
-  let profileData;
-  try {
-    profileData = await profileModel.findOne({ userID: msg.author.id });
-    if (!profileData) {
-      let profile = await profileModel.create({
-        userID: msg.author.id,
-        coins: 500,
-      });
-    }
-    console.log(`${msg.author.id} Create New Profile.`);
-  } catch (error) {
-    console.log(error);
-  }
 };
