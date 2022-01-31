@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const { Collection } = require('discord.js');
+
 const voiceCollection = new Collection();
 
 module.exports = async (client, oldState, newState) => {

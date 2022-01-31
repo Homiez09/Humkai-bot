@@ -3,8 +3,6 @@ const { MessageAttachment, Message } = require('discord.js');
 const fs = require('fs');
 const axios = require('axios');
 const FormData = require('form-data');
-const mongoose = require('mongoose');
-const profileModel = require('../../schemas/profileDB');
 
 require('dotenv').config();
 

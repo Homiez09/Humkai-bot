@@ -1,3 +1,4 @@
+const { MessageEmbed, Message } = require('discord.js');
 const profileModel = require('../../schemas/profileDB');
 
 module.exports = {
@@ -24,21 +25,29 @@ module.exports = {
     try {
       if (amount > profileData.coins)
         return interaction.reply({
-          content: 'คุณมีเงินไม่พอ',
-          ephemeral: true,
+          embeds: [
+            await new MessageEmbed()
+            .setDescription(':x: | คุณมีเงินไม่พอ!')
+          ],
+          ephemeral: false,
         });
       if (target.id === profileData.userID)
         return interaction.reply({
-          content: 'คุณไม่สามารถโอนเงินให้ตัวเองได้',
-          ephemeral: true,
+          embeds: [
+            await new MessageEmbed()
+            .setDescription(':x: | ไม่สามารถโอนเงินให้ตัวเองได้!')
+          ],
+          ephemeral: false,
         });
-      const targetChk = await profileModel.findOne({
-        userID: target.id,
-      });
-      if (!(targetChk.userID === target.id))
+      let targetChk;
+      targetChk = await profileModel.findOne({ userID: target.id });
+      if (!targetChk)
         return interaction.reply({
-          content: `ไม่พบข้อมูลของ ${target}`,
-          ephemeral: true,
+          embeds: [
+            await new MessageEmbed()
+            .setDescription(':x: | ไม่พบข้อมูลผู้ใช้งานนี้!')
+          ],
+          ephemeral: false,
         });
       await profileModel.findOneAndUpdate(
         {
@@ -50,7 +59,6 @@ module.exports = {
           },
         },
       );
-      //console.log(profileData);
       await profileModel.findOneAndUpdate(
         {
           userID: target.id,
@@ -62,7 +70,7 @@ module.exports = {
         },
       );
       return interaction.reply({
-        content: `โอนเงินให้ ${target} จำนวน ${amount} เรียบร้อยแล้ว`,
+        content: `:white_check_mark: | โอนเงินให้ ${target} จำนวน ${amount} เรียบร้อยแล้ว`,
         ephemeral: false,
       });
     } catch (error) {
