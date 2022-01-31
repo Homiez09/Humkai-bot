@@ -4,7 +4,6 @@ const profileModel = require('../../schemas/profileDB');
 module.exports = {
   name: 'pay',
   description: 'โอนเงิน',
-  type: 1,
   options: [
     {
       name: 'target',
@@ -26,7 +25,7 @@ module.exports = {
       if (amount > profileData.coins)
         return interaction.reply({
           embeds: [
-            await new MessageEmbed().setDescription(':x: | คุณมีเงินไม่พอ!'),
+            await new MessageEmbed().setDescription(':x: | คุณมีเงินไม่พอ!').setColor('RED'),
           ],
           ephemeral: false,
         });
@@ -35,7 +34,7 @@ module.exports = {
           embeds: [
             await new MessageEmbed().setDescription(
               ':x: | ไม่สามารถโอนเงินให้ตัวเองได้!',
-            ),
+            ).setColor('RED'),
           ],
           ephemeral: false,
         });
@@ -46,7 +45,7 @@ module.exports = {
           embeds: [
             await new MessageEmbed().setDescription(
               ':x: | ไม่พบข้อมูลผู้ใช้งานนี้!',
-            ),
+            ).setColor('RED'),
           ],
           ephemeral: false,
         });
@@ -71,7 +70,9 @@ module.exports = {
         },
       );
       return interaction.reply({
-        content: `:white_check_mark: | โอนเงินให้ ${target} จำนวน ${amount} เรียบร้อยแล้ว`,
+        embeds: [
+          await new MessageEmbed().setDescription(`:white_check_mark: | โอนเงินให้ ${target} จำนวน ${amount}${process.env.CURRENCY} เรียบร้อยแล้ว`).setColor('RED'),
+        ],
         ephemeral: false,
       });
     } catch (error) {

@@ -10,10 +10,9 @@ module.exports = async (client, interaction) => {
     if (!profileData) {
       let profile = await profileModel.create({
         userID: interaction.user.id,
-        coins: 500,
       });
       console.log(`${interaction.user.id} Create New Profile.`);
-      await interaction.reply({
+      await interaction.member.send({
         content: `:white_check_mark: | เพิ่มข้อมูลของคุณแล้ว!`,
         ephemeral: true,
       });

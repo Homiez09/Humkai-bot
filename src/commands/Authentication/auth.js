@@ -5,10 +5,11 @@ module.exports = {
     const role = '871634427552358421';
     try {
       await interaction.member.roles.add(role);
-      client.channels.cache
-        .get('882234093495017513')
-        .send(`ยินดีด้วยคุณ <@${interaction.user.id}> ยืนยันตัวตนเรียบร้อย`);
-      interaction.reply({
+      await interaction.member.send({
+        content: `ยินดีด้วยคุณ <@${interaction.user.id}> ยืนยันตัวตนเรียบร้อย`,
+        ephemeral: true,
+      });
+      await interaction.reply({
         content: `คุณเป็นสมาชิกเรียบร้อยแล้ว`,
         ephemeral: true,
       });
@@ -20,3 +21,7 @@ module.exports = {
     }
   },
 };
+/* 
+TO DO 
+- Admin set role 
+*/
