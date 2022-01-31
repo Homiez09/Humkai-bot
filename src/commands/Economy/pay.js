@@ -26,16 +26,16 @@ module.exports = {
       if (amount > profileData.coins)
         return interaction.reply({
           embeds: [
-            await new MessageEmbed()
-            .setDescription(':x: | คุณมีเงินไม่พอ!')
+            await new MessageEmbed().setDescription(':x: | คุณมีเงินไม่พอ!'),
           ],
           ephemeral: false,
         });
       if (target.id === profileData.userID)
         return interaction.reply({
           embeds: [
-            await new MessageEmbed()
-            .setDescription(':x: | ไม่สามารถโอนเงินให้ตัวเองได้!')
+            await new MessageEmbed().setDescription(
+              ':x: | ไม่สามารถโอนเงินให้ตัวเองได้!',
+            ),
           ],
           ephemeral: false,
         });
@@ -44,8 +44,9 @@ module.exports = {
       if (!targetChk)
         return interaction.reply({
           embeds: [
-            await new MessageEmbed()
-            .setDescription(':x: | ไม่พบข้อมูลผู้ใช้งานนี้!')
+            await new MessageEmbed().setDescription(
+              ':x: | ไม่พบข้อมูลผู้ใช้งานนี้!',
+            ),
           ],
           ephemeral: false,
         });

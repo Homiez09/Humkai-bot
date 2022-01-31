@@ -37,15 +37,13 @@ module.exports = {
             {
               type: 'GUILD_CATEGORY',
             },
-          );
-
+          ); 
           let category_rebg = await interaction.guild.channels.create(
             'rebg by humkai',
             {
               type: 'GUILD_CATEGORY',
             },
           );
-
           let channel0 = await interaction.guild.channels.create(
             'Create New Room',
             {
@@ -53,7 +51,6 @@ module.exports = {
               parent: category_voice,
             },
           );
-
           let channel1 = await interaction.guild.channels.create(
             'input-image',
             {
@@ -61,7 +58,6 @@ module.exports = {
               parent: category_rebg,
             },
           );
-
           let channel2 = await interaction.guild.channels.create(
             'output-image',
             {
