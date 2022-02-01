@@ -15,14 +15,9 @@ module.exports = {
         await new MessageEmbed()
           .setTitle(':school_satchel: | Inventory')
           .setThumbnail(interaction.user.avatarURL())
-          .addFields(
-            { name: 'Item', value: `:fish:\n:gem:\n:carrot:`, inline: true },
-            {
-              name: 'Value',
-              value: `${profileData.fish}g\n${profileData.mine}g\n${profileData.harvest}g`,
-              inline: true,
-            },
-          )
+          .addField(':fish:', `${profileData.fish}g`, false)
+          .addField(':gem:', `${profileData.mine}g`, false)
+          .addField(':harvest:', `${profileData.harvest}g`, false)
           .setFooter(`${lottery}`, interaction.user.displayAvatarURL())
           .setColor('BLUE'),
       ],
