@@ -17,7 +17,7 @@ module.exports = {
           .setThumbnail(interaction.user.avatarURL())
           .addField(':fish:', `${profileData.fish}g`, false)
           .addField(':gem:', `${profileData.mine}g`, false)
-          .addField(':harvest:', `${profileData.harvest}g`, false)
+          .addField(':ear_of_rice: ', `${profileData.harvest}g`, false)
           .setFooter(`${lottery}`, interaction.user.displayAvatarURL())
           .setColor('BLUE'),
       ],
