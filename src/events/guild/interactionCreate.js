@@ -6,7 +6,10 @@ const profileModel = require('../../schemas/profileDB');
 module.exports = async (client, interaction) => {
   let profileData;
   try {
-    profileData = await profileModel.findOneAndUpdate({ userID: interaction.user.id },{ protection: false });
+    profileData = await profileModel.findOneAndUpdate(
+      { userID: interaction.user.id },
+      { protection: false },
+    );
     if (!profileData) {
       let profile = await profileModel.create({
         userID: interaction.user.id,
