@@ -25,16 +25,18 @@ module.exports = {
       if (amount > profileData.coins)
         return interaction.reply({
           embeds: [
-            await new MessageEmbed().setDescription(':x: | คุณมีเงินไม่พอ!').setColor('RED'),
+            await new MessageEmbed()
+              .setDescription(':x: | คุณมีเงินไม่พอ!')
+              .setColor('RED'),
           ],
           ephemeral: false,
         });
       if (target.id === profileData.userID)
         return interaction.reply({
           embeds: [
-            await new MessageEmbed().setDescription(
-              ':x: | ไม่สามารถโอนเงินให้ตัวเองได้!',
-            ).setColor('RED'),
+            await new MessageEmbed()
+              .setDescription(':x: | ไม่สามารถโอนเงินให้ตัวเองได้!')
+              .setColor('RED'),
           ],
           ephemeral: false,
         });
@@ -43,9 +45,9 @@ module.exports = {
       if (!targetChk)
         return interaction.reply({
           embeds: [
-            await new MessageEmbed().setDescription(
-              ':x: | ไม่พบข้อมูลผู้ใช้งานนี้!',
-            ).setColor('RED'),
+            await new MessageEmbed()
+              .setDescription(':x: | ไม่พบข้อมูลผู้ใช้งานนี้!')
+              .setColor('RED'),
           ],
           ephemeral: false,
         });
@@ -71,7 +73,11 @@ module.exports = {
       );
       return interaction.reply({
         embeds: [
-          await new MessageEmbed().setDescription(`:white_check_mark: | โอนเงินให้ ${target} จำนวน ${amount}${process.env.CURRENCY} เรียบร้อยแล้ว`).setColor('RED'),
+          await new MessageEmbed()
+            .setDescription(
+              `:white_check_mark: | โอนเงินให้ ${target} จำนวน ${amount}${process.env.CURRENCY} เรียบร้อยแล้ว`,
+            )
+            .setColor('RED'),
         ],
         ephemeral: false,
       });
