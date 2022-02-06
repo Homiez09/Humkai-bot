@@ -9,22 +9,22 @@ module.exports = {
                 [
                     new MessageButton()
                     .setCustomId('member')
-                    .setLabel('Member')
+                    .setLabel('confirm')
                     .setStyle('SUCCESS')
                     .setEmoji('✅')
                 ],
                 [
                     new MessageButton()
                     .setCustomId('cancel')
-                    .setLabel('Cancel')
+                    .setLabel('cancel')
                     .setStyle('DANGER')
                     .setEmoji('❌')
                 ]
             );
 
         const embed = new MessageEmbed()
-            .setTitle("Auto Role")
-            .setDescription("กรุณาเลือกสิทธิ์ของคุณ")
+            .setTitle("Authentication")
+            .setDescription("If you aren't a bot click green button.")
             .setColor("GREEN")
 
         interaction.reply({ embeds: [embed], components: [row], ephemeral: false });
