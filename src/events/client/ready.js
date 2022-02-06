@@ -50,8 +50,8 @@ module.exports = (client) => {
 
   try {
     client.channels.cache
-      .get('937751153100353607')
-      .messages.fetch('939772615294333005')
+      .get('864742131209076779')
+      .messages.fetch('939789717585657856')
       .then((msg) => {
         let ifilter = (i) => !i.user.bot;
         const collector = msg.createMessageComponentCollector({
@@ -59,7 +59,7 @@ module.exports = (client) => {
         });
 
         collector.on('collect', async (i) => {
-          const role = '939778742467846154';
+          const role = '871634427552358421';
           try {
             if (i.customId === 'member') {
               if (!i.member.roles.cache.has(role)) {
