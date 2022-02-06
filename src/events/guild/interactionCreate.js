@@ -1,29 +1,8 @@
 require('dotenv').config();
 
 const { MessageEmbed } = require('discord.js');
-const profileModel = require('../../schemas/profileDB');
 
 module.exports = async (client, interaction) => {
-  let profileData;
-  try {
-    profileData = await profileModel.findOneAndUpdate(
-      { userID: interaction.user.id },
-      { protection: false },
-    );
-    if (!profileData) {
-      let profile = await profileModel.create({
-        userID: interaction.user.id,
-      });
-      console.log(`${interaction.user.id} Create New Profile.`);
-      await interaction.member.send({
-        content: `:white_check_mark: | เพิ่มข้อมูลของคุณแล้ว!`,
-        ephemeral: true,
-      });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-
   if (interaction.isCommand()) {
     if (!client.slash.has(interaction.commandName)) return;
     if (!interaction.guild) return;
@@ -62,7 +41,7 @@ module.exports = async (client, interaction) => {
           interaction.reply({ embeds: [embed], ephemeral: true });
         }
       }
-      command.run(interaction, client, profileData);
+      command.run(interaction, client);
     } catch (e) {
       console.log(e);
       await interaction.reply({

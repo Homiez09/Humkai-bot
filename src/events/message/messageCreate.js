@@ -1,6 +1,5 @@
-const { MessageAttachment, Message } = require('discord.js');
+const { MessageAttachment } = require('discord.js');
 
-const fs = require('fs');
 const axios = require('axios');
 const FormData = require('form-data');
 
