@@ -47,4 +47,38 @@ module.exports = (client) => {
     .catch((err) => {
       console.log(err);
     });
+
+  try {
+    client.channels.cache.get("937751153100353607").messages.fetch("939772615294333005").then(msg => {
+      let ifilter = i => !i.user.bot;
+      const collector = msg.createMessageComponentCollector({ filter: ifilter });
+
+      collector.on("collect", async i => {
+        const role = "939778742467846154";
+        try {
+          if (i.customId === "member") {
+            if (!i.member.roles.cache.has(role)) {
+              await i.member.roles.add(role);
+              i.reply({ content: `ยินดีด้วย🎉 คุณได้รับยศ <@&${role}> แล้ว`, ephemeral: true });
+            } else {
+              i.reply({ content: `คุณมียศ <@&${role}> อยู่แล้ว`, ephemeral: true });
+            }
+          }
+          if (i.customId === "cancel") {
+            if (i.member.roles.cache.has(role)) {
+              await i.member.roles.remove(role);
+              i.reply({ content: `ลบยศ <@&${role}> ของคุณแล้ว`, ephemeral: true });
+            } else {
+              i.reply({ content: `คุณไม่ได้มียศ <@&${role}> อยู่แล้ว`, ephemeral: true });
+            }
+          }
+        } catch (error) {
+          console.log(error);
+          i.reply({ content: "ไม่มีพบ role ในเซิฟนี้", ephemeral: true });
+        }
+      })
+    })
+  } catch (error) {
+    console.log(error);
+  }
 };
