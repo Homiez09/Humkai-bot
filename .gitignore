@@ -2,5 +2,5 @@
 .env
 
 # Folder
-./node_modules
-./src/commands/Music
+/node_modules
+/Music

@@ -1,5 +1,5 @@
 require('dotenv').config();
-const delay = require("delay");
+const delay = require('delay');
 
 const { Collection } = require('discord.js');
 
