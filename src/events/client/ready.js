@@ -2,13 +2,13 @@ require('dotenv').config();
 
 const figlet = require('figlet');
 const chalk = require('chalk');
-const mongoose = require('mongoose');
 
 module.exports = (client) => {
+  const memberCount = client.users.cache.size;
+  const guildCount = client.guilds.cache.size;
   const Act = [
-    'abcdefu -GAYLE',
-    'Blank space -Taylor Swift',
-    'Stay -Justin Bieber',
+    `${memberCount} users`,
+    `${guildCount} servers`,
   ];
 
   figlet(client.user.tag, function (err, data) {
@@ -26,28 +26,15 @@ module.exports = (client) => {
         {
           name: Act[Math.floor(Math.random() * Act.length)],
           // Type --> PLAYING, STREAMING, LISTENING, WATCHING, CUSTOM, COMPETING
-          type: 'LISTENING',
+          type: 'WATCHING',
         },
       ],
       // Status --> online, idle, dnd, invisible
       status: 'online',
     });
-  }, 5000);
+  }, 1000);
 
-  if (!process.env.dbURL) return;
-  mongoose
-    .connect(process.env.dbURL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      //useFindAndModify: true
-    })
-    .then(() => {
-      console.log('The client is now connect to the database');
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
+  // Only my server
   try {
     client.channels.cache
       .get('864742131209076779')
