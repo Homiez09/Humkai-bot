@@ -12,5 +12,5 @@ module.exports = (client) => {
     }
   };
   // Add Folder Name
-  ['client', 'guild', 'player'].forEach((x) => loadCommands(x));
+  ['client', 'guild'].forEach((x) => loadCommands(x));
 };
