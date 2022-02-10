@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const { Client, Intents, Collection } = require('discord.js');
 const { DiscordTogether } = require('discord-together');
+const { Player } = require("discord-player");
 
 const client = new Client({
   shards: 'auto',
@@ -23,8 +24,9 @@ client.slash = new Collection();
 client.commands = new Collection();
 client.aliases = new Collection();
 client.together = new DiscordTogether(client);
+client.player = new Player(client);
 
-['loadEvents', 'loadCommands', 'loadDatabase'].forEach((file) => {
+['loadEvents', 'loadCommands', 'loadDatabase', 'loadPlayer'].forEach((file) => {
   require(`./handlers/${file}`)(client);
 });
 
