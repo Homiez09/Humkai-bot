@@ -3,6 +3,7 @@ const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 module.exports = {
   name: 'youtube',
   description: 'Watching youtube together',
+  category: 'Together',
   run: async (interaction, client) => {
     if (!interaction.member.voice.channel)
       return interaction.reply('You must be in voice channel.');

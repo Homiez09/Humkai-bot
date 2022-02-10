@@ -2,7 +2,8 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
   name: 'say',
-  description: 'Mod Only | สั่งให้บอทพูด',
+  description: 'ให้บอทส่งข้อความที่คุณกำหนด',
+  category: 'Moderator',
   userPerms: ['MANAGE_MESSAGES'],
   options: [
     {

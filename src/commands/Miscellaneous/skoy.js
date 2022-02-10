@@ -3,6 +3,7 @@ const Skoy = require('skoy');
 module.exports = {
   name: 'skoy',
   description: 'นายเองก็เป็นได้นะสก๊อยอ่ะ',
+  category: 'miscellaneous',
   options: [
     {
       name: 'text',

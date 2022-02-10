@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
   name: 'install',
   description: 'ติดตั้ง',
+  category: 'Moderator',
   userPerms: ['MANAGE_MESSAGES'],
   options: [
     {

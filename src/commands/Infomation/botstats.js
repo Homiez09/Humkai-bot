@@ -7,6 +7,7 @@ const ipInfo = require('ipinfo');
 module.exports = {
   name: 'bot-stats',
   description: 'เช็คสถานะของบอท',
+  category: 'Information',
   run: async (interaction, client) => {
     let info = await ipInfo();
     await interaction.reply({

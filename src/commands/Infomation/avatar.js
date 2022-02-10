@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
   name: 'avatar',
   description: 'โชว์รูปโปรไฟล์',
+  category: 'Information',
   options: [
     {
       name: 'user',
