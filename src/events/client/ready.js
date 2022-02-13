@@ -35,7 +35,7 @@ module.exports = (client) => {
   try {
     client.channels.cache
       .get('864742131209076779')
-      .messages.fetch('939789717585657856')
+      .messages.fetch('942393400693522432')
       .then((msg) => {
         let ifilter = (i) => !i.user.bot;
         const collector = msg.createMessageComponentCollector({
@@ -49,26 +49,7 @@ module.exports = (client) => {
               if (!i.member.roles.cache.has(role)) {
                 await i.member.roles.add(role);
                 i.reply({
-                  content: `ยินดีด้วย🎉 คุณได้รับยศ <@&${role}> แล้ว`,
-                  ephemeral: true,
-                });
-              } else {
-                i.reply({
-                  content: `คุณมียศ <@&${role}> อยู่แล้ว`,
-                  ephemeral: true,
-                });
-              }
-            }
-            if (i.customId === 'cancel') {
-              if (i.member.roles.cache.has(role)) {
-                await i.member.roles.remove(role);
-                i.reply({
-                  content: `ลบยศ <@&${role}> ของคุณแล้ว`,
-                  ephemeral: true,
-                });
-              } else {
-                i.reply({
-                  content: `คุณไม่ได้มียศ <@&${role}> อยู่แล้ว`,
+                  content: `You are now a member!`,
                   ephemeral: true,
                 });
               }

@@ -67,14 +67,11 @@ module.exports = {
               parent: category_voice,
             },
           );
-          let channel1 = await interaction.guild.channels.create(
-            'removebg',
-            {
-              type: 'GUILD_TEXT',
-              parent: category_rebg,
-            },
-          );
-          
+          let channel1 = await interaction.guild.channels.create('removebg', {
+            type: 'GUILD_TEXT',
+            parent: category_rebg,
+          });
+
           channelData = await channelModel.findOneAndUpdate(
             { guild_ID: interaction.guild.id },
             { voice_ID: channel0.id, remove_ID: channel1.id },
@@ -90,7 +87,7 @@ module.exports = {
                 )
                 .addField(
                   'Remove Background',
-                  `ส่งรูปภาพไปที่ <#${channel1.id}> แล้วรับภาพที่ <#${channel2.id}>`,
+                  `ใช้งานได้ที่ <#${channel1.id}>`,
                 )
                 .setColor('#0099ff')
                 .setFooter(

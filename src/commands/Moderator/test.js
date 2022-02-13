@@ -9,22 +9,15 @@ module.exports = {
       [
         new MessageButton()
           .setCustomId('member')
-          .setLabel('confirm')
+          .setLabel('Yes')
           .setStyle('SUCCESS')
           .setEmoji('✅'),
-      ],
-      [
-        new MessageButton()
-          .setCustomId('cancel')
-          .setLabel('cancel')
-          .setStyle('DANGER')
-          .setEmoji('❌'),
       ],
     );
 
     const embed = new MessageEmbed()
       .setTitle('Authentication')
-      .setDescription("If you aren't a bot click green button.")
+      .setDescription("Do you want to join the server?")
       .setColor('GREEN');
 
     interaction.reply({ embeds: [embed], components: [row], ephemeral: false });
