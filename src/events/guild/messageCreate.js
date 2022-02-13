@@ -11,7 +11,7 @@ module.exports = async (client, msg) => {
   try {
     const channelData = await channelModel.findOne({ guild_ID: msg.guild.id });
     console.log(channelData);
-    const input_image = channelData.input_ID;
+    const input_image = channelData.remove_ID;
     const bot_id = msg.guild.members.cache.get(client.user.id).id;
     if (msg.channel.id == input_image && msg.author.id != bot_id) {
       msg.attachments.forEach((attachment) => {

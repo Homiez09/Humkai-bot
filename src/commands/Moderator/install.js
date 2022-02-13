@@ -68,19 +68,18 @@ module.exports = {
             },
           );
           let channel1 = await interaction.guild.channels.create(
-            'input-image',
+            'removebg',
             {
               type: 'GUILD_TEXT',
               parent: category_rebg,
             },
           );
-          let channel2 = await interaction.guild.channels.create(
-            'output-image',
-            {
-              type: 'GUILD_TEXT',
-              parent: category_rebg,
-            },
+          
+          channelData = await channelModel.findOneAndUpdate(
+            { guild_ID: interaction.guild.id },
+            { voice_ID: channel0.id, remove_ID: channel1.id },
           );
+
           return interaction.reply({
             embeds: [
               await new MessageEmbed()
@@ -159,17 +158,10 @@ module.exports = {
                 parent: category_rebg,
               },
             );
-            let channel2 = await interaction.guild.channels.create(
-              'output-image',
-              {
-                type: 'GUILD_TEXT',
-                parent: category_rebg,
-              },
-            );
 
             channelData = await channelModel.findOneAndUpdate(
               { guild_ID: interaction.guild.id },
-              { input_ID: channel1.id, output_ID: channel2.id },
+              { remove_ID: channel1.id },
             );
 
             return interaction.reply({
