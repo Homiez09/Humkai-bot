@@ -2,18 +2,17 @@ const { MessageAttachment } = require('discord.js');
 
 const axios = require('axios');
 const FormData = require('form-data');
+const channelModel = require('../../schemas/channelDB');
 
 require('dotenv').config();
 
 module.exports = async (client, msg) => {
   /* Remove Background */
   try {
-    const input_image = msg.guild.channels.cache.find(
-      (channel) => channel.name === 'input-image',
-    ).id;
-    const output_image = msg.guild.channels.cache.find(
-      (channel) => channel.name === 'output-image',
-    ).id;
+    const channelData = await channelModel.findOne({ guild_ID: msg.guild.id });
+    console.log(channelData);
+    const input_image = channelData.input_ID;
+    const output_image = channelData.output_ID
     if (msg.channel.id == input_image) {
       msg.attachments.forEach((attachment) => {
         const ImageLink = attachment.proxyURL;
@@ -33,12 +32,16 @@ module.exports = async (client, msg) => {
           encoding: null,
         })
           .then((response) => {
-            if (response.status != 200)
-              return console.error(
-                'Error:',
-                response.status,
-                response.statusText,
-              );
+            if (response.status == 402) {
+              return client.channels.cache.get(output_image).send({
+                content: `การใช้งานของคุณในเดือนนี้สิ้นสุดแล้ว`,
+              });
+            } else if (response.status != 200)
+            return console.error(
+              'Error:',
+              response.status,
+              response.statusText,
+            );
             let attachment1 = new MessageAttachment(response.data);
             client.channels.cache.get(output_image).send({
               content: `<@${msg.author.id}> ลบพื้นหลังเรียบร้อย`,
@@ -46,7 +49,11 @@ module.exports = async (client, msg) => {
             });
           })
           .catch((error) => {
-            msg.reply(`รูปภาพที่ส่งมีนามสกุลไม่ถูกต้อง`);
+            if (error.response.status == 402) {
+              msg.reply(`CODE:${error.response.status} การใช้งานในเดือนนี้สิ้นสุดแล้ว`);
+            } else if(error.response.status == 400) {
+              msg.reply(`CODE:${error.response.status} อัพโหลดไฟล์ไม่ถูกต้อง`);
+            }
             return console.error('Request failed:', error);
           });
       });

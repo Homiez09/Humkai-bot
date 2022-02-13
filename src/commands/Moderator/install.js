@@ -1,4 +1,5 @@
 const { MessageEmbed } = require('discord.js');
+const channelModel = require('../../schemas/channelDB');
 
 module.exports = {
   name: 'install',
@@ -28,6 +29,20 @@ module.exports = {
     },
   ],
   run: async (interaction, client) => {
+    let channelData;
+    try {
+      channelData = await channelModel.findOne(
+        { guild_ID: interaction.guild.id }
+      );
+      if (!channelData) {
+        channelData = await channelModel.create({
+          guild_ID: interaction.guild.id,
+        });
+      }
+    } catch(err) {
+      console.log(err);
+    }
+    
     const { options } = interaction;
     const choice = options.getString('options');
     switch (choice) {
@@ -104,6 +119,12 @@ module.exports = {
               parent: category_voice,
             },
           );
+
+          channelData = await channelModel.findOneAndUpdate(
+            { guild_ID: interaction.guild.id },
+            { voice_ID: channel0.id },
+          );
+
           return interaction.reply({
             embeds: [
               await new MessageEmbed()
@@ -145,6 +166,12 @@ module.exports = {
                 parent: category_rebg,
               },
             );
+
+            channelData = await channelModel.findOneAndUpdate(
+              { guild_ID: interaction.guild.id },
+              { input_ID: channel1.id, output_ID: channel2.id },
+            );
+
             return interaction.reply({
               embeds: [
                 await new MessageEmbed()

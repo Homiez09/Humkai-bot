@@ -1,16 +1,17 @@
-require('dotenv').config();
-const delay = require('delay');
-
 const { Collection } = require('discord.js');
 
 const voiceCollection = new Collection();
+const channelModel = require('../../schemas/channelDB');
+
+require('dotenv').config();
 
 module.exports = async (client, oldState, newState) => {
   const user = await client.users.fetch(newState.id);
   const member = await newState.guild.members.fetch(user.id);
-
+  const channelData = await channelModel.findOne({ guild_ID: newState.guild.id });
+  console.log(channelData);
   try {
-    if (!oldState.channel && newState.channel.name === 'Create New Room') {
+    if (!oldState.channel && newState.channel.id === channelData.voice_ID) {
       const channel = await newState.guild.channels.create(user.tag, {
         type: 'GUILD_VOICE',
         parent: newState.channel.parent,
