@@ -11,7 +11,6 @@ module.exports = async (client, oldState, newState) => {
   const channelData = await channelModel.findOne({
     guild_ID: newState.guild.id,
   });
-  console.log(channelData);
   try {
     if (!oldState.channel && newState.channel.id === channelData.voice_ID) {
       const channel = await newState.guild.channels.create(user.tag, {

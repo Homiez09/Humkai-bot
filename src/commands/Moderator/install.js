@@ -145,13 +145,10 @@ module.exports = {
               },
             );
 
-            let channel1 = await interaction.guild.channels.create(
-              'removebg',
-              {
-                type: 'GUILD_TEXT',
-                parent: category_rebg,
-              },
-            );
+            let channel1 = await interaction.guild.channels.create('removebg', {
+              type: 'GUILD_TEXT',
+              parent: category_rebg,
+            });
 
             channelData = await channelModel.findOneAndUpdate(
               { guild_ID: interaction.guild.id },
