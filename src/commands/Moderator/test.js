@@ -1,7 +1,7 @@
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 module.exports = {
   name: 'test',
-  description: 'Add role',
+  description: 'ไม่มีอะไรจ้าเฉพาะเซิฟหลัก',
   category: 'Moderator',
   userPerms: ['MANAGE_MESSAGES'],
   run: async (interaction, client) => {

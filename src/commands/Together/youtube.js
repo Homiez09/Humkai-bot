@@ -2,7 +2,7 @@ const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = {
   name: 'youtube',
-  description: 'Watching youtube together',
+  description: 'มาดูยูทูปนะจ้ะ',
   category: 'Together',
   run: async (interaction, client) => {
     if (!interaction.member.voice.channel)
