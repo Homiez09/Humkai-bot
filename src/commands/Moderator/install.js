@@ -85,10 +85,7 @@ module.exports = {
                   'Create Voice Channel',
                   `คลิกที่ <#${channel0.id}> เพื่อสร้างห้องของตัวเอง `,
                 )
-                .addField(
-                  'Remove Background',
-                  `ใช้งานได้ที่ <#${channel1.id}>`,
-                )
+                .addField('Remove Background', `ใช้งานได้ที่ <#${channel1.id}>`)
                 .setColor('#0099ff')
                 .setFooter(
                   `Requested by ${interaction.user.tag}`,
@@ -167,7 +164,7 @@ module.exports = {
                   .setTitle('Installed')
                   .addField(
                     'Remove Background',
-                    `ส่งรูปภาพไปที่ <#${channel1.id}> แล้วรับภาพที่ <#${channel2.id}>`,
+                    `ใช้งานได้ที่ <#${channel1.id}>`,
                   )
                   .setColor('#0099ff')
                   .setFooter(
