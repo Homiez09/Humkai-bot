@@ -22,7 +22,7 @@ module.exports = async (client, oldState, newState) => {
     } else if (!newState.channel) {
       try {
         if (oldState.channel.id === voiceCollection.get(newState.id))
-          return oldState.channel.delete();
+        return oldState.channel.delete();
       } catch (error) {
         console.log(error);
       }

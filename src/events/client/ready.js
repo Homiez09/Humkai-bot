@@ -4,9 +4,7 @@ const figlet = require('figlet');
 const chalk = require('chalk');
 
 module.exports = (client) => {
-  const memberCount = client.users.cache.size;
-  const guildCount = client.guilds.cache.size;
-  const Act = [`${memberCount} users`, `${guildCount} servers`];
+  const Act = [`${client.users.cache.size} users`, `${guilds.cache.size} servers`];
 
   figlet(client.user.tag, function (err, data) {
     if (err) {
