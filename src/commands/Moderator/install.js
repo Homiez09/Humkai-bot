@@ -146,7 +146,7 @@ module.exports = {
             );
 
             let channel1 = await interaction.guild.channels.create(
-              'input-image',
+              'removebg',
               {
                 type: 'GUILD_TEXT',
                 parent: category_rebg,
