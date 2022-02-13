@@ -31,18 +31,18 @@ module.exports = {
   run: async (interaction, client) => {
     let channelData;
     try {
-      channelData = await channelModel.findOne(
-        { guild_ID: interaction.guild.id }
-      );
+      channelData = await channelModel.findOne({
+        guild_ID: interaction.guild.id,
+      });
       if (!channelData) {
         channelData = await channelModel.create({
           guild_ID: interaction.guild.id,
         });
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
-    
+
     const { options } = interaction;
     const choice = options.getString('options');
     switch (choice) {

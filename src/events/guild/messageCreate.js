@@ -12,8 +12,8 @@ module.exports = async (client, msg) => {
     const channelData = await channelModel.findOne({ guild_ID: msg.guild.id });
     console.log(channelData);
     const input_image = channelData.input_ID;
-    const output_image = channelData.output_ID
-    if (msg.channel.id == input_image) {
+    const bot_id = msg.guild.members.cache.get(client.user.id).id;
+    if (msg.channel.id == input_image && msg.author.id != bot_id) {
       msg.attachments.forEach((attachment) => {
         const ImageLink = attachment.proxyURL;
         const formData = new FormData();
@@ -32,26 +32,24 @@ module.exports = async (client, msg) => {
           encoding: null,
         })
           .then((response) => {
-            if (response.status == 402) {
-              return client.channels.cache.get(output_image).send({
-                content: `การใช้งานของคุณในเดือนนี้สิ้นสุดแล้ว`,
-              });
-            } else if (response.status != 200)
-            return console.error(
-              'Error:',
-              response.status,
-              response.statusText,
-            );
+            if (response.status != 200)
+              return console.error(
+                'Error:',
+                response.status,
+                response.statusText,
+              );
             let attachment1 = new MessageAttachment(response.data);
-            client.channels.cache.get(output_image).send({
+            msg.reply({
               content: `<@${msg.author.id}> ลบพื้นหลังเรียบร้อย`,
               files: [attachment1],
             });
           })
           .catch((error) => {
             if (error.response.status == 402) {
-              msg.reply(`CODE:${error.response.status} การใช้งานในเดือนนี้สิ้นสุดแล้ว`);
-            } else if(error.response.status == 400) {
+              msg.reply(
+                `CODE:${error.response.status} การใช้งานในเดือนนี้สิ้นสุดแล้ว`,
+              );
+            } else if (error.response.status == 400) {
               msg.reply(`CODE:${error.response.status} อัพโหลดไฟล์ไม่ถูกต้อง`);
             }
             return console.error('Request failed:', error);

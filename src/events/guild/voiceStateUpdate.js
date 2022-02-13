@@ -8,7 +8,9 @@ require('dotenv').config();
 module.exports = async (client, oldState, newState) => {
   const user = await client.users.fetch(newState.id);
   const member = await newState.guild.members.fetch(user.id);
-  const channelData = await channelModel.findOne({ guild_ID: newState.guild.id });
+  const channelData = await channelModel.findOne({
+    guild_ID: newState.guild.id,
+  });
   console.log(channelData);
   try {
     if (!oldState.channel && newState.channel.id === channelData.voice_ID) {
