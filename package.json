@@ -21,6 +21,7 @@
   "dependencies": {
     "@discordjs/rest": "^0.2.0-canary.0",
     "axios": "^0.25.0",
+    "canvas": "^2.9.0",
     "chalk": "^4.1.2",
     "delay": "^5.0.0",
     "discord-api-types": "^0.26.0",

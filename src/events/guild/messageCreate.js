@@ -14,29 +14,35 @@ module.exports = async (client, msg) => {
       let rankData;
       rankData = await rankModel.findOneAndUpdate(
         {
-          userID: msg.author.id
+          userID: msg.author.id,
         },
         {
-          $inc: { point: 1 }
-        });
+          $inc: { point: 1 },
+        },
+      );
       if (!rankData) {
         rankData = await rankModel.create({
           userID: msg.author.id,
         });
       }
-
-      if ((rankData.point + 1) >= Math.pow(rankData.rank, 4)) {
-        rankData = await rankModel.findOneAndUpdate(
-          {
-            userID: msg.author.id
-          },
-          {
-            $inc: { rank: 1 }
-          });
-        msg.reply(`คุณเพิ่งไปถึงระดับ ${rankData.rank}`)
+      
+      if (rankData.point + 1 >= Math.pow(rankData.rank, 4)) {
+        while (rankData.point + 1 >= Math.pow(rankData.rank, 4)) {
+          rankData = await rankModel.findOneAndUpdate(
+            {
+              userID: msg.author.id,
+            },
+            {
+              $inc: { rank: 1 },
+            },
+          );
+        }
+        msg.channel.send({ 
+          content: `${msg.author} -> เพิ่งไปถึงระดับ ${rankData.rank}`, 
+          ephemeral: true 
+        });
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
   }
@@ -44,7 +50,9 @@ module.exports = async (client, msg) => {
   /* Remove Background */
   if (!msg.author.bot) {
     try {
-      const channelData = await channelModel.findOne({ guild_ID: msg.guild.id });
+      const channelData = await channelModel.findOne({
+        guild_ID: msg.guild.id,
+      });
       const input_image = channelData.remove_ID;
       const bot_id = msg.guild.members.cache.get(client.user.id).id;
       if (msg.channel.id == input_image && msg.author.id != bot_id) {
@@ -84,7 +92,9 @@ module.exports = async (client, msg) => {
                   `CODE:${error.response.status} การใช้งานในเดือนนี้สิ้นสุดแล้ว`,
                 );
               } else if (error.response.status == 400) {
-                msg.reply(`CODE:${error.response.status} อัพโหลดไฟล์ไม่ถูกต้อง`);
+                msg.reply(
+                  `CODE:${error.response.status} อัพโหลดไฟล์ไม่ถูกต้อง`,
+                );
               }
               return console.error('Request failed:', error);
             });

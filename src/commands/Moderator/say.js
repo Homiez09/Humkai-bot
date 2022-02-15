@@ -18,6 +18,6 @@ module.exports = {
     const embed = new MessageEmbed()
       .setColor('#3CB371')
       .setDescription(`${msg}`);
-    interaction.reply({ embeds: [embed], ephemeral: false });
+    await interaction.reply({ embeds: [embed], ephemeral: false });
   },
 };
