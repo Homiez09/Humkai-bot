@@ -10,6 +10,7 @@ require('dotenv').config();
 module.exports = async (client, msg) => {
   /* increase your rank when typing*/
   if (!msg.author.bot) {
+    if (msg.content.length >= 2)
     try {
       let rankData;
       rankData = await rankModel.findOneAndUpdate(
@@ -25,7 +26,7 @@ module.exports = async (client, msg) => {
           userID: msg.author.id,
         });
       }
-      
+
       if (rankData.point + 1 >= Math.pow(rankData.rank, 4)) {
         while (rankData.point + 1 >= Math.pow(rankData.rank, 4)) {
           rankData = await rankModel.findOneAndUpdate(
@@ -37,9 +38,9 @@ module.exports = async (client, msg) => {
             },
           );
         }
-        msg.channel.send({ 
-          content: `${msg.author} -> เพิ่งไปถึงระดับ ${rankData.rank}`, 
-          ephemeral: true 
+        msg.channel.send({
+          content: `${msg.author} -> เพิ่งไปถึงระดับ ${rankData.rank}`,
+          ephemeral: true,
         });
       }
     } catch (error) {
