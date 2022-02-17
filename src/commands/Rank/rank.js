@@ -44,6 +44,11 @@ module.exports = {
       });
     }
 
+    const expMaxBefore = Math.pow(rankData.rank - 1, 4);
+    const expMaxNow = Math.pow(rankData.rank, 4);
+    const expMax = expMaxNow - expMaxBefore;
+    const expNow = rankData.point - expMaxBefore;
+
     let x = 727;
     let y = 0;
     ctx.beginPath();
@@ -63,8 +68,7 @@ module.exports = {
     ctx.fillText(`${user.username}`, x, 116);
     ctx.closePath();
 
-    const progress = rankData.point / Math.pow(rankData.rank, 4);
-    let progressBar = progress * 100;
+    let progressBar = (expNow / expMax) * 100;
 
     if (progressBar > 100) {
       progressBar = 100;
@@ -72,7 +76,7 @@ module.exports = {
 
     x = 211;
     y = 151;
-    let width = progressBar * 5.6;
+    let width = progressBar * 5.2;
     let height = 30;
     let radius = 20;
     if (width < 2 * radius) radius = width / 2;
@@ -89,11 +93,6 @@ module.exports = {
 
     x = 469;
     y = 160;
-    const expMaxBefore = Math.pow(rankData.rank - 1, 4);
-    const expMaxNow = Math.pow(rankData.rank, 4);
-    const expMax = expMaxNow - expMaxBefore;
-    const expNow = rankData.point - expMaxBefore;
-
     ctx.beginPath();
     ctx.moveTo(x, 0);
     ctx.font = '25px Arial';
