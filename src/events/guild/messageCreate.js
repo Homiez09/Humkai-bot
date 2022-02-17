@@ -28,18 +28,16 @@ module.exports = async (client, msg) => {
         }
 
         if (rankData.point + 1 >= Math.pow(rankData.rank, 4)) {
-          while (rankData.point + 1 >= Math.pow(rankData.rank, 4)) {
-            rankData = await rankModel.findOneAndUpdate(
-              {
-                userID: msg.author.id,
-              },
-              {
-                $inc: { rank: 1 },
-              },
-            );
-          }
+          rankData = await rankModel.findOneAndUpdate(
+            {
+              userID: msg.author.id,
+            },
+            {
+              $inc: { rank: 1 },
+            },
+          );
           msg.channel.send({
-            content: `${msg.author} -> เพิ่งไปถึงระดับ ${rankData.rank}`,
+            content: `${msg.author} -> เพิ่งไปถึงระดับ ${rankData.rank + 1}`,
             ephemeral: true,
           });
         }
