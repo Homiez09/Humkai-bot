@@ -53,15 +53,6 @@ module.exports = {
     ctx.fillRect(19, 277, progressBar * 5.6, 42);
     ctx.fillStyle = '#FFFFFF';
 
-    ctx.font = applyText(canvas, `${rankData.point}`);
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fillText(`${rankData.point}`, canvas.width - 25, canvas.height - 25);
-
-    /* textRan = Math.floor(Math.random() * 100) + 1 + "%"
-        ctx.font = applyText(canvas, `${textRan}`);
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillText(`${textRan}`, canvas.width / 2.5, canvas.height / 1.3); */
-
     ctx.beginPath();
     ctx.arc(300, 157, 102, 0, Math.PI * 2, true);
     ctx.closePath();

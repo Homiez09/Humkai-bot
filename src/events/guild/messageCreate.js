@@ -11,41 +11,41 @@ module.exports = async (client, msg) => {
   /* increase your rank when typing*/
   if (!msg.author.bot) {
     if (msg.content.length >= 2)
-    try {
-      let rankData;
-      rankData = await rankModel.findOneAndUpdate(
-        {
-          userID: msg.author.id,
-        },
-        {
-          $inc: { point: 1 },
-        },
-      );
-      if (!rankData) {
-        rankData = await rankModel.create({
-          userID: msg.author.id,
-        });
-      }
-
-      if (rankData.point + 1 >= Math.pow(rankData.rank, 4)) {
-        while (rankData.point + 1 >= Math.pow(rankData.rank, 4)) {
-          rankData = await rankModel.findOneAndUpdate(
-            {
-              userID: msg.author.id,
-            },
-            {
-              $inc: { rank: 1 },
-            },
-          );
+      try {
+        let rankData;
+        rankData = await rankModel.findOneAndUpdate(
+          {
+            userID: msg.author.id,
+          },
+          {
+            $inc: { point: 1 },
+          },
+        );
+        if (!rankData) {
+          rankData = await rankModel.create({
+            userID: msg.author.id,
+          });
         }
-        msg.channel.send({
-          content: `${msg.author} -> เพิ่งไปถึงระดับ ${rankData.rank}`,
-          ephemeral: true,
-        });
+
+        if (rankData.point + 1 >= Math.pow(rankData.rank, 4)) {
+          while (rankData.point + 1 >= Math.pow(rankData.rank, 4)) {
+            rankData = await rankModel.findOneAndUpdate(
+              {
+                userID: msg.author.id,
+              },
+              {
+                $inc: { rank: 1 },
+              },
+            );
+          }
+          msg.channel.send({
+            content: `${msg.author} -> เพิ่งไปถึงระดับ ${rankData.rank}`,
+            ephemeral: true,
+          });
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   /* Remove Background */
