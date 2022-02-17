@@ -37,6 +37,12 @@ module.exports = {
       userID: user.id,
     });
 
+    if (!rankData) {
+      rankData = await rankModel.create({
+        userID: user.id,
+      });
+    }
+
     ctx.font = applyText(canvas, `lvl ${rankData.rank}`);
     ctx.fillStyle = '#FFFFFF';
     ctx.fillText(`lvl ${rankData.rank}`, 25, 65);
