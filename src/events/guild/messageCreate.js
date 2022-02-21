@@ -10,15 +10,17 @@ require('dotenv').config();
 module.exports = async (client, msg) => {
   /* increase your rank when typing*/
   if (!msg.author.bot) {
-    if (msg.content.length >= 2)
+    let lengthMsg = msg.content.length;
+    if (lengthMsg >= 2)
       try {
         let rankData;
+        let xp = Math.floor(lengthMsg / 2);
         rankData = await rankModel.findOneAndUpdate(
           {
             userID: msg.author.id,
           },
           {
-            $inc: { point: 1 },
+            $inc: { point: xp },
           },
         );
         if (!rankData) {
