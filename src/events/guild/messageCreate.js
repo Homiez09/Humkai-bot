@@ -15,7 +15,7 @@ module.exports = async (client, msg) => {
       try {
         let rankData;
         // random xp 2-5
-        let xp = Math.floor(lengthMsg / 2);       
+        let xp = Math.floor(lengthMsg / 2);
         rankData = await rankModel.findOneAndUpdate(
           {
             userID: msg.author.id,
@@ -37,7 +37,7 @@ module.exports = async (client, msg) => {
               userID: msg.author.id,
             },
             {
-              rank: LvlUp,
+              rank: LvlUp+1,
             },
           );
           msg.channel.send({
