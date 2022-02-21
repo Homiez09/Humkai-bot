@@ -30,14 +30,14 @@ module.exports = async (client, msg) => {
           });
         }
         let myXp = rankData.point + xp;
-        if (myXp >= Math.pow(rankData.rank, 4)) {
+        if (myXp >= Math.pow(rankData.rank + 1, 4)) {
           let LvlUp = Math.floor(Math.pow(myXp, 1 / 4));
           rankData = await rankModel.findOneAndUpdate(
             {
               userID: msg.author.id,
             },
             {
-              rank: LvlUp+1,
+              rank: LvlUp + 1,
             },
           );
           msg.channel.send({
