@@ -11,37 +11,47 @@ module.exports = async (client, msg) => {
   /* increase your rank when typing*/
   if (!msg.author.bot) {
     let lengthMsg = msg.content.length;
+    let xpGet = Math.floor(Math.random() * 7) + 1;
+    //console.log(msg.author.id + ' Got ' + xpGet + ' xp ');
     if (lengthMsg >= 2)
       try {
-        let rankData;
-        // random xp 2-5
-        let xp = Math.floor(lengthMsg / 2);
+      
         rankData = await rankModel.findOneAndUpdate(
           {
             userID: msg.author.id,
           },
           {
-            $inc: { point: xp },
+            $inc: { exp: xpGet },
           },
         );
         if (!rankData) {
-          rankData = await rankModel.create({
-            userID: msg.author.id,
-          });
+            rankData = await rankModel.create({
+              userID: msg.author.id,
+            })
+            return(msg.channel.send({
+              content: `${msg.author} -> เพิ่งไปถึงระดับ 0`,
+              ephemeral: true,
+            }));
         }
-        let myXp = rankData.point + xp;
-        if (myXp >= Math.pow(rankData.rank + 1, 4)) {
-          let LvlUp = Math.floor(Math.pow(myXp, 1 / 4));
+
+        let lvl = rankData.rank;
+        let xpNow = rankData.exp + xpGet;
+        let xpNext = 5 * (lvl ** 2) + (50 * lvl) + 100;
+        if (xpNext - xpNow <= 0) {
           rankData = await rankModel.findOneAndUpdate(
             {
               userID: msg.author.id,
             },
             {
-              rank: LvlUp + 1,
+              $inc: { 
+                rank: 1,
+                exp: -xpNext,
+                totalExp: xpNext
+              },
             },
           );
           msg.channel.send({
-            content: `${msg.author} -> เพิ่งไปถึงระดับ ${LvlUp}`,
+            content: `${msg.author} -> เพิ่งไปถึงระดับ ${lvl + 1}`,
             ephemeral: true,
           });
         }

@@ -44,11 +44,14 @@ module.exports = {
       });
     }
 
-    const expMaxBefore = Math.pow(rankData.rank - 1, 4);
+    /* const expMaxBefore = Math.pow(rankData.rank - 1, 4);
     const expMaxNow = Math.pow(rankData.rank, 4);
     const expMax = expMaxNow - expMaxBefore;
-    const expNow = rankData.point - expMaxBefore;
-
+    const expNow = rankData.exp - expMaxBefore; */
+    const lvl = rankData.rank;
+    const expMax = 5 * (lvl ** 2) + (50 * lvl) + 100;
+    const expNow = rankData.exp;
+    
     let x = 727;
     let y = 0;
     ctx.beginPath();
