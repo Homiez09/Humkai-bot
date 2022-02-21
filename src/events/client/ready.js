@@ -4,11 +4,6 @@ const figlet = require('figlet');
 const chalk = require('chalk');
 
 module.exports = (client) => {
-  const Act = [
-    `${client.users.cache.size} users`,
-    `${client.guilds.cache.size} servers`,
-  ];
-
   figlet(client.user.tag, function (err, data) {
     if (err) {
       console.log('Something went wrong...');
@@ -16,13 +11,18 @@ module.exports = (client) => {
       return;
     }
     console.log(chalk.red.bold(data));
+    console.log(client.guilds.cache.map(guild => guild.memberCount))
   });
-
+  
   setInterval(() => {
+    let Act = [
+      `${client.guilds.cache.map(guild => guild.memberCount).reduce((a, b) => a + b, 0)} users`,
+      `${client.guilds.cache.size} servers`,
+    ];
     client.user.setPresence({
       activities: [
         {
-          name: Act[Math.floor(Math.random() * Act.length)],
+          name: Act[Math.floor(Math.random() * (Act.length-1)+1)],
           // Type --> PLAYING, STREAMING, LISTENING, WATCHING, CUSTOM, COMPETING
           type: 'WATCHING',
         },
@@ -63,5 +63,5 @@ module.exports = (client) => {
       });
   } catch (error) {
     console.log(error);
-  }
+  }   
 };
