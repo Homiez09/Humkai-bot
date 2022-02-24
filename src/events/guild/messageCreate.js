@@ -1,9 +1,11 @@
-const { MessageAttachment } = require('discord.js');
+const { MessageAttachment, Message, Interaction } = require('discord.js');
 
 const axios = require('axios');
 const FormData = require('form-data');
 const channelModel = require('../../schemas/channelDB');
 const rankModel = require('../../schemas/rankDB');
+const wordleModel = require('../../schemas/wordleDB');
+const wordle = require('../../commands/game/wordle');
 
 require('dotenv').config();
 
@@ -11,11 +13,10 @@ module.exports = async (client, msg) => {
   /* increase your rank when typing*/
   if (!msg.author.bot) {
     let lengthMsg = msg.content.length;
-    let xpGet = Math.floor(Math.random() * 7) + 1;
+    let xpGet = Math.floor(Math.random() * (lengthMsg / 2)) + 1;
     //console.log(msg.author.id + ' Got ' + xpGet + ' xp ');
     if (lengthMsg >= 2)
       try {
-      
         rankData = await rankModel.findOneAndUpdate(
           {
             userID: msg.author.id,
@@ -25,28 +26,28 @@ module.exports = async (client, msg) => {
           },
         );
         if (!rankData) {
-            rankData = await rankModel.create({
-              userID: msg.author.id,
-            })
-            return(msg.channel.send({
-              content: `${msg.author} -> เพิ่งไปถึงระดับ 0`,
-              ephemeral: true,
-            }));
+          rankData = await rankModel.create({
+            userID: msg.author.id,
+          });
+          return msg.channel.send({
+            content: `${msg.author} -> เพิ่งไปถึงระดับ 0`,
+            ephemeral: true,
+          });
         }
 
         let lvl = rankData.rank;
         let xpNow = rankData.exp + xpGet;
-        let xpNext = 5 * (lvl ** 2) + (50 * lvl) + 100;
+        let xpNext = 5 * lvl ** 2 + 50 * lvl + 100;
         if (xpNext - xpNow <= 0) {
           rankData = await rankModel.findOneAndUpdate(
             {
               userID: msg.author.id,
             },
             {
-              $inc: { 
+              $inc: {
                 rank: 1,
                 exp: -xpNext,
-                totalExp: xpNext
+                totalExp: xpNext,
               },
             },
           );
@@ -115,6 +116,85 @@ module.exports = async (client, msg) => {
       }
     } catch (error) {
       return;
+    }
+  }
+
+  /* Wordle Game */
+  if (!msg.author.bot) {
+    try {
+      const bot_id = msg.guild.members.cache.get(client.user.id).id;
+      const channelData = await channelModel.findOne({
+        guild_ID: msg.guild.id,
+      });
+      const wordle_ID = channelData.wordle_ID;
+      if (msg.channel.id == wordle_ID && msg.author.id != bot_id) {
+        let wordleData;
+        wordleData = await wordleModel.findOne({
+          user_ID: msg.author.id,
+        });
+        if (!wordleData || wordleData.working === false) return msg.reply('คุณยังไม่ได้สร้างเกม ลองพิมพ์ /wordle ดูสิ');
+        const word = wordleData.word;
+        const content = msg.content.toLowerCase();
+        if (content.length != 5) return msg.reply(`กรุณาป้อนตัวอักษรให้ครบ 5 ตัว`);
+
+        let score = "";
+        if (!(content == word)) {
+          for (let i = 0; i < 5; i++) {
+            if (content[i] == word[i]) {
+              score += ":green_square:";
+            }
+            else {
+              if (word.includes(content[i])) {
+                score += ":yellow_square:";
+              } else {
+                score += ":black_large_square:";
+              }
+            }
+          }
+        } else {
+          score += ":green_square::green_square::green_square::green_square::green_square:";
+        }
+        await wordleModel.findOneAndUpdate(
+          { user_ID: msg.author.id },
+          { $push: { doing: [score] } }
+        );
+        msg.reply(`${wordleData.doing.length + 1}/6 => ${score}`);
+
+        if (score == ":green_square::green_square::green_square::green_square::green_square:") {
+          wordleData = await wordleModel.findOne({ user_ID: msg.author.id });
+          let output = "\n\n";
+          for (let i = 0; i < wordleData.doing.length; i++) {
+            output += wordleData.doing[i] + "\n";
+          }
+          if (wordleData.doing.length > 6) {
+            msg.reply(`
+          Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณแพ้)${output}
+          `);
+          await wordleModel.findOneAndUpdate(
+            { user_ID: msg.author.id },
+            {
+              working: false,
+              doing: [],
+            }
+          );
+          } else {
+            msg.reply(`
+          Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณชนะ)${output}
+          `);
+          await wordleModel.findOneAndUpdate(
+            { user_ID: msg.author.id },
+            {
+              $inc: { day: 1 },
+              working: false,
+              doing: [],
+            }
+          );
+          }
+          
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 };

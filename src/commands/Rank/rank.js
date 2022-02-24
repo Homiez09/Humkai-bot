@@ -49,9 +49,9 @@ module.exports = {
     const expMax = expMaxNow - expMaxBefore;
     const expNow = rankData.exp - expMaxBefore; */
     const lvl = rankData.rank;
-    const expMax = 5 * (lvl ** 2) + (50 * lvl) + 100;
+    const expMax = 5 * lvl ** 2 + 50 * lvl + 100;
     const expNow = rankData.exp;
-    
+
     let x = 727;
     let y = 0;
     ctx.beginPath();

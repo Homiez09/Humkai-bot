@@ -25,6 +25,10 @@ module.exports = {
           name: 'remove-background',
           value: 'remove-background',
         },
+        {
+          name: 'wordle-game',
+          value: 'wordle-game',
+        }
       ],
     },
   ],
@@ -48,14 +52,8 @@ module.exports = {
     switch (choice) {
       case 'all':
         {
-          let category_voice = await interaction.guild.channels.create(
+          let category0 = await interaction.guild.channels.create(
             'voice by humkai',
-            {
-              type: 'GUILD_CATEGORY',
-            },
-          );
-          let category_rebg = await interaction.guild.channels.create(
-            'rebg by humkai',
             {
               type: 'GUILD_CATEGORY',
             },
@@ -64,17 +62,38 @@ module.exports = {
             'Create New Room',
             {
               type: 'GUILD_VOICE',
-              parent: category_voice,
+              parent: category0,
+            },
+          );
+
+          let category1 = await interaction.guild.channels.create(
+            'rebg by humkai',
+            {
+              type: 'GUILD_CATEGORY',
             },
           );
           let channel1 = await interaction.guild.channels.create('removebg', {
             type: 'GUILD_TEXT',
-            parent: category_rebg,
+            parent: category1,
           });
+
+          let category2 = await interaction.guild.channels.create(
+            "Humkai's wordle",
+            {
+              type: 'GUILD_CATEGORY',
+            },
+          );
+          let channel2 = await interaction.guild.channels.create(
+            'play_wordle',
+            {
+              type: 'GUILD_TEXT',
+              parent: category2,
+            },
+          );
 
           channelData = await channelModel.findOneAndUpdate(
             { guild_ID: interaction.guild.id },
-            { voice_ID: channel0.id, remove_ID: channel1.id },
+            { voice_ID: channel0.id, remove_ID: channel1.id, wordle_ID: channel2.id },
           );
 
           return interaction.reply({
@@ -86,6 +105,7 @@ module.exports = {
                   `คลิกที่ <#${channel0.id}> เพื่อสร้างห้องของตัวเอง `,
                 )
                 .addField('Remove Background', `ใช้งานได้ที่ <#${channel1.id}>`)
+                .addField('Wordle Game', `เข้าไปเล่นได้ที่ <#${channel2.id}>`)
                 .setColor('#0099ff')
                 .setFooter(
                   `Requested by ${interaction.user.tag}`,
@@ -98,7 +118,7 @@ module.exports = {
 
       case 'voice':
         {
-          let category_voice = await interaction.guild.channels.create(
+          let category0 = await interaction.guild.channels.create(
             'voice by humkai',
             {
               type: 'GUILD_CATEGORY',
@@ -109,7 +129,7 @@ module.exports = {
             'Create New Room',
             {
               type: 'GUILD_VOICE',
-              parent: category_voice,
+              parent: category0,
             },
           );
 
@@ -138,7 +158,7 @@ module.exports = {
       case 'remove-background':
         {
           {
-            let category_rebg = await interaction.guild.channels.create(
+            let category1 = await interaction.guild.channels.create(
               'rebg by humkai',
               {
                 type: 'GUILD_CATEGORY',
@@ -147,7 +167,7 @@ module.exports = {
 
             let channel1 = await interaction.guild.channels.create('removebg', {
               type: 'GUILD_TEXT',
-              parent: category_rebg,
+              parent: category1,
             });
 
             channelData = await channelModel.findOneAndUpdate(
@@ -173,6 +193,47 @@ module.exports = {
           }
         }
         break;
+
+      case 'wordle-game':
+        {
+          let category2 = await interaction.guild.channels.create(
+            "Humkai's wordle",
+            {
+              type: 'GUILD_CATEGORY',
+            },
+          );
+
+          let channel2 = await interaction.guild.channels.create(
+            'play_wordle',
+            {
+              type: 'GUILD_TEXT',
+              parent: category2,
+            },
+          );
+
+          await channelModel.findOneAndUpdate(
+            { guild_ID: interaction.guild.id },
+            { wordle_ID: channel2.id },
+          );
+
+          return interaction.reply({
+            embeds: [
+              await new MessageEmbed()
+                .setTitle('Installed')
+                .addField(
+                  'Wordle Game',
+                  `เข้าไปเล่นได้ที่ <#${channel2.id}>`,
+                )
+                .setColor('#0099ff')
+                .setFooter(
+                  `Requested by ${interaction.user.tag}`,
+                  interaction.user.displayAvatarURL(),
+                ),
+            ],
+          });
+        }
+        break
+
     }
   },
 };
