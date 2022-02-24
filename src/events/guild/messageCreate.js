@@ -5,7 +5,6 @@ const FormData = require('form-data');
 const channelModel = require('../../schemas/channelDB');
 const rankModel = require('../../schemas/rankDB');
 const wordleModel = require('../../schemas/wordleDB');
-const wordle = require('../../commands/game/wordle');
 
 require('dotenv').config();
 

@@ -14,7 +14,7 @@ module.exports = {
         guild_ID: interaction.guild.id,
       });
       if (!channelData)
-        return interaction.reply('กรุณาติดตั้งก่อนนะครับ /install wordle-game');
+        return interaction.reply('กรุณาติดตั้งก่อนเกมก่อน /install wordle-game');
       if (channelData.wordle_ID !== interaction.channel.id)
         return interaction.reply(
           `ไปเล่นที่ห้องนี้ <#${channelData.wordle_ID}>`,
