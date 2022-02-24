@@ -16,7 +16,8 @@ module.exports = async (client, oldState, newState) => {
       const channel = await newState.guild.channels.create(user.tag, {
         type: 'GUILD_VOICE',
         parent: newState.channel.parent,
-      });
+      })
+      channel.permissionOverwrites.create(user.id, { MANAGE_CHANNELS: true, MUTE_MEMBERS: true, DEAFEN_MEMBERS: true, MANAGE_ROLES: true, MOVE_MEMBERS: true });
       member.voice.setChannel(channel);
       voiceCollection.set(user.id, channel.id);
     } else if (!newState.channel) {
