@@ -28,7 +28,7 @@ module.exports = {
         {
           name: 'wordle-game',
           value: 'wordle-game',
-        }
+        },
       ],
     },
   ],
@@ -93,7 +93,11 @@ module.exports = {
 
           channelData = await channelModel.findOneAndUpdate(
             { guild_ID: interaction.guild.id },
-            { voice_ID: channel0.id, remove_ID: channel1.id, wordle_ID: channel2.id },
+            {
+              voice_ID: channel0.id,
+              remove_ID: channel1.id,
+              wordle_ID: channel2.id,
+            },
           );
 
           return interaction.reply({
@@ -220,10 +224,7 @@ module.exports = {
             embeds: [
               await new MessageEmbed()
                 .setTitle('Installed')
-                .addField(
-                  'Wordle Game',
-                  `เข้าไปเล่นได้ที่ <#${channel2.id}>`,
-                )
+                .addField('Wordle Game', `เข้าไปเล่นได้ที่ <#${channel2.id}>`)
                 .setColor('#0099ff')
                 .setFooter(
                   `Requested by ${interaction.user.tag}`,
@@ -232,8 +233,7 @@ module.exports = {
             ],
           });
         }
-        break
-
+        break;
     }
   },
 };

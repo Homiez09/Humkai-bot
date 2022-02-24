@@ -132,65 +132,69 @@ module.exports = async (client, msg) => {
         wordleData = await wordleModel.findOne({
           user_ID: msg.author.id,
         });
-        if (!wordleData || wordleData.working === false) return msg.reply('คุณยังไม่ได้สร้างเกม ลองพิมพ์ /wordle ดูสิ');
+        if (!wordleData || wordleData.working === false)
+          return msg.reply('คุณยังไม่ได้สร้างเกม ลองพิมพ์ /wordle ดูสิ');
         const word = wordleData.word;
         const content = msg.content.toLowerCase();
-        if (content.length != 5) return msg.reply(`กรุณาป้อนตัวอักษรให้ครบ 5 ตัว`);
+        if (content.length != 5)
+          return msg.reply(`กรุณาป้อนตัวอักษรให้ครบ 5 ตัว`);
 
-        let score = "";
+        let score = '';
         if (!(content == word)) {
           for (let i = 0; i < 5; i++) {
             if (content[i] == word[i]) {
-              score += ":green_square:";
-            }
-            else {
+              score += ':green_square:';
+            } else {
               if (word.includes(content[i])) {
-                score += ":yellow_square:";
+                score += ':yellow_square:';
               } else {
-                score += ":black_large_square:";
+                score += ':black_large_square:';
               }
             }
           }
         } else {
-          score += ":green_square::green_square::green_square::green_square::green_square:";
+          score +=
+            ':green_square::green_square::green_square::green_square::green_square:';
         }
         await wordleModel.findOneAndUpdate(
           { user_ID: msg.author.id },
-          { $push: { doing: [score] } }
+          { $push: { doing: [score] } },
         );
         msg.reply(`${wordleData.doing.length + 1}/6 => ${score}`);
 
-        if (score == ":green_square::green_square::green_square::green_square::green_square:") {
+        if (
+          score ==
+          ':green_square::green_square::green_square::green_square::green_square:'
+        ) {
           wordleData = await wordleModel.findOne({ user_ID: msg.author.id });
-          let output = "\n\n";
+          let output = '\n\n';
           for (let i = 0; i < wordleData.doing.length; i++) {
-            output += wordleData.doing[i] + "\n";
+            output += wordleData.doing[i] + '\n';
           }
           if (wordleData.doing.length > 6) {
             msg.reply(`
           Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณแพ้)${output}
           `);
-          await wordleModel.findOneAndUpdate(
-            { user_ID: msg.author.id },
-            {
-              working: false,
-              doing: [],
-            }
-          );
+            await wordleModel.findOneAndUpdate(
+              { user_ID: msg.author.id },
+              {
+                working: false,
+                doing: [],
+              },
+            );
           } else {
             msg.reply(`
           Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณชนะ)${output}
           `);
-          await wordleModel.findOneAndUpdate(
-            { user_ID: msg.author.id },
-            {
-              $inc: { day: 1 },
-              working: false,
-              doing: [],
-            }
-          );
+            await wordleModel.findOneAndUpdate(
+              { user_ID: msg.author.id },
+              {
+                $inc: { day: 1 },
+                working: false,
+                doing: [],
+              },
+            );
           }
-          
         }
       }
     } catch (error) {
