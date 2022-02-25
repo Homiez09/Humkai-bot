@@ -32,37 +32,4 @@ module.exports = (client) => {
       status: 'online',
     });
   }, 1000);
-
-  // Only my server
-  try {
-    client.channels.cache
-      .get('864742131209076779')
-      .messages.fetch('942393400693522432')
-      .then((msg) => {
-        let ifilter = (i) => !i.user.bot;
-        const collector = msg.createMessageComponentCollector({
-          filter: ifilter,
-        });
-
-        collector.on('collect', async (i) => {
-          const role = '871634427552358421';
-          try {
-            if (i.customId === 'member') {
-              if (!i.member.roles.cache.has(role)) {
-                await i.member.roles.add(role);
-                i.reply({
-                  content: `You are now a member!`,
-                  ephemeral: true,
-                });
-              }
-            }
-          } catch (error) {
-            console.log(error);
-            i.reply({ content: 'ไม่มีพบ role ในเซิฟนี้', ephemeral: true });
-          }
-        });
-      });
-  } catch (error) {
-    console.log(error);
-  }
 };

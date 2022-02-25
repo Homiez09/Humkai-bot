@@ -24,7 +24,7 @@ client.commands = new Collection();
 client.aliases = new Collection();
 client.together = new DiscordTogether(client);
 
-['loadEvents', 'loadCommands', 'loadDatabase'].forEach((file) => {
+['loadEvents', 'loadCommands', 'loadDatabase', 'loadAction'].forEach((file) => {
   require(`./handlers/${file}`)(client);
 });
 
