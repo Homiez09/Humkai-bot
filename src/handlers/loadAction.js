@@ -5,7 +5,7 @@ module.exports = (client) => {
     const msg_id = '947288622795739176';
     client.channels.cache
       .get('864742131209076779')
-      .messages.fetch('947288622795739176')
+      .msg.fetch('947288622795739176')
       .then((msg) => {
         let ifilter = (i) => !i.user.bot;
         const collector = msg.createMessageComponentCollector({
