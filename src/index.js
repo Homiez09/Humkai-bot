@@ -6,7 +6,6 @@ const { DiscordTogether } = require('discord-together');
 const client = new Client({
   shards: 'auto',
   intents: [
-    Intents.FLAGS.READ_MESSAGES,
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_PRESENCES,
     Intents.FLAGS.GUILD_MEMBERS,
