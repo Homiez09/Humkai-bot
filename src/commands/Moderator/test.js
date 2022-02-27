@@ -1,4 +1,9 @@
-const { MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
+const {
+  MessageActionRow,
+  MessageButton,
+  MessageEmbed,
+  MessageSelectMenu,
+} = require('discord.js');
 module.exports = {
   name: 'test',
   description: 'ไม่มีอะไรจ้าเฉพาะเซิฟหลัก',
@@ -7,16 +12,16 @@ module.exports = {
   run: async (interaction, client) => {
     const row = new MessageActionRow().addComponents(
       new MessageSelectMenu()
-      .setCustomId('member')
-      .setPlaceholder('เลือกเมนู')
-      .addOptions([
-        {
-          label: 'Verify',
-          description: 'Click to verify',
-          value: 'verify'
-        }
-      ])
-    )
+        .setCustomId('member')
+        .setPlaceholder('เลือกเมนู')
+        .addOptions([
+          {
+            label: 'Verify',
+            description: 'Click to verify',
+            value: 'verify',
+          },
+        ]),
+    );
 
     const embed = new MessageEmbed()
       .setTitle('Authentication')
