@@ -88,11 +88,7 @@ module.exports = async (client, msg) => {
           })
             .then((response) => {
               if (response.status != 200)
-                console.error(
-                  'Error:',
-                  response.status,
-                  response.statusText,
-                );
+                console.error('Error:', response.status, response.statusText);
               let attachment1 = new MessageAttachment(response.data);
               msg.reply({
                 content: `<@${msg.author.id}> ลบพื้นหลังเรียบร้อย`,

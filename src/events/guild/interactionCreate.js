@@ -65,19 +65,21 @@ module.exports = async (client, interaction) => {
   }
 
   // Select Menu Handling
-  if (interaction.isSelectMenu()){
-    if(interaction.customId !== 'member') return;
+  if (interaction.isSelectMenu()) {
+    if (interaction.customId !== 'member') return;
     let role_ID = interaction.values[0];
     await interaction.deferReply({ ephemeral: true });
     const role = interaction.guild.roles.cache.get(role_ID);
     const embed = new MessageEmbed()
-                        .setTitle('You have been verified!')
-                        .setDescription(`✅ ยืนยันตัวตนสำเร็จแล้ว. ยินดีตอนรับเข้าสู่ ${interaction.guild.name}!`)
-                        .setColor('GREEN');
+      .setTitle('You have been verified!')
+      .setDescription(
+        `✅ ยืนยันตัวตนสำเร็จแล้ว. ยินดีตอนรับเข้าสู่ ${interaction.guild.name}!`,
+      )
+      .setColor('GREEN');
 
     if (!interaction.member.roles.cache.has(role_ID)) {
       await interaction.member.roles.add(role);
-      interaction.followUp({ embeds: [embed], ephemeral: true});
+      interaction.followUp({ embeds: [embed], ephemeral: true });
     }
   }
 };

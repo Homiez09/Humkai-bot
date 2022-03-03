@@ -100,7 +100,7 @@ module.exports = {
             },
           );
 
-          return interaction.deferReply({
+          return interaction.reply({
             embeds: [
               await new MessageEmbed()
                 .setTitle('Installed')
