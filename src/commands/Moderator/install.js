@@ -5,7 +5,7 @@ module.exports = {
   name: 'install',
   description: 'ติดตั้ง',
   category: 'Moderator',
-  userPerms: ['MANAGE_MESSAGES'],
+  userPerms: ['ADMINISTRATOR'],
   options: [
     {
       name: 'options',
@@ -100,7 +100,7 @@ module.exports = {
             },
           );
 
-          return interaction.reply({
+          return interaction.deferReply({
             embeds: [
               await new MessageEmbed()
                 .setTitle('Installed')

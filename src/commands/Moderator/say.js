@@ -4,7 +4,7 @@ module.exports = {
   name: 'say',
   description: 'ให้บอทส่งข้อความที่คุณกำหนด',
   category: 'Moderator',
-  userPerms: ['MANAGE_MESSAGES'],
+  userPerms: ['ADMINISTRATOR'],
   options: [
     {
       name: 'msg',

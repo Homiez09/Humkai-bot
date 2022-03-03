@@ -1,14 +1,9 @@
-const {
-  MessageActionRow,
-  MessageButton,
-  MessageEmbed,
-  MessageSelectMenu,
-} = require('discord.js');
+const { MessageActionRow, MessageEmbed, MessageSelectMenu } = require('discord.js');
 module.exports = {
   name: 'test',
   description: 'ไม่มีอะไรจ้าเฉพาะเซิฟหลัก',
   category: 'Moderator',
-  userPerms: ['MANAGE_MESSAGES'],
+  userPerms: ['ADMINISTRATOR'],
   run: async (interaction, client) => {
     const row = new MessageActionRow().addComponents(
       new MessageSelectMenu()

@@ -2,11 +2,11 @@ module.exports = {
   name: 'delete',
   description: 'ลบข้อความ',
   category: 'Moderator',
-  userPerms: ['MANAGE_MESSAGES'],
+  userPerms: ['ADMINISTRATOR'],
   options: [
     {
       name: 'amount',
-      description: 'Amount of messages you want to delete.',
+      description: 'ลบข้อความ (สูงสุด 100)',
       type: 4,
       required: true,
     },
@@ -14,7 +14,7 @@ module.exports = {
   run: async (interaction, client) => {
     const amount = interaction.options.getInteger('amount');
     if (amount > 100) {
-      interaction.reply("You can't delete more than 100 messages.");
+      interaction.reply("ไม่สามารถลบได้เกิน 100 ข้อความหรือข้อความที่มีอายุมากกว่า 2 สัปดาห์");
       return;
     }
 
@@ -23,7 +23,7 @@ module.exports = {
     });
     await interaction.channel.bulkDelete(messages, true);
     interaction.reply({
-      content: `Cleared ${amount} messages.`,
+      content: `ลบไป ${amount} ข้อความ`,
       ephemeral: true,
     });
   },

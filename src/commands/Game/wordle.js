@@ -1,3 +1,4 @@
+// รอทำใหม่
 const { MessageEmbed } = require('discord.js');
 const wordleModel = require('../../schemas/wordleDB');
 const channelModel = require('../../schemas/channelDB');

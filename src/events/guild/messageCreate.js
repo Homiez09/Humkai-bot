@@ -28,8 +28,8 @@ module.exports = async (client, msg) => {
           rankData = await rankModel.create({
             userID: msg.author.id,
           });
-          return msg.channel.send({
-            content: `${msg.author} -> เพิ่งไปถึงระดับ 0`,
+          await msg.channel.send({
+            content: `${msg.author} ~> เพิ่มระดับเป็นเลเวล 0`,
             ephemeral: true,
           });
         }
@@ -50,8 +50,8 @@ module.exports = async (client, msg) => {
               },
             },
           );
-          msg.channel.send({
-            content: `${msg.author} -> เพิ่งไปถึงระดับ ${lvl + 1}`,
+          await msg.channel.send({
+            content: `${msg.author} ~> เพิ่มระดับเป็นเลเวล ${lvl + 1}`,
             ephemeral: true,
           });
         }
@@ -88,7 +88,7 @@ module.exports = async (client, msg) => {
           })
             .then((response) => {
               if (response.status != 200)
-                return console.error(
+                console.error(
                   'Error:',
                   response.status,
                   response.statusText,
@@ -109,12 +109,12 @@ module.exports = async (client, msg) => {
                   `CODE:${error.response.status} อัพโหลดไฟล์ไม่ถูกต้อง`,
                 );
               }
-              return console.error('Request failed:', error);
+              console.error('Request failed:', error);
             });
         });
       }
     } catch (error) {
-      return;
+      console.log(error);
     }
   }
 
@@ -132,11 +132,11 @@ module.exports = async (client, msg) => {
           user_ID: msg.author.id,
         });
         if (!wordleData || wordleData.working === false)
-          return msg.reply('คุณยังไม่ได้สร้างเกม ลองพิมพ์ /wordle ดูสิ');
+          return await msg.reply('คุณยังไม่ได้สร้างเกม ลองพิมพ์ /wordle ดูสิ');
         const word = wordleData.word;
         const content = msg.content.toLowerCase();
         if (content.length != 5)
-          return msg.reply(`กรุณาป้อนตัวอักษรให้ครบ 5 ตัว`);
+          return await msg.reply(`กรุณาป้อนตัวอักษรให้ครบ 5 ตัว`);
 
         let score = '';
         if (!(content == word)) {
@@ -159,7 +159,7 @@ module.exports = async (client, msg) => {
           { user_ID: msg.author.id },
           { $push: { doing: [score] } },
         );
-        msg.reply(`${wordleData.doing.length + 1}/6 => ${score}`);
+        await msg.reply(`${wordleData.doing.length + 1}/6 => ${score}`);
 
         if (
           score ==
@@ -171,7 +171,7 @@ module.exports = async (client, msg) => {
             output += wordleData.doing[i] + '\n';
           }
           if (wordleData.doing.length > 6) {
-            msg.reply(`
+            await msg.reply(`
           Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณแพ้)${output}
           `);
             await wordleModel.findOneAndUpdate(
@@ -182,7 +182,7 @@ module.exports = async (client, msg) => {
               },
             );
           } else {
-            msg.reply(`
+            await msg.reply(`
           Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณชนะ)${output}
           `);
             await wordleModel.findOneAndUpdate(
