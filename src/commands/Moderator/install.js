@@ -59,7 +59,7 @@ module.exports = {
             },
           );
           let channel0 = await interaction.guild.channels.create(
-            'Create New Room',
+            'Join To Create',
             {
               type: 'GUILD_VOICE',
               parent: category0,
@@ -130,7 +130,7 @@ module.exports = {
           );
 
           let channel0 = await interaction.guild.channels.create(
-            'Create New Room',
+            'Join To Create',
             {
               type: 'GUILD_VOICE',
               parent: category0,
