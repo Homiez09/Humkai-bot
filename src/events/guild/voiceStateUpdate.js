@@ -30,20 +30,24 @@ module.exports = async (client, oldState, newState) => {
       //voiceCollection.set(user.id, channel.id);
       await voiceCollectModel.create({
         user_ID: user.id,
-        channel_ID: channel.id
-      })
+        channel_ID: channel.id,
+      });
     } else if (!newState.channel) {
       try {
-        let voiceCollect; 
-        voiceCollect = await voiceCollectModel.findOne({ channel_ID: oldState.channel.id });
+        let voiceCollect;
+        voiceCollect = await voiceCollectModel.findOne({
+          channel_ID: oldState.channel.id,
+        });
         if (!voiceCollect) return;
         if (voiceCollect)
-        if (oldState.channel.id === voiceCollect.channel_ID) {
-          if (oldState.channel.members.size < 1) {
-            oldState.channel.delete();
-            return await voiceCollectModel.deleteOne({ channel_ID: oldState.channel.id });
+          if (oldState.channel.id === voiceCollect.channel_ID) {
+            if (oldState.channel.members.size < 1) {
+              oldState.channel.delete();
+              return await voiceCollectModel.deleteOne({
+                channel_ID: oldState.channel.id,
+              });
+            }
           }
-        }
       } catch (error) {
         console.log(error);
       }

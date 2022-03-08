@@ -20,10 +20,12 @@ module.exports = (client) => {
         .reduce((a, b) => a + b, 0)} users`,
       `${client.guilds.cache.size} servers`,
     ];
+
+    let randomAct = Act[Math.floor(Math.random() * 2)];
     client.user.setPresence({
       activities: [
         {
-          name: Act[Math.floor(Math.random() * (Act.length - 1) + 1)],
+          name: randomAct,
           // Type --> PLAYING, STREAMING, LISTENING, WATCHING, CUSTOM, COMPETING
           type: 'WATCHING',
         },
@@ -31,5 +33,5 @@ module.exports = (client) => {
       // Status --> online, idle, dnd, invisible
       status: 'online',
     });
-  }, 1000);
+  }, 30000);
 };
