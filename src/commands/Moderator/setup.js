@@ -7,7 +7,7 @@ const channelModel = require('../../schemas/channelDB');
 
 module.exports = {
   name: 'setup',
-  description: 'เซ็ตค่าต่างๆ',
+  description: 'ตั้งค่าความปลอดภัย',
   category: 'Moderator',
   userPerms: ['ADMINISTRATOR'],
   options: [
