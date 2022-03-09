@@ -11,13 +11,10 @@ module.exports = {
       required: true,
     },
   ],
-  run: async (interaction, client) => {
+  run: async (interaction, client, word) => {
     const amount = interaction.options.getInteger('amount');
     if (amount > 100) {
-      interaction.reply(
-        'ไม่สามารถลบได้เกิน 100 ข้อความหรือข้อความที่มีอายุมากกว่า 2 สัปดาห์',
-      );
-      return;
+      return interaction.reply(eval(word.delete.too_many));
     }
 
     const messages = await interaction.channel.messages.fetch({
@@ -25,7 +22,7 @@ module.exports = {
     });
     await interaction.channel.bulkDelete(messages, true);
     interaction.reply({
-      content: `ลบไป ${amount} ข้อความ`,
+      content: eval(word.delete.success),
       ephemeral: true,
     });
   },

@@ -4,15 +4,11 @@ module.exports = {
   name: 'ping',
   description: 'ปิงปอง ปองปิง',
   category: 'miscellaneous',
-  run: async (interaction, client) => {
+  run: async (interaction, client, word) => {
     const embed = new MessageEmbed()
-      .setTitle('pong!')
       .setColor('GREEN')
-      .setDescription(
-        `Latency is ${
-          Date.now() - interaction.createdTimestamp
-        }ms. API Latency is ${Math.round(client.ws.ping)}ms`,
-      )
+      .setTitle(eval(word.ping.embed.title))
+      .setDescription(eval(word.ping.embed.description))
       .setFooter(
         `Requested by ${interaction.user.tag}`,
         interaction.user.displayAvatarURL(),

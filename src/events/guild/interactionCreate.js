@@ -1,8 +1,16 @@
 require('dotenv').config();
 
 const { MessageEmbed } = require('discord.js');
+const langModel = require('../../schemas/langDB');
 
 module.exports = async (client, interaction) => {
+  let lang;
+  const langData = await langModel.findOne({ id: interaction.guild.id });
+  if (!langData) lang = 'en';
+  else lang = langData.lang;
+  // requrie json file
+  const word = require(`../../lang/${lang}.json`);
+
   // slash Command Handling
   if (interaction.isCommand()) {
     if (!client.slash.has(interaction.commandName)) return;
@@ -13,9 +21,9 @@ module.exports = async (client, interaction) => {
       if (command.userPerms) {
         if (!interaction.member.permissions.has(command.userPerms)) {
           const embed = new MessageEmbed()
-            .setTitle('ปฎิเสธการใช้งาน')
             .setColor('RED')
-            .setDescription(`ไม่มีสิทธิ์ในการใช้งานคำสั่งนี้`)
+            .setTitle(eval(word.error.userEmbed.title))
+            .setDescription(eval(word.error.userEmbed.description))
             .setFooter(
               interaction.user.tag,
               interaction.user.displayAvatarURL(),
@@ -28,9 +36,9 @@ module.exports = async (client, interaction) => {
       if (command.botPerms) {
         if (!interaction.guild.me.permissions.has(command.botPerms)) {
           const embed = new MessageEmbed()
-            .setTitle('ปฎิเสธการใช้งาน')
             .setColor('RED')
-            .setDescription(`ไม่มีสิทธิ์ในการใช้งานคำสั่งนี้`)
+            .setTitle(eval(word.error.botEmbed.title))
+            .setDescription(eval(word.error.botEmbed.description))
             .setFooter(
               interaction.user.tag,
               interaction.user.displayAvatarURL(),
@@ -43,9 +51,9 @@ module.exports = async (client, interaction) => {
       if (command.ownerOnly) {
         if (interaction.use.id !== process.env.OWNER_ID) {
           const embed = new MessageEmbed()
-            .setTitle('Access Denied')
             .setColor('RED')
-            .setDescription(`You not owner the bot can't use this command!`)
+            .setTitle(eval(word.error.ownerEmbed.title))
+            .setDescription(eval(word.error.ownerEmbed.description))
             .setFooter(
               interaction.user.tag,
               interaction.user.displayAvatarURL(),
@@ -54,7 +62,7 @@ module.exports = async (client, interaction) => {
           return interaction.reply({ embeds: [embed], ephemeral: true });
         }
       }
-      command.run(interaction, client);
+      command.run(interaction, client, word);
     } catch (e) {
       console.log(e);
       await interaction.reply({
@@ -71,9 +79,9 @@ module.exports = async (client, interaction) => {
     await interaction.deferReply({ ephemeral: true });
     const role = interaction.guild.roles.cache.get(role_ID);
     const embed = new MessageEmbed()
-      .setTitle('You have been verified!')
+      .setTitle(eval(word.setup.auth.success_embed.title))
       .setDescription(
-        `✅ ยืนยันตัวตนสำเร็จแล้ว. ยินดีตอนรับเข้าสู่ ${interaction.guild.name}!`,
+        eval(word.setup.auth.success_embed.description),
       )
       .setColor('GREEN');
 

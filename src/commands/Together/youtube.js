@@ -4,9 +4,9 @@ module.exports = {
   name: 'youtube',
   description: 'มาดูยูทูปนะจ้ะ',
   category: 'Together',
-  run: async (interaction, client) => {
+  run: async (interaction, client, word) => {
     if (!interaction.member.voice.channel)
-      return interaction.reply('You must be in voice channel.');
+      return interaction.reply(eval(word.youtube.fail));
     {
       client.together
         .createTogetherCode(interaction.member.voice.channel.id, 'youtube')

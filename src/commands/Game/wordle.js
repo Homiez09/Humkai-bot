@@ -8,7 +8,7 @@ module.exports = {
   name: 'wordle',
   description: 'play wordle',
   category: 'Game',
-  run: async (interaction, client) => {
+  run: async (interaction, client, word) => {
     let channelData;
     try {
       channelData = await channelModel.findOne({
@@ -16,11 +16,11 @@ module.exports = {
       });
       if (!channelData)
         return interaction.reply(
-          'กรุณาติดตั้งก่อนเกมก่อน /install wordle-game',
+          eval(word.wordle.content1),
         );
       if (channelData.wordle_ID !== interaction.channel.id)
         return interaction.reply(
-          `ไปเล่นที่ห้องนี้ <#${channelData.wordle_ID}>`,
+          eval(word.wordle.content2),
         );
     } catch (err) {
       console.log(err);
@@ -40,19 +40,17 @@ module.exports = {
       console.log(err);
     }
 
-    wordData = ['start', 'homie', 'horny', 'honny', 'batch', 'tooth'];
-
     if (wordleData.working)
       return interaction.reply(
-        `เกมกำลังดำเนินการอยู่ ${wordleData.doing.length}`,
+        eval(word.wordle.content3),
       );
-    let word = WORDS[Math.floor(Math.random() * WORDS.length)];
+    let wordRandom = WORDS[Math.floor(Math.random() * WORDS.length)];
     await wordleModel.findOneAndUpdate(
       { user_ID: interaction.user.id },
-      { word: word, working: true },
+      { word: wordRandom, working: true },
     );
 
-    let message = interaction.reply({
+    return interaction.reply({
       embeds: [
         await new MessageEmbed()
           .setTitle(`Day ${wordleData.day}`)

@@ -32,7 +32,7 @@ module.exports = {
       ],
     },
   ],
-  run: async (interaction, client) => {
+  run: async (interaction, client, word) => {
     let channelData;
     try {
       channelData = await channelModel.findOne({
@@ -100,16 +100,13 @@ module.exports = {
             },
           );
 
-          return interaction.reply({
+          await interaction.reply({
             embeds: [
               await new MessageEmbed()
-                .setTitle('Installed')
-                .addField(
-                  'Create Voice Channel',
-                  `คลิกที่ <#${channel0.id}> เพื่อสร้างห้องของตัวเอง `,
-                )
-                .addField('Remove Background', `ใช้งานได้ที่ <#${channel1.id}>`)
-                .addField('Wordle Game', `เข้าไปเล่นได้ที่ <#${channel2.id}>`)
+                .setTitle(eval(word.install.embed.title))
+                .addField('Join To Create', eval(word.install.embed.field1.value))
+                .addField('Remove Background', eval(word.install.embed.field2.value))
+                .addField('Wordle Game', eval(word.install.embed.field3.value))
                 .setColor('#0099ff')
                 .setFooter(
                   `Requested by ${interaction.user.tag}`,
@@ -142,14 +139,11 @@ module.exports = {
             { voice_ID: channel0.id },
           );
 
-          return interaction.reply({
+          await interaction.reply({
             embeds: [
               await new MessageEmbed()
-                .setTitle('Installed')
-                .addField(
-                  'Create Voice Channel',
-                  `คลิกที่ <#${channel0.id}> เพื่อสร้างห้องของตัวเอง `,
-                )
+                .setTitle(eval(word.install.embed.title))
+                .addField('Join To Create', eval(word.install.embed.field1.value))
                 .setColor('#0099ff')
                 .setFooter(
                   `Requested by ${interaction.user.tag}`,
@@ -179,13 +173,13 @@ module.exports = {
               { remove_ID: channel1.id },
             );
 
-            return interaction.reply({
+            await interaction.reply({
               embeds: [
                 await new MessageEmbed()
-                  .setTitle('Installed')
+                  .setTitle(eval(word.install.embed.title))
                   .addField(
                     'Remove Background',
-                    `ใช้งานได้ที่ <#${channel1.id}>`,
+                    eval(word.install.embed.field2.value),
                   )
                   .setColor('#0099ff')
                   .setFooter(
@@ -220,11 +214,11 @@ module.exports = {
             { wordle_ID: channel2.id },
           );
 
-          return interaction.reply({
+          await interaction.reply({
             embeds: [
               await new MessageEmbed()
-                .setTitle('Installed')
-                .addField('Wordle Game', `เข้าไปเล่นได้ที่ <#${channel2.id}>`)
+                .setTitle(eval(word.install.embed.title))
+                .addField(eval(word.install.embed.field3.value))
                 .setColor('#0099ff')
                 .setFooter(
                   `Requested by ${interaction.user.tag}`,

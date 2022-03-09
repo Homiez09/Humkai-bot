@@ -5,10 +5,20 @@ const FormData = require('form-data');
 const channelModel = require('../../schemas/channelDB');
 const rankModel = require('../../schemas/rankDB');
 const wordleModel = require('../../schemas/wordleDB');
+const langModel = require('../../schemas/langDB');
 
 require('dotenv').config();
 
 module.exports = async (client, msg) => {
+  /* language server*/
+  let lang ;
+  const langData = await langModel.findOne({ id: msg.guild.id });
+  if (!langData) lang = 'en';
+  else lang = langData.lang;
+  // requrie json file
+  const word = require(`../../lang/${lang}.json`);
+
+
   /* increase your rank when typing*/
   if (!msg.author.bot) {
     let lengthMsg = msg.content.length;
@@ -29,7 +39,7 @@ module.exports = async (client, msg) => {
             userID: msg.author.id,
           });
           await msg.channel.send({
-            content: `${msg.author} ~> เพิ่มระดับเป็นเลเวล 0`,
+            content: eval(word.messageCreate.rank.newData),
             ephemeral: true,
           });
         }
@@ -51,7 +61,7 @@ module.exports = async (client, msg) => {
             },
           );
           await msg.channel.send({
-            content: `${msg.author} ~> เพิ่มระดับเป็นเลเวล ${lvl + 1}`,
+            content: eval(word.messageCreate.rank.msgLvlUp),
             ephemeral: true,
           });
         }
@@ -97,13 +107,9 @@ module.exports = async (client, msg) => {
             })
             .catch((error) => {
               if (error.response.status == 402) {
-                msg.reply(
-                  `CODE:${error.response.status} การใช้งานในเดือนนี้สิ้นสุดแล้ว`,
-                );
+                msg.reply(eval(word.messageCreate.removebg.status.err402));
               } else if (error.response.status == 400) {
-                msg.reply(
-                  `CODE:${error.response.status} อัพโหลดไฟล์ไม่ถูกต้อง`,
-                );
+                msg.reply(eval(word.messageCreate.removebg.status.err400));
               }
               console.error('Request failed:', error);
             });
@@ -113,7 +119,7 @@ module.exports = async (client, msg) => {
       console.log(error);
     }
   }
-
+  
   /* Wordle Game */
   if (!msg.author.bot) {
     try {
@@ -122,25 +128,26 @@ module.exports = async (client, msg) => {
         guild_ID: msg.guild.id,
       });
       const wordle_ID = channelData.wordle_ID;
+
       if (msg.channel.id == wordle_ID && msg.author.id != bot_id) {
         let wordleData;
         wordleData = await wordleModel.findOne({
           user_ID: msg.author.id,
         });
         if (!wordleData || wordleData.working === false)
-          return await msg.reply('คุณยังไม่ได้สร้างเกม ลองพิมพ์ /wordle ดูสิ');
-        const word = wordleData.word;
+          return await msg.reply(eval(word.wordle.msgGame.content1));
+        const wordGet = wordleData.word;
         const content = msg.content.toLowerCase();
         if (content.length != 5)
-          return await msg.reply(`กรุณาป้อนตัวอักษรให้ครบ 5 ตัว`);
+          return await msg.reply(eval(word.wordle.msgGame.content2));
 
         let score = '';
-        if (!(content == word)) {
+        if (!(content == wordGet)) {
           for (let i = 0; i < 5; i++) {
-            if (content[i] == word[i]) {
+            if (content[i] == wordGet[i]) {
               score += ':green_square:';
             } else {
-              if (word.includes(content[i])) {
+              if (wordGet.includes(content[i])) {
                 score += ':yellow_square:';
               } else {
                 score += ':black_large_square:';
@@ -167,9 +174,7 @@ module.exports = async (client, msg) => {
             output += wordleData.doing[i] + '\n';
           }
           if (wordleData.doing.length > 6) {
-            await msg.reply(`
-          Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณแพ้)${output}
-          `);
+            await msg.reply(eval(word.wordle.msgGame.msgLose));
             await wordleModel.findOneAndUpdate(
               { user_ID: msg.author.id },
               {
@@ -178,9 +183,7 @@ module.exports = async (client, msg) => {
               },
             );
           } else {
-            await msg.reply(`
-          Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณชนะ)${output}
-          `);
+            await msg.reply(eval(word.wordle.msgGame.msgWin));
             await wordleModel.findOneAndUpdate(
               { user_ID: msg.author.id },
               {
