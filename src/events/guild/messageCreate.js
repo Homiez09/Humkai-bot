@@ -11,13 +11,12 @@ require('dotenv').config();
 
 module.exports = async (client, msg) => {
   /* language server*/
-  let lang ;
+  let lang;
   const langData = await langModel.findOne({ id: msg.guild.id });
   if (!langData) lang = 'en';
   else lang = langData.lang;
   // requrie json file
   const word = require(`../../lang/${lang}.json`);
-
 
   /* increase your rank when typing*/
   if (!msg.author.bot) {
@@ -119,7 +118,7 @@ module.exports = async (client, msg) => {
       console.log(error);
     }
   }
-  
+
   /* Wordle Game */
   if (!msg.author.bot) {
     try {

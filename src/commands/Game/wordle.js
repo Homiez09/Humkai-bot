@@ -14,14 +14,9 @@ module.exports = {
       channelData = await channelModel.findOne({
         guild_ID: interaction.guild.id,
       });
-      if (!channelData)
-        return interaction.reply(
-          eval(word.wordle.content1),
-        );
+      if (!channelData) return interaction.reply(eval(word.wordle.content1));
       if (channelData.wordle_ID !== interaction.channel.id)
-        return interaction.reply(
-          eval(word.wordle.content2),
-        );
+        return interaction.reply(eval(word.wordle.content2));
     } catch (err) {
       console.log(err);
     }
@@ -41,9 +36,7 @@ module.exports = {
     }
 
     if (wordleData.working)
-      return interaction.reply(
-        eval(word.wordle.content3),
-      );
+      return interaction.reply(eval(word.wordle.content3));
     let wordRandom = WORDS[Math.floor(Math.random() * WORDS.length)];
     await wordleModel.findOneAndUpdate(
       { user_ID: interaction.user.id },

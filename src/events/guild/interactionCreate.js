@@ -80,9 +80,7 @@ module.exports = async (client, interaction) => {
     const role = interaction.guild.roles.cache.get(role_ID);
     const embed = new MessageEmbed()
       .setTitle(eval(word.setup.auth.success_embed.title))
-      .setDescription(
-        eval(word.setup.auth.success_embed.description),
-      )
+      .setDescription(eval(word.setup.auth.success_embed.description))
       .setColor('GREEN');
 
     if (!interaction.member.roles.cache.has(role_ID)) {

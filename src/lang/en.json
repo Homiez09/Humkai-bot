@@ -1,106 +1,106 @@
 {
-    "test": "This is a test",
+  "test": "This is a test",
 
-    "error": {
-        "userEmbed": {
-            "title": "`Access Denied`",
-            "description": "`You don't have permission to use this command!`"   
-        },
-        "botEmbed": {
-            "title": "`Access Denied`",
-            "description": "`Bot don't have permission to use this command!`"       
-        },
-        "ownerEmbed": {
-            "title": "`Access Denied`",
-            "description": "`You not owner the bot can't use this command!`"        
-        },
-        "fail": "`Something went wrong!`"
+  "error": {
+    "userEmbed": {
+      "title": "`Access Denied`",
+      "description": "`You don't have permission to use this command!`"
+    },
+    "botEmbed": {
+      "title": "`Access Denied`",
+      "description": "`Bot don't have permission to use this command!`"
+    },
+    "ownerEmbed": {
+      "title": "`Access Denied`",
+      "description": "`You not owner the bot can't use this command!`"
+    },
+    "fail": "`Something went wrong!`"
+  },
+
+  "messageCreate": {
+    "rank": {
+      "newData": "`${msg.author} just start from lvl 0`",
+      "msgLvlUp": "`${msg.author} reached lvl ${lvl + 1}`"
     },
 
-    "messageCreate": {
-        "rank": {
-            "newData": "`${msg.author} just start from lvl 0`",
-            "msgLvlUp": "`${msg.author} reached lvl ${lvl + 1}`"
-        },
-
-        "removebg": {
-            "status": {
-                "err401": "`CODE:${error.response.status} invalid api key`",
-                "err402": "`CODE:${error.response.status} No credits remaining`",
-                "err400": "`CODE:${error.response.status} Source image file not found`"
-            }
-        }
-    },
-
-    "ping": {
-        "embed":{
-            "title": "`pong!`",
-            "description": "`Latency is ${Date.now() - interaction.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`"
-        }
-    },
-
-    "delete": {
-        "too_many": "`You can't delete more than 100 message and oldest 2 week.`",
-        "success": "`Successfully deleted ${amount} messages`"
-    },
-
-    "install": {
-        "embed":{
-            "title": "`Installed`",
-            "field1": {
-                "value": "`Click <#${channel0.id}> to create your private voice channel.`"
-            },
-            "field2": {
-                "value": "`Click <#${channel1.id}> to go to the channel `"
-            },
-            "field3": {
-                "value": "`Click <#${channel2.id}> to play the game`"
-            }
-        }
-    },
-
-    "setup": {
-        "lang": {
-            "embed": {
-                "title": "`Installed`",
-                "description": "`Your current language is English.`"
-            }
-        },
-        "auth": {
-            "embed1": {
-                "title": "`Installed`",
-                "field": {
-                    "value": "`Click <#${channel.id}> to go to the channel.`"
-                }
-            },
-            "embed2": {
-                "title": "`Hello! Are you human?`",
-                "description": "`Welcome to ${interaction.guild.name}! 🎈\nSelect the menu to access the server. 🔐`"
-            },
-            "embed3": {
-                "title": "`fail`",
-                "description": "`You didn't setup anything`"
-            },
-            "success_embed": {
-                "title": "`You have been verified!`",
-                "description": "`✅ You passed the verification successfully. You can now access ${interaction.guild.name}!`"
-            }
-        }
-    },
-
-    "youtube": {
-        "fail": "`You must be in voice channel.`"
-    },
-
-    "wordle": {
-        "content1": "`You have to install first (/install wordle-game)",
-        "content2": "`Click <#${channelData.wordle_ID}> to play`",
-        "content3": "`The game is still running. ${wordleData.doing.length}`",
-        "msgGame": {
-            "content1": "`You have to type /wordle to create your game.`",
-            "content2": "`Please enter 5 letter.`",
-            "msgLose": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (lose)${output}`",
-            "msgWin": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (win)${output}`"        
-        }
+    "removebg": {
+      "status": {
+        "err401": "`CODE:${error.response.status} invalid api key`",
+        "err402": "`CODE:${error.response.status} No credits remaining`",
+        "err400": "`CODE:${error.response.status} Source image file not found`"
+      }
     }
+  },
+
+  "ping": {
+    "embed": {
+      "title": "`pong!`",
+      "description": "`Latency is ${Date.now() - interaction.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`"
+    }
+  },
+
+  "delete": {
+    "too_many": "`You can't delete more than 100 message and oldest 2 week.`",
+    "success": "`Successfully deleted ${amount} messages`"
+  },
+
+  "install": {
+    "embed": {
+      "title": "`Installed`",
+      "field1": {
+        "value": "`Click <#${channel0.id}> to create your private voice channel.`"
+      },
+      "field2": {
+        "value": "`Click <#${channel1.id}> to go to the channel `"
+      },
+      "field3": {
+        "value": "`Click <#${channel2.id}> to play the game`"
+      }
+    }
+  },
+
+  "setup": {
+    "lang": {
+      "embed": {
+        "title": "`Installed`",
+        "description": "`Your current language is English.`"
+      }
+    },
+    "auth": {
+      "embed1": {
+        "title": "`Installed`",
+        "field": {
+          "value": "`Click <#${channel.id}> to go to the channel.`"
+        }
+      },
+      "embed2": {
+        "title": "`Hello! Are you human?`",
+        "description": "`Welcome to ${interaction.guild.name}! 🎈\nSelect the menu to access the server. 🔐`"
+      },
+      "embed3": {
+        "title": "`fail`",
+        "description": "`You didn't setup anything`"
+      },
+      "success_embed": {
+        "title": "`You have been verified!`",
+        "description": "`✅ You passed the verification successfully. You can now access ${interaction.guild.name}!`"
+      }
+    }
+  },
+
+  "youtube": {
+    "fail": "`You must be in voice channel.`"
+  },
+
+  "wordle": {
+    "content1": "`You have to install first (/install wordle-game)",
+    "content2": "`Click <#${channelData.wordle_ID}> to play`",
+    "content3": "`The game is still running. ${wordleData.doing.length}`",
+    "msgGame": {
+      "content1": "`You have to type /wordle to create your game.`",
+      "content2": "`Please enter 5 letter.`",
+      "msgLose": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (lose)${output}`",
+      "msgWin": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (win)${output}`"
+    }
+  }
 }

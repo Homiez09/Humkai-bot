@@ -104,8 +104,14 @@ module.exports = {
             embeds: [
               await new MessageEmbed()
                 .setTitle(eval(word.install.embed.title))
-                .addField('Join To Create', eval(word.install.embed.field1.value))
-                .addField('Remove Background', eval(word.install.embed.field2.value))
+                .addField(
+                  'Join To Create',
+                  eval(word.install.embed.field1.value),
+                )
+                .addField(
+                  'Remove Background',
+                  eval(word.install.embed.field2.value),
+                )
                 .addField('Wordle Game', eval(word.install.embed.field3.value))
                 .setColor('#0099ff')
                 .setFooter(
@@ -143,7 +149,10 @@ module.exports = {
             embeds: [
               await new MessageEmbed()
                 .setTitle(eval(word.install.embed.title))
-                .addField('Join To Create', eval(word.install.embed.field1.value))
+                .addField(
+                  'Join To Create',
+                  eval(word.install.embed.field1.value),
+                )
                 .setColor('#0099ff')
                 .setFooter(
                   `Requested by ${interaction.user.tag}`,

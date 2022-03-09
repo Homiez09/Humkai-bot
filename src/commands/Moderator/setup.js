@@ -26,13 +26,13 @@ module.exports = {
           choices: [
             {
               name: 'thai',
-              value: 'th'
+              value: 'th',
             },
             {
               name: 'english',
-              value: 'en'
-            }
-          ]
+              value: 'en',
+            },
+          ],
         },
       ],
     },
@@ -54,9 +54,9 @@ module.exports = {
             {
               name: 'false',
               value: 'false',
-            }
+            },
           ],
-        }
+        },
       ],
     },
   ],
@@ -74,19 +74,22 @@ module.exports = {
             await langModel.create({
               id: interaction.guild.id,
               lang: choice,
-            })
-          } else {
-            await langModel.updateOne({ id: interaction.guild.id }, {
-              $set: {
-                lang: choice,
-              },
             });
+          } else {
+            await langModel.updateOne(
+              { id: interaction.guild.id },
+              {
+                $set: {
+                  lang: choice,
+                },
+              },
+            );
           }
 
           const wordfast = require(`../../lang/${choice}.json`);
           const embed = new MessageEmbed()
-          .setTitle(eval(wordfast.setup.lang.embed.title))
-          .setDescription(eval(wordfast.setup.lang.embed.description))
+            .setTitle(eval(wordfast.setup.lang.embed.title))
+            .setDescription(eval(wordfast.setup.lang.embed.description));
 
           interaction.reply({ embeds: [embed], ephemeral: false });
         }
@@ -160,7 +163,10 @@ module.exports = {
                   .setTitle(eval(word.setup.auth.embed2.title))
                   .setDescription(eval(word.setup.auth.embed2.description))
                   .setColor('GREEN');
-                let msg = await channel.send({ embeds: [embed], components: [row] });
+                let msg = await channel.send({
+                  embeds: [embed],
+                  components: [row],
+                });
 
                 let channelData;
                 try {
@@ -202,9 +208,8 @@ module.exports = {
               }
               break;
           }
-
         }
-        break
+        break;
     }
   },
 };
