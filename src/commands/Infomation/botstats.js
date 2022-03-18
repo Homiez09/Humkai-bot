@@ -8,6 +8,7 @@ module.exports = {
   name: 'bot-stats',
   description: 'เช็คสถานะของบอท',
   category: 'Information',
+  botPerms: ['ADMINISTRATOR'],
   run: async (interaction, client) => {
     let info = await ipInfo();
     await interaction.reply({

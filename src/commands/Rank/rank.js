@@ -5,6 +5,7 @@ module.exports = {
   name: 'rank',
   description: 'ดูระดับของคุณ',
   category: 'Rank',
+  botPerms: ['ADMINISTRATOR'],
   run: async (interaction, client) => {
     const applyText = (canvas, text) => {
       const context = canvas.getContext('2d');

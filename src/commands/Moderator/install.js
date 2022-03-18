@@ -6,6 +6,7 @@ module.exports = {
   description: 'ติดตั้ง',
   category: 'Moderator',
   userPerms: ['ADMINISTRATOR'],
+  botPerms: ['ADMINISTRATOR'],
   options: [
     {
       name: 'options',

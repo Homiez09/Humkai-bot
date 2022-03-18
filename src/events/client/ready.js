@@ -1,17 +1,9 @@
 require('dotenv').config();
 
-const figlet = require('figlet');
 const chalk = require('chalk');
 
 module.exports = (client) => {
-  figlet(client.user.tag, function (err, data) {
-    if (err) {
-      console.log('Something went wrong...');
-      console.dir(err);
-      return;
-    }
-    console.log(chalk.red.bold(data));
-  });
+  console.log(chalk.red.bold(client.user.tag));
 
   setInterval(() => {
     let Act = [

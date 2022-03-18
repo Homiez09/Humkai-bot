@@ -3,6 +3,7 @@ module.exports = {
   description: 'ลบข้อความ',
   category: 'Moderator',
   userPerms: ['ADMINISTRATOR'],
+  botPerms: ['ADMINISTRATOR'],
   options: [
     {
       name: 'amount',

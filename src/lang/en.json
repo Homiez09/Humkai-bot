@@ -4,15 +4,16 @@
   "error": {
     "userEmbed": {
       "title": "`Access Denied`",
-      "description": "`You don't have permission to use this command!`"
+      "description": "`You don't have permission!`"
     },
     "botEmbed": {
       "title": "`Access Denied`",
-      "description": "`Bot don't have permission to use this command!`"
+      "description": "`I need ${command.botPerms} permission!`",
+      "description2": "`I need ADMINISTRATOR permission!`"
     },
     "ownerEmbed": {
       "title": "`Access Denied`",
-      "description": "`You not owner the bot can't use this command!`"
+      "description": "`You are not owner`"
     },
     "fail": "`Something went wrong!`"
   },

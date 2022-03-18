@@ -5,6 +5,7 @@ module.exports = {
   name: 'wordle-search',
   description: 'คำศัพท์ที่อยู่ในเกม wordle',
   category: 'Game',
+  botPerms: ['ADMINISTRATOR'],
   options: [
     {
       name: 'search',

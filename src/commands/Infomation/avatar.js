@@ -4,6 +4,7 @@ module.exports = {
   name: 'avatar',
   description: 'โชว์รูปโปรไฟล์',
   category: 'Information',
+  botPerms: ['ADMINISTRATOR'],
   options: [
     {
       name: 'user',

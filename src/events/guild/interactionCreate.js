@@ -74,6 +74,19 @@ module.exports = async (client, interaction) => {
 
   // Select Menu Handling
   if (interaction.isSelectMenu()) {
+    if (!interaction.guild.me.permissions.has('ADMINISTRATOR')) {
+      const embed = new MessageEmbed()
+        .setColor('RED')
+        .setTitle(eval(word.error.botEmbed.title))
+        .setDescription(eval(word.error.botEmbed.description2))
+        .setFooter(
+          interaction.user.tag,
+          interaction.user.displayAvatarURL(),
+        );
+
+      return interaction.reply({ embeds: [embed], ephemeral: false });
+    }
+
     if (interaction.customId !== 'member') return;
     let role_ID = interaction.values[0];
     await interaction.deferReply({ ephemeral: true });

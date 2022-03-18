@@ -4,15 +4,16 @@
   "error": {
     "userEmbed": {
       "title": "`ปฎิเสธการใช้งาน`",
-      "description": "`คุณไม่มีสิทธิ์ในการใช้งานคำสั่งนี้`"
+      "description": "`คุณไม่มีสิทธิ์ในการใช้งานคำสั่งนี้!`"
     },
     "botEmbed": {
       "title": "`ปฎิเสธการใช้งาน`",
-      "description": "`ฉันไม่มีสิทธิ์ในการใช้งานคำสั่งนี้`"
+      "description": "`ฉันต้องการสิทธิ์ ${command.botPerms}!`",
+      "description2": "`ฉันต้องการสิทธิ์ ADMINISTRATOR!`"
     },
     "ownerEmbed": {
       "title": "`Access Denied`",
-      "description": "`You not owner the bot can't use this command!`"
+      "description": "`You are not owner`"
     },
     "fail": "`Something went wrong!`"
   },

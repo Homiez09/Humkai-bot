@@ -12,6 +12,7 @@ module.exports = {
   description: 'ตั้งค่าความปลอดภัย',
   category: 'Moderator',
   userPerms: ['ADMINISTRATOR'],
+  botPerms: ['ADMINISTRATOR'],
   options: [
     {
       name: 'language',

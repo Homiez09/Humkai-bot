@@ -8,6 +8,7 @@ module.exports = {
   name: 'wordle',
   description: 'play wordle',
   category: 'Game',
+  botPerms: ['ADMINISTRATOR'],
   run: async (interaction, client, word) => {
     let channelData;
     try {

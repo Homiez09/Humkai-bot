@@ -4,6 +4,7 @@ module.exports = {
   name: 'youtube',
   description: 'มาดูยูทูปนะจ้ะ',
   category: 'Together',
+  botPerms: ['ADMINISTRATOR'],
   run: async (interaction, client, word) => {
     if (!interaction.member.voice.channel)
       return interaction.reply(eval(word.youtube.fail));

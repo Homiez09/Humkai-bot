@@ -5,6 +5,7 @@ module.exports = {
   description: 'ให้บอทส่งข้อความที่คุณกำหนด',
   category: 'Moderator',
   userPerms: ['ADMINISTRATOR'],
+  botPerms: ['ADMINISTRATOR'],
   options: [
     {
       name: 'msg',

@@ -4,8 +4,10 @@ module.exports = {
   name: 'help',
   description: 'ดูคำสั่งทั้งหมด',
   category: 'miscellaneous',
+  botPerms: ['ADMINISTRATOR'],
   run: async (interaction, client) => {
     const categories = new Set(client.slash.map((c) => c.category));
+    console.log(categories)
     const embed = new MessageEmbed()
       .setColor('BLUE')
       .setTitle(`${client.user.username}'s Help`)
