@@ -32,6 +32,7 @@ module.exports = {
       case 'major':
         {
           try {
+            await interaction.deferReply();
             const siteUrl = 'https://majorcineplex.com/movie#movie-page-coming';
 
             const { data } = await axios({
@@ -76,17 +77,16 @@ module.exports = {
                 '[ข้อมูลจาก MajorCineplex](https://majorcineplex.com/movie)',
               )
               .setColor('#0099ff')
-              .setTimestamp()
               .setFooter(
                 `Requested by ${interaction.user.tag}`,
                 interaction.user.displayAvatarURL(),
               );
-
+            
             for (let i = 0; i < lengthOfListA; i++) {
               embed.addField(`${listA[i].name[0]}`, `${listA[i].time[0]}`);
             }
-
-            await interaction.reply({ embeds: [embed], ephemeral: false });
+            
+		    await interaction.editReply({ embeds: [embed], ephemeral: false });
           } catch (error) {
             console.log(error);
           }
