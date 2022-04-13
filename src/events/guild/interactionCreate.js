@@ -79,10 +79,7 @@ module.exports = async (client, interaction) => {
         .setColor('RED')
         .setTitle(eval(word.error.botEmbed.title))
         .setDescription(eval(word.error.botEmbed.description2))
-        .setFooter(
-          interaction.user.tag,
-          interaction.user.displayAvatarURL(),
-        );
+        .setFooter(interaction.user.tag, interaction.user.displayAvatarURL());
 
       return interaction.reply({ embeds: [embed], ephemeral: false });
     }
