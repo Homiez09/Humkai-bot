@@ -1,8 +1,10 @@
 const { MessageEmbed } = require('discord.js');
+const axios = require('axios');
+const cheerio = require('cheerio');
 
 module.exports = {
     name: 'movie',
-    description: 'เช็คหนังที่กำลังฉายในโรง',
+    description: 'โปรแกรมฉายหนัง',
     category: 'miscellaneous',
     botPerms: ['ADMINISTRATOR'],
     options: [
@@ -14,14 +16,14 @@ module.exports = {
             choices: [
                 {
                     name: 'major',
-                    value: 'major'
+                    value: 'major',
                 },
                 {
                     name: 'sf',
-                    value: 'sf'
-                }
-            ]
-        }
+                    value: 'sf',
+                },
+            ],
+        },
     ],
     run: async (interaction, client, word) => {
         const { options } = interaction;
@@ -29,14 +31,90 @@ module.exports = {
         switch (choice) {
             case 'major':
                 {
-                    console.log('this is major');
+                    try {
+                        const siteUrl = 'https://majorcineplex.com/movie#movie-page-coming';
+
+                        const { data } = await axios({
+                            method: "GET",
+                            url: siteUrl,
+                        })
+
+                        const $ = cheerio.load(data);
+                        const elemSelector = '#movie-page-showing > div > div'
+
+                        const keys = [
+                            'genre',
+                            'date',
+                            'name',
+                            'time',
+                        ]
+
+                        var listA = []
+                        $(elemSelector).each((parentIdx, parentElem) => {
+                            let keyIdx = 0;
+                            const jsonList = {}
+
+                            if (true) {
+                                $(parentElem).children().each((childIdx, childElem) => {
+                                    const tdValue = $(childElem).text();
+                                    const tdValueOptimized = tdValue.replace(/\s\s+ /g, ' ').trim();
+                                    const tdValueArray = tdValueOptimized.split(/\n/);
+                                    jsonList[keys[keyIdx]] = tdValueArray
+                                    //jsonList[keys[keyIdx]] = tdValueArray;
+                                    keyIdx++;
+
+                                })
+                                listA.push(jsonList);
+                            }
+                        })
+                        //return console.log(listA);
+                        lengthOfListA = listA.length;
+
+                        const embed = new MessageEmbed()
+                            .setTitle(`หนังที่กำลังฉาย (Major) | ทั้งหมด ${lengthOfListA} รายการ`)
+                            .setDescription("[ข้อมูลจาก MajorCineplex](https://majorcineplex.com/movie)")
+                            .setColor('#0099ff')
+                            .setTimestamp()
+                            .setFooter(
+                                `Requested by ${interaction.user.tag}`,
+                                interaction.user.displayAvatarURL(),
+                            );
+
+                        for (let i = 0; i < lengthOfListA; i++) {
+                            embed.addField(
+                                `${listA[i].name[0]}`,
+                                `${listA[i].time[0]}`,
+                            )
+                        }
+
+                        await interaction.reply({ embeds: [embed], ephemeral: false });
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
                 break;
             case 'sf':
                 {
-                    console.log('this is sf');
+                    const embed = new MessageEmbed()
+                        .setTitle(`หนังที่กำลังฉาย (SF) | ทั้งหมด X รายการ`)
+                        .setDescription("ยังไม่ได้ทำ ขีเกียจ")
+                        .setColor('#0099ff')
+                        .setTimestamp()
+                        .setFooter(
+                            `Requested by ${interaction.user.tag}`,
+                            interaction.user.displayAvatarURL(),
+                        );
+
+                    /* for (let i = 0; i < lengthOfListA; i++) {
+                        embed.addField(
+                            `${listA[i].name[0]}`,
+                            `${listA[i].time[0]}`,
+                        )
+                    } */
+
+                    await interaction.reply({ embeds: [embed], ephemeral: false });
                 }
                 break;
-        }       
-    }
-}
+        }
+    },
+};
