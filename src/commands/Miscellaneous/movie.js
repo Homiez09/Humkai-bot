@@ -81,12 +81,12 @@ module.exports = {
                 `Requested by ${interaction.user.tag}`,
                 interaction.user.displayAvatarURL(),
               );
-            
+
             for (let i = 0; i < lengthOfListA; i++) {
-              embed.addField(`${listA[i].name[0]}`, `${listA[i].time[0]}`);
+              embed.addField(`${listA[i].name[0]}`, `${listA[i].date[0]}`);
             }
-            
-		    await interaction.editReply({ embeds: [embed], ephemeral: false });
+
+            await interaction.editReply({ embeds: [embed], ephemeral: false });
           } catch (error) {
             console.log(error);
           }
