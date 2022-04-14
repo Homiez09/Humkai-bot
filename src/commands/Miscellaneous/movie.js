@@ -68,15 +68,11 @@ module.exports = {
             });
             //return console.log(listA);
             lengthOfListA = listA.length;
-
             const embed = new MessageEmbed()
-              .setTitle(
-                `หนังที่กำลังฉาย (Major) | ทั้งหมด ${lengthOfListA} รายการ`,
-              )
-              .setDescription(
-                '[ข้อมูลจาก MajorCineplex](https://majorcineplex.com/movie)',
-              )
+              .setTitle(eval(word.movie.embed1.title))
+              .setDescription(eval(word.movie.embed1.description))
               .setColor('#0099ff')
+              .setTimestamp()
               .setFooter(
                 `Requested by ${interaction.user.tag}`,
                 interaction.user.displayAvatarURL(),
@@ -95,8 +91,12 @@ module.exports = {
       case 'sf':
         {
           const embed = new MessageEmbed()
-            .setTitle(`หนังที่กำลังฉาย (SF) | ทั้งหมด X รายการ`)
-            .setDescription('ยังไม่ได้ทำ ขีเกียจ')
+            .setTitle(
+              eval(word.movie.embed2.title)
+            )
+            .setDescription(
+              eval(word.movie.embed2.description)
+            )
             .setColor('#0099ff')
             .setTimestamp()
             .setFooter(

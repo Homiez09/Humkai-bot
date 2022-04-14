@@ -103,5 +103,16 @@
       "msgLose": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณแพ้)${output}`",
       "msgWin": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณชนะ)${output}`"
     }
+  },
+
+  "movie": {
+    "embed1": {
+      "title": "`หนังที่กำลังฉาย (Major) | ทั้งหมด ${lengthOfListA} รายการ`",
+      "description": "`[ข้อมูลจาก MajorCineplex](https://majorcineplex.com/movie)`"
+    },
+    "embed2": {
+      "title": "`NO INFO`",
+      "description": "`[Info](https://www.google.com)`"
+    }
   }
 }

@@ -103,5 +103,16 @@
       "msgLose": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (lose)${output}`",
       "msgWin": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (win)${output}`"
     }
+  },
+
+  "movie": {
+    "embed1": {
+      "title": "`Major Cineplex | Total ${lengthOfListA}`",
+      "description": "`[Info](https://majorcineplex.com/movie)`"
+    },
+    "embed2": {
+      "title": "`NO INFO`",
+      "description": "`[Info](https://www.google.com)`"
+    }
   }
 }
