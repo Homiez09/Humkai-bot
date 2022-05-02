@@ -4,8 +4,10 @@ const chalk = require('chalk');
 
 module.exports = (client) => {
   console.log(chalk.red.bold(client.user.tag));
-
+  let i = 0;
   setInterval(() => {
+    if (i > 1) i = 0;
+
     let Act = [
       `${client.guilds.cache
         .map((guild) => guild.memberCount)
@@ -13,11 +15,10 @@ module.exports = (client) => {
       `${client.guilds.cache.size} servers`,
     ];
 
-    let randomAct = Act[Math.floor(Math.random() * 2)];
     client.user.setPresence({
       activities: [
         {
-          name: randomAct,
+          name: Act[i],
           // Type --> PLAYING, STREAMING, LISTENING, WATCHING, CUSTOM, COMPETING
           type: 'WATCHING',
         },
@@ -25,5 +26,7 @@ module.exports = (client) => {
       // Status --> online, idle, dnd, invisible
       status: 'online',
     });
-  }, 30000);
+
+    i++;
+  }, 10000);
 };

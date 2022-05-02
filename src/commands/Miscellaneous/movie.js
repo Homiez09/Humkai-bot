@@ -91,12 +91,8 @@ module.exports = {
       case 'sf':
         {
           const embed = new MessageEmbed()
-            .setTitle(
-              eval(word.movie.embed2.title)
-            )
-            .setDescription(
-              eval(word.movie.embed2.description)
-            )
+            .setTitle(eval(word.movie.embed2.title))
+            .setDescription(eval(word.movie.embed2.description))
             .setColor('#0099ff')
             .setTimestamp()
             .setFooter(
