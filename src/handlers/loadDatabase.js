@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 module.exports = async () => {
-  if (!process.env.dbURL) return console.log('The client is not connected to the database.');
+  if (!process.env.dbURL)
+    return console.log('The client is not connected to the database.');
   mongoose
     .connect(process.env.dbURL, {
       useNewUrlParser: true,

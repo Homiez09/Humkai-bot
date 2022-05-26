@@ -1,5 +1,8 @@
 const { MessageAttachment, Message, Interaction } = require('discord.js');
 
+const { createReadStream } = require('node:fs');
+const { join } = require('node:path');
+const { createAudioResource, StreamType } = require('@discordjs/voice');
 const axios = require('axios');
 const FormData = require('form-data');
 const googleTTS = require('google-tts-api');
@@ -211,26 +214,25 @@ module.exports = async (client, msg) => {
       });
 
       if (ttsData.ttsStatus === true && ttsData.channelID === msg.channel.id) {
-        const audioURL = googleTTS.getAudioUrl(msg.content, {
+        const audioURL = await googleTTS.getAudioUrl(msg.content, {
           lang: 'th',
           slow: false,
           host: 'https://translate.google.com',
         });
         try {
-          const channel = msg.member.voice.channel;
+          const channel = await msg.member.voice.channel;
 
-          const player = voiceDiscord.createAudioPlayer();
-          const resource = voiceDiscord.createAudioResource(audioURL);
+          const player = await voiceDiscord.createAudioPlayer();
+          const resource = await voiceDiscord.createAudioResource(audioURL);
 
-          const connection = voiceDiscord.joinVoiceChannel({
+          const connection = await voiceDiscord.joinVoiceChannel({
             channelId: channel.id,
             guildId: msg.guild.id,
             adapterCreator: msg.guild.voiceAdapterCreator,
           });
 
-          player.play(resource);
-          connection.subscribe(player);
-
+          await player.play(resource);
+          await connection.subscribe(player);
         } catch (e) {
           console.log(e);
         }

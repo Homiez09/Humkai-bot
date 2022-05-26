@@ -1,6 +1,5 @@
 const { Collection } = require('discord.js');
 
-const voiceCollection = new Collection();
 const channelModel = require('../../schemas/channelDB');
 const voiceCollectModel = require('../../schemas/voiceCollectDB');
 
