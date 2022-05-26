@@ -2,10 +2,13 @@ const { MessageAttachment, Message, Interaction } = require('discord.js');
 
 const axios = require('axios');
 const FormData = require('form-data');
+const googleTTS = require('google-tts-api');
+const voiceDiscord = require('@discordjs/voice');
 const channelModel = require('../../schemas/channelDB');
 const rankModel = require('../../schemas/rankDB');
 const wordleModel = require('../../schemas/wordleDB');
 const langModel = require('../../schemas/langDB');
+const ttsModel = require('../../schemas/ttsDB');
 
 require('dotenv').config();
 
@@ -192,6 +195,44 @@ module.exports = async (client, msg) => {
               },
             );
           }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  /* tts */
+  if (!msg.author.bot) {
+    try {
+      let ttsData;
+      ttsData = await ttsModel.findOne({
+        guildID: msg.guild.id,
+      });
+
+      if (ttsData.ttsStatus === true && ttsData.channelID === msg.channel.id) {
+        const audioURL = googleTTS.getAudioUrl(msg.content, {
+          lang: 'th',
+          slow: false,
+          host: 'https://translate.google.com',
+        });
+        try {
+          const channel = msg.member.voice.channel;
+
+          const player = voiceDiscord.createAudioPlayer();
+          const resource = voiceDiscord.createAudioResource(audioURL);
+
+          const connection = voiceDiscord.joinVoiceChannel({
+            channelId: channel.id,
+            guildId: msg.guild.id,
+            adapterCreator: msg.guild.voiceAdapterCreator,
+          });
+
+          player.play(resource);
+          connection.subscribe(player);
+
+        } catch (e) {
+          console.log(e);
         }
       }
     } catch (error) {

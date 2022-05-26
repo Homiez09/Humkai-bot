@@ -4,7 +4,7 @@ module.exports = {
   name: 'schedule',
   description: 'ตารางเรียน',
   category: 'miscellaneous',
-  botPerms: ['ADMINISTRATOR'],
+  botPerms: [],
   run: async (interaction, client) => {
     const attachment = new MessageAttachment(
       './src/assets/images/talangrean.jpg',

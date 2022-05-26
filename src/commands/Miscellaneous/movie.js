@@ -6,7 +6,7 @@ module.exports = {
   name: 'movie',
   description: 'โปรแกรมฉายหนัง',
   category: 'miscellaneous',
-  botPerms: ['ADMINISTRATOR'],
+  botPerms: [],
   options: [
     {
       name: 'options',

@@ -4,7 +4,7 @@ module.exports = {
   name: 'ping',
   description: 'ปิงปอง ปองปิง',
   category: 'miscellaneous',
-  botPerms: ['ADMINISTRATOR'],
+  botPerms: [],
   run: async (interaction, client, word) => {
     const embed = new MessageEmbed()
       .setColor('GREEN')

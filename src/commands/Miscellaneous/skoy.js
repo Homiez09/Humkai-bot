@@ -4,7 +4,7 @@ module.exports = {
   name: 'skoy',
   description: 'นายเองก็เป็นได้นะสก๊อยอ่ะ',
   category: 'miscellaneous',
-  botPerms: ['ADMINISTRATOR'],
+  botPerms: [],
   options: [
     {
       name: 'text',
