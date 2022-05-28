@@ -1,8 +1,5 @@
-const { MessageAttachment, Message, Interaction } = require('discord.js');
+const { MessageAttachment } = require('discord.js');
 
-const { createReadStream } = require('node:fs');
-const { join } = require('node:path');
-const { createAudioResource, StreamType } = require('@discordjs/voice');
 const axios = require('axios');
 const FormData = require('form-data');
 const googleTTS = require('google-tts-api');
@@ -43,7 +40,8 @@ module.exports = async (client, msg) => {
           rankData = await rankModel.create({
             userID: msg.author.id,
           });
-          await msg.channel.send({
+          //await msg.channel.send({
+          await msg.author.send({
             content: eval(word.messageCreate.rank.newData),
             ephemeral: true,
           });
@@ -52,6 +50,8 @@ module.exports = async (client, msg) => {
         let lvl = rankData.rank;
         let xpNow = rankData.exp + xpGet;
         let xpNext = 5 * lvl ** 2 + 50 * lvl + 100;
+
+        //When lvl up
         if (xpNext - xpNow <= 0) {
           rankData = await rankModel.findOneAndUpdate(
             {
@@ -65,7 +65,8 @@ module.exports = async (client, msg) => {
               },
             },
           );
-          await msg.channel.send({
+          //await msg.channel.send({
+          await msg.author.send({
             content: eval(word.messageCreate.rank.msgLvlUp),
             ephemeral: true,
           });
