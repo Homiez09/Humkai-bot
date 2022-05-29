@@ -49,7 +49,7 @@ module.exports = async (client, interaction) => {
       }
 
       if (command.ownerOnly) {
-        if (interaction.use.id !== process.env.OWNER_ID) {
+        if (interaction.user.id !== process.env.OWNER_ID) {
           const embed = new MessageEmbed()
             .setColor('RED')
             .setTitle(eval(word.error.ownerEmbed.title))
