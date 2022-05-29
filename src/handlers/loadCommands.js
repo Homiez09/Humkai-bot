@@ -6,7 +6,7 @@ module.exports = (client) => {
     const commands = readdirSync(`./src/commands/${dir}/`).map(async (cmd) => {
       const pull = require(`../../src/commands/${dir}/${cmd}`);
       client.slash.set(pull.name, pull);
-      console.log('✅', `[${dir}]`, `/${pull.name}`)
+      console.log('✅', `[${dir}]`, `/${pull.name}`);
       if (pull.aliases) {
         pull.aliases.map((x) => client.slash.set(x, pull));
       }

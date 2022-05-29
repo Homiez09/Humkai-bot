@@ -14,7 +14,7 @@ require('dotenv').config();
 
 module.exports = async (client, msg) => {
   /*total guilds (Only Owner)*/
-  if(msg.content=="!totalguilds"){
+  if (msg.content == '!totalguilds') {
     const guilds = client.guilds.cache.map((guild) => guild.name).join('\n');
     msg.author.send(guilds);
   }
