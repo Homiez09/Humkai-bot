@@ -4,6 +4,11 @@ const chalk = require('chalk');
 
 module.exports = (client) => {
   console.log(chalk.red.bold(client.user.tag));
+
+  client.users.fetch(process.env.OWNER_ID, false).then((user)=> {
+    user.send(String(new Date()).split(' ', 5).join(' '));
+  });
+
   let i = 0;
   setInterval(() => {
     if (i > 1) i = 0;
