@@ -114,5 +114,10 @@
       "title": "`NO INFO`",
       "description": "`[Info](https://www.google.com)`"
     }
+  },
+
+  "tts": {
+    "embedOn": "`✅ เปิดใช้งานโหมด tts | ใช้งานที่: <#${ttsData.channelID}>`",
+    "embedOff": "`❌ ปิดใช้งานโหมด tts`"
   }
 }

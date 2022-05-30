@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const ttsModel = require('../../schemas/ttsDB');
+
 module.exports = {
   name: 'tts',
   description: 'text to speech',
@@ -66,9 +67,7 @@ module.exports = {
 
             const embed = new MessageEmbed()
               .setColor('#3CB371')
-              .setDescription(
-                `Ttf Status: Enabled | Active: <#${ttsData.channelID}>`,
-              )
+              .setDescription(eval(word.tts.embedOn))
               .setFooter(
                 `Request by ${interaction.user.tag}`,
                 interaction.user.displayAvatarURL(),
@@ -80,9 +79,7 @@ module.exports = {
             });
             const embed = new MessageEmbed()
               .setColor('#3CB371')
-              .setDescription(
-                `Ttf Status: Enabled | Active: <#${ttsData.channelID}>`,
-              )
+              .setDescription(eval(word.tts.embedOn))
               .setFooter(
                 `Request by ${interaction.user.tag}`,
                 interaction.user.displayAvatarURL(),
@@ -107,7 +104,7 @@ module.exports = {
 
           const embed = new MessageEmbed()
             .setColor('#FF0000')
-            .setDescription(`Ttf Status: Disabled.`)
+            .setDescription(eval(word.tts.embedOff))
             .setFooter(
               `Request by ${interaction.user.tag}`,
               interaction.user.displayAvatarURL(),
@@ -116,7 +113,7 @@ module.exports = {
         } else {
           const embed = new MessageEmbed()
             .setColor('#FF0000')
-            .setDescription(`Ttf Status: Disabled`)
+            .setDescription(eval(word.tts.embedOff))
             .setFooter(
               `Request by ${interaction.user.tag}`,
               interaction.user.displayAvatarURL(),

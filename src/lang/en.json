@@ -114,5 +114,10 @@
       "title": "`NO INFO`",
       "description": "`[Info](https://www.google.com)`"
     }
+  },
+
+  "tts": {
+    "embedOn": "`✅ Tts Status: Enabled | Active: <#${ttsData.channelID}>`",
+    "embedOff": "`❌ Tts Status: Disabled`"
   }
 }
