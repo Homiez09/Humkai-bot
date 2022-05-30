@@ -5,7 +5,7 @@ const chalk = require('chalk');
 module.exports = (client) => {
   console.log(chalk.red.bold(client.user.tag));
 
-  client.users.fetch(process.env.OWNER_ID, false).then((user)=> {
+  client.users.fetch(process.env.OWNER_ID, false).then((user) => {
     user.send(String(new Date()).split(' ', 5).join(' '));
   });
 
