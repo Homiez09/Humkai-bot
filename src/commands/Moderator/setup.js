@@ -51,7 +51,7 @@ module.exports = {
           choices: [
             {
               name: 'about',
-              value: 'about'
+              value: 'about',
             },
             {
               name: 'confirm',
@@ -79,10 +79,10 @@ module.exports = {
             {
               name: 'confirm',
               value: 'confirm',
-            }
-          ]
-        }
-      ]
+            },
+          ],
+        },
+      ],
     },
     {
       name: 'remove-background',
@@ -101,12 +101,12 @@ module.exports = {
             },
             {
               name: 'confirm',
-              value: 'confirm'
-            }
-          ]
-        }
-      ]
-    }
+              value: 'confirm',
+            },
+          ],
+        },
+      ],
+    },
   ],
   run: async (interaction, client, word) => {
     const { options } = interaction;
@@ -123,12 +123,16 @@ module.exports = {
                 const embed = await new MessageEmbed()
                   .setColor('RED')
                   .setTitle(eval(word.setup.remove_background.about.title))
-                  .setDescription(eval(word.setup.remove_background.about.description))
+                  .setDescription(
+                    eval(word.setup.remove_background.about.description),
+                  )
                   .setFooter(
                     `Requested by ${interaction.user.tag}`,
                     interaction.user.displayAvatarURL(),
                   );
-                const attachment = new MessageAttachment("./src/assets/images/about.rebg.png")
+                const attachment = new MessageAttachment(
+                  './src/assets/images/about.rebg.png',
+                );
                 interaction.reply({ files: [attachment], embeds: [embed] });
               }
               break;
@@ -138,22 +142,22 @@ module.exports = {
                 let channelData;
                 try {
                   channelData = await channelModel.findOne({
-                    guild_ID: interaction.guild.id
+                    guild_ID: interaction.guild.id,
                   });
                   if (!channelData) {
                     channelData = await channelModel.create({
-                      guild_ID: interaction.guild.id
+                      guild_ID: interaction.guild.id,
                     });
                   }
                 } catch (e) {
-                  console.log(e)
+                  console.log(e);
                 }
 
                 let category = await interaction.guild.channels.create(
                   'rebg by humkai',
                   {
                     type: 'GUILD_CATEGORY',
-                  }
+                  },
                 );
 
                 let channel = await interaction.guild.channels.create(
@@ -161,7 +165,7 @@ module.exports = {
                   {
                     type: 'GUILD_TEXT',
                     parent: category,
-                  }
+                  },
                 );
 
                 channelData = await channelModel.findOneAndUpdate(
@@ -172,7 +176,9 @@ module.exports = {
                 await interaction.editReply({
                   embeds: [
                     await new MessageEmbed()
-                      .setTitle(eval(word.setup.remove_background.embed_confirm.title))
+                      .setTitle(
+                        eval(word.setup.remove_background.embed_confirm.title),
+                      )
                       .addField(
                         'Remove Background',
                         eval(word.setup.remove_background.embed_confirm.field),
@@ -184,7 +190,6 @@ module.exports = {
                       ),
                   ],
                 });
-
               }
               break;
           }
@@ -200,30 +205,34 @@ module.exports = {
                 const embed = await new MessageEmbed()
                   .setColor('RED')
                   .setTitle(eval(word.setup.create_voice.about.title))
-                  .setDescription(eval(word.setup.create_voice.about.description))
+                  .setDescription(
+                    eval(word.setup.create_voice.about.description),
+                  )
                   .setFooter(
                     `Requested by ${interaction.user.tag}`,
                     interaction.user.displayAvatarURL(),
                   );
-                const attachment = new MessageAttachment("./src/assets/images/about.voice.png")
+                const attachment = new MessageAttachment(
+                  './src/assets/images/about.voice.png',
+                );
                 interaction.reply({ files: [attachment], embeds: [embed] });
               }
-              break
+              break;
             case 'confirm':
               {
                 await interaction.deferReply();
                 let channelData;
                 try {
                   channelData = await channelModel.findOne({
-                    guild_ID: interaction.guild.id
+                    guild_ID: interaction.guild.id,
                   });
                   if (!channelData) {
                     channelData = await channelModel.create({
-                      guild_ID: interaction.guild.id
+                      guild_ID: interaction.guild.id,
                     });
                   }
                 } catch (e) {
-                  console.log(e)
+                  console.log(e);
                 }
 
                 let category = await interaction.guild.channels.create(
@@ -238,7 +247,7 @@ module.exports = {
                   {
                     type: 'GUILD_VOICE',
                     parent: category,
-                  }
+                  },
                 );
 
                 channelData = await channelModel.findOneAndUpdate(
@@ -248,19 +257,18 @@ module.exports = {
                 await interaction.editReply({
                   embeds: [
                     await new MessageEmbed()
-                      .setTitle(eval(word.setup.create_voice.embed_confirm.title))
+                      .setTitle(
+                        eval(word.setup.create_voice.embed_confirm.title),
+                      )
                       .addField(
                         'create-voice',
                         eval(word.setup.create_voice.embed_confirm.field),
-                      )
-                  ]
-                })
+                      ),
+                  ],
+                });
               }
               break;
           }
-
-
-
         }
         break;
       case 'language':
@@ -294,12 +302,12 @@ module.exports = {
         break;
       case 'auth':
         {
-          await interaction.deferReply();
           const choice = options.getString('options');
           const everyoneRole = interaction.guild.roles.everyone;
           switch (choice) {
             case 'confirm':
               {
+                await interaction.deferReply();
                 // สร้าง "verify" role
                 let role = await interaction.guild.roles.create({
                   name: 'verify',
@@ -401,7 +409,9 @@ module.exports = {
                     `Requested by ${interaction.user.tag}`,
                     interaction.user.displayAvatarURL(),
                   );
-                const attachment = new MessageAttachment("./src/assets/images/about.auth.png")
+                const attachment = new MessageAttachment(
+                  './src/assets/images/about.auth.png',
+                );
                 interaction.reply({ files: [attachment], embeds: [embed] });
               }
               break;
