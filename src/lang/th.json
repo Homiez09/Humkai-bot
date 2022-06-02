@@ -89,15 +89,15 @@
         "description": "`ระบบจะสร้างแชแนลขี้นมา(สามารถเปลี่ยนชื่อแชแนลได้) เมื่อส่งรูปจะทำการลบพื้นหลังให้ (จำนวนจำกัด)\nใช้คำสั่ง /setup remove-background confirm เพื่อติดตั้งได้เลย`"
       }
     },
-    "wordle_game":{
+    "wordle_game": {
       "embed_confirm": {
         "title": "`ติดตั้งแล้ว`",
         "field": "`เข้าไปเล่นได้ที่ <#${channel.id}>`"
       },
-        "about":{
-          "title": "`เกี่ยวกับ`",
-          "description": "`สร้างห้องสำหรับเล่นเกม Wordle (สามารถเปลียนชื่อห้องได้)\nใช้คำสั่ง /setup wordle-game confirm เพื่อติดตั้งได้เลย`"
-        }
+      "about": {
+        "title": "`เกี่ยวกับ`",
+        "description": "`สร้างห้องสำหรับเล่นเกม Wordle (สามารถเปลียนชื่อห้องได้)\nใช้คำสั่ง /setup wordle-game confirm เพื่อติดตั้งได้เลย`"
+      }
     }
   },
 
@@ -109,6 +109,8 @@
     "content1": "`กรุณาติดตั้งเกมก่อน (/install wordle-game)`",
     "content2": "`ไปเล่นที่แชแนวนี้ <#${channelData.wordle_ID}>`",
     "content3": "`เกมกำลังดำเนินการอยู่ ${wordleData.doing.length}`",
+    "content4": "`เกมของคุณถูกยกเลิกแล้ว`",
+    "content5": "`เกมของคุณไม่ได้กำลังเริ่มอยู่`",
     "msgGame": {
       "content1": "`คุณยังไม่ได้สร้างเกม ลองพิมพ์ /wordle ดูสิ`",
       "content2": "`กรุณาป้อนตัวอักษรให้ครบ 5 ตัว`",

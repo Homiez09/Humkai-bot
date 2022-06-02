@@ -125,10 +125,10 @@ module.exports = {
             {
               name: 'confirm',
               value: 'confirm',
-            }
-          ]
-        }
-      ]
+            },
+          ],
+        },
+      ],
     },
   ],
   run: async (interaction, client, word) => {
@@ -158,62 +158,59 @@ module.exports = {
                 );
                 interaction.reply({ files: [attachment], embeds: [embed] });
               }
-              break
-            case 'confirm':
-              {
-                await interaction.deferReply();
-                let channelData;
-                try {
-                  channelData = await channelModel.findOne({
+              break;
+            case 'confirm': {
+              await interaction.deferReply();
+              let channelData;
+              try {
+                channelData = await channelModel.findOne({
+                  guild_ID: interaction.guild.id,
+                });
+                if (!channelData) {
+                  channelData = await channelModel.create({
                     guild_ID: interaction.guild.id,
                   });
-                  if (!channelData) {
-                    channelData = await channelModel.create({
-                      guild_ID: interaction.guild.id,
-                    });
-                  }
-                } catch (e) {
-                  console.log(e);
                 }
-
-                let category = await interaction.guild.channels.create(
-                  "Humkau's wordle",
-                  {
-                    type: 'GUILD_CATEGORY',
-                  }
-                );
-
-                let channel = await interaction.guild.channels.create(
-                  'play_wordle',
-                  {
-                    type: 'GUILD_TEXT',
-                    parent: category,
-                  }
-                );
-
-                await channelModel.findOneAndUpdate(
-                  { guild_ID: interaction.guild.id },
-                  { wordle_ID: channel.id },
-                );
-
-                await interaction.editReply({
-                  embeds: [
-                    await new MessageEmbed()
-                      .setTitle(
-                        eval(word.setup.wordle_game.embed_confirm.title),
-                      )
-                      .addField(
-                        'Remove Background',
-                        eval(word.setup.wordle_game.embed_confirm.field),
-                      )
-                      .setColor('#0099ff')
-                      .setFooter(
-                        `Requested by ${interaction.user.tag}`,
-                        interaction.user.displayAvatarURL(),
-                      ),
-                  ],
-                });
+              } catch (e) {
+                console.log(e);
               }
+
+              let category = await interaction.guild.channels.create(
+                "Humkau's wordle",
+                {
+                  type: 'GUILD_CATEGORY',
+                },
+              );
+
+              let channel = await interaction.guild.channels.create(
+                'play_wordle',
+                {
+                  type: 'GUILD_TEXT',
+                  parent: category,
+                },
+              );
+
+              await channelModel.findOneAndUpdate(
+                { guild_ID: interaction.guild.id },
+                { wordle_ID: channel.id },
+              );
+
+              await interaction.editReply({
+                embeds: [
+                  await new MessageEmbed()
+                    .setTitle(eval(word.setup.wordle_game.embed_confirm.title))
+                    .addField(
+                      'Remove Background',
+                      eval(word.setup.wordle_game.embed_confirm.field),
+                    )
+                    .setColor('#0099ff')
+                    .setFooter(
+                      `Requested by ${interaction.user.tag}`,
+                      interaction.user.displayAvatarURL(),
+                    ),
+                ],
+              });
+            }
           }
         }
         break;

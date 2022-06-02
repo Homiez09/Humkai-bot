@@ -89,15 +89,15 @@
         "description": "`Create new channel for REBG (You can change name of channel).\nuse /setup create-voice confirm for install.`"
       }
     },
-    "wordle-game":{
+    "wordle-game": {
       "embed_confirm": {
         "title": "`installed`",
         "field": "`Click <#${channel.id}> for play.`"
       },
-        "about":{
-          "title": "`About`",
-          "description": "`Create channel for play wordle game(You can change name of channel).\nuse /setup wordle-game confirm for install.`"
-        }
+      "about": {
+        "title": "`About`",
+        "description": "`Create channel for play wordle game(You can change name of channel).\nuse /setup wordle-game confirm for install.`"
+      }
     }
   },
 
