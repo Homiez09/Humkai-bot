@@ -2,6 +2,7 @@ const {
   MessageActionRow,
   MessageEmbed,
   MessageSelectMenu,
+  MessageAttachment,
 } = require('discord.js');
 
 const channelModel = require('../../schemas/channelDB');
@@ -44,28 +45,224 @@ module.exports = {
       options: [
         {
           name: 'options',
-          description: 'true or false',
+          description: 'confirm?',
           type: 3,
           required: true,
           choices: [
             {
-              name: 'true',
-              value: 'true',
+              name: 'about',
+              value: 'about'
             },
             {
-              name: 'false',
-              value: 'false',
+              name: 'confirm',
+              value: 'confirm',
             },
           ],
         },
       ],
     },
+    {
+      name: 'create-voice',
+      description: 'Join to create voice channel.',
+      type: 1,
+      options: [
+        {
+          name: 'options',
+          description: 'confirm?',
+          type: 3,
+          required: true,
+          choices: [
+            {
+              name: 'about',
+              value: 'about',
+            },
+            {
+              name: 'confirm',
+              value: 'confirm',
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'remove-background',
+      description: 'Remove background.',
+      type: 1,
+      options: [
+        {
+          name: 'options',
+          description: 'confirm?',
+          type: 3,
+          required: true,
+          choices: [
+            {
+              name: 'about',
+              value: 'about',
+            },
+            {
+              name: 'confirm',
+              value: 'confirm'
+            }
+          ]
+        }
+      ]
+    }
   ],
   run: async (interaction, client, word) => {
     const { options } = interaction;
     const Sub = options.getSubcommand();
 
     switch (Sub) {
+      case 'remove-background':
+        {
+          const choice = options.getString('options');
+
+          switch (choice) {
+            case 'about':
+              {
+                const embed = await new MessageEmbed()
+                  .setColor('RED')
+                  .setTitle(eval(word.setup.remove_background.about.title))
+                  .setDescription(eval(word.setup.remove_background.about.description))
+                  .setFooter(
+                    `Requested by ${interaction.user.tag}`,
+                    interaction.user.displayAvatarURL(),
+                  );
+                const attachment = new MessageAttachment("./src/assets/images/about.rebg.png")
+                interaction.reply({ files: [attachment], embeds: [embed] });
+              }
+              break;
+            case 'confirm':
+              {
+                await interaction.deferReply();
+                let channelData;
+                try {
+                  channelData = await channelModel.findOne({
+                    guild_ID: interaction.guild.id
+                  });
+                  if (!channelData) {
+                    channelData = await channelModel.create({
+                      guild_ID: interaction.guild.id
+                    });
+                  }
+                } catch (e) {
+                  console.log(e)
+                }
+
+                let category = await interaction.guild.channels.create(
+                  'rebg by humkai',
+                  {
+                    type: 'GUILD_CATEGORY',
+                  }
+                );
+
+                let channel = await interaction.guild.channels.create(
+                  'removebg',
+                  {
+                    type: 'GUILD_TEXT',
+                    parent: category,
+                  }
+                );
+
+                channelData = await channelModel.findOneAndUpdate(
+                  { guild_ID: interaction.guild.id },
+                  { remove_ID: channel.id },
+                );
+
+                await interaction.editReply({
+                  embeds: [
+                    await new MessageEmbed()
+                      .setTitle(eval(word.setup.remove_background.embed_confirm.title))
+                      .addField(
+                        'Remove Background',
+                        eval(word.setup.remove_background.embed_confirm.field),
+                      )
+                      .setColor('#0099ff')
+                      .setFooter(
+                        `Requested by ${interaction.user.tag}`,
+                        interaction.user.displayAvatarURL(),
+                      ),
+                  ],
+                });
+
+              }
+              break;
+          }
+        }
+        break;
+      case 'create-voice':
+        {
+          const choice = options.getString('options');
+
+          switch (choice) {
+            case 'about':
+              {
+                const embed = await new MessageEmbed()
+                  .setColor('RED')
+                  .setTitle(eval(word.setup.create_voice.about.title))
+                  .setDescription(eval(word.setup.create_voice.about.description))
+                  .setFooter(
+                    `Requested by ${interaction.user.tag}`,
+                    interaction.user.displayAvatarURL(),
+                  );
+                const attachment = new MessageAttachment("./src/assets/images/about.voice.png")
+                interaction.reply({ files: [attachment], embeds: [embed] });
+              }
+              break
+            case 'confirm':
+              {
+                await interaction.deferReply();
+                let channelData;
+                try {
+                  channelData = await channelModel.findOne({
+                    guild_ID: interaction.guild.id
+                  });
+                  if (!channelData) {
+                    channelData = await channelModel.create({
+                      guild_ID: interaction.guild.id
+                    });
+                  }
+                } catch (e) {
+                  console.log(e)
+                }
+
+                let category = await interaction.guild.channels.create(
+                  'voice by humkai',
+                  {
+                    type: 'GUILD_CATEGORY',
+                  },
+                );
+
+                let channel = await interaction.guild.channels.create(
+                  'Join To Create',
+                  {
+                    type: 'GUILD_VOICE',
+                    parent: category,
+                  }
+                );
+
+                channelData = await channelModel.findOneAndUpdate(
+                  { guild_ID: interaction.guild.id },
+                  { voice_ID: channel.id },
+                );
+                await interaction.editReply({
+                  embeds: [
+                    await new MessageEmbed()
+                      .setTitle(eval(word.setup.create_voice.embed_confirm.title))
+                      .addField(
+                        'create-voice',
+                        eval(word.setup.create_voice.embed_confirm.field),
+                      )
+                  ]
+                })
+              }
+              break;
+          }
+
+
+
+        }
+        break;
       case 'language':
         {
           const choice = options.getString('select');
@@ -97,10 +294,11 @@ module.exports = {
         break;
       case 'auth':
         {
+          await interaction.deferReply();
           const choice = options.getString('options');
           const everyoneRole = interaction.guild.roles.everyone;
           switch (choice) {
-            case 'true':
+            case 'confirm':
               {
                 // สร้าง "verify" role
                 let role = await interaction.guild.roles.create({
@@ -130,13 +328,14 @@ module.exports = {
                   VIEW_CHANNEL: false,
                 });
 
-                interaction.reply({
+                // embed_confirm
+                interaction.editReply({
                   embeds: [
                     await new MessageEmbed()
-                      .setTitle(eval(word.setup.auth.embed1.title))
+                      .setTitle(eval(word.setup.auth.embed_confirm.title))
                       .addField(
                         'Auth',
-                        eval(word.setup.auth.embed1.field.value),
+                        eval(word.setup.auth.embed_confirm.field),
                       )
                       .setColor('#0099ff')
                       .setFooter(
@@ -161,8 +360,8 @@ module.exports = {
                 );
 
                 const embed = new MessageEmbed()
-                  .setTitle(eval(word.setup.auth.embed2.title))
-                  .setDescription(eval(word.setup.auth.embed2.description))
+                  .setTitle(eval(word.setup.auth.embed.title))
+                  .setDescription(eval(word.setup.auth.embed.description))
                   .setColor('GREEN');
                 let msg = await channel.send({
                   embeds: [embed],
@@ -192,20 +391,18 @@ module.exports = {
                 );
               }
               break;
-            case 'false':
+            case 'about':
               {
-                interaction.reply({
-                  embeds: [
-                    await new MessageEmbed()
-                      .setColor('RED')
-                      .setTitle(eval(word.setup.auth.embed3.title))
-                      .setDescription(eval(word.setup.auth.embed3.description))
-                      .setFooter(
-                        `Requested by ${interaction.user.tag}`,
-                        interaction.user.displayAvatarURL(),
-                      ),
-                  ],
-                });
+                const embed = await new MessageEmbed()
+                  .setColor('RED')
+                  .setTitle(eval(word.setup.auth.about.title))
+                  .setDescription(eval(word.setup.auth.about.description))
+                  .setFooter(
+                    `Requested by ${interaction.user.tag}`,
+                    interaction.user.displayAvatarURL(),
+                  );
+                const attachment = new MessageAttachment("./src/assets/images/about.auth.png")
+                interaction.reply({ files: [attachment], embeds: [embed] });
               }
               break;
           }

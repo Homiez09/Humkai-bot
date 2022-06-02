@@ -3,3 +3,4 @@
 
 # Folder
 /node_modules
+.bin

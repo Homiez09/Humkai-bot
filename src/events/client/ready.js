@@ -30,7 +30,7 @@ module.exports = (client) => {
       ],
       // Status --> online, idle, dnd, invisible
       status: 'online',
-    });
+    })
 
     i++;
   }, 10000);

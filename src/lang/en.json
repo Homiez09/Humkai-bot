@@ -23,7 +23,6 @@
       "newData": "`${msg.author} just start from lvl 0`",
       "msgLvlUp": "`${msg.author} reached lvl ${lvl + 1}`"
     },
-
     "removebg": {
       "status": {
         "err401": "`CODE:${error.response.status} invalid api key`",
@@ -48,12 +47,6 @@
   "install": {
     "embed": {
       "title": "`Installed`",
-      "field1": {
-        "value": "`Click <#${channel0.id}> to create your private voice channel.`"
-      },
-      "field2": {
-        "value": "`Click <#${channel1.id}> to go to the channel `"
-      },
       "field3": {
         "value": "`Click <#${channel2.id}> to play the game`"
       }
@@ -68,23 +61,41 @@
       }
     },
     "auth": {
-      "embed1": {
+      "embed_confirm": {
         "title": "`Installed`",
-        "field": {
-          "value": "`Click <#${channel.id}> to go to the channel.`"
-        }
+        "field": "`Click <#${channel.id}> to go to the channel."
       },
-      "embed2": {
+      "embed": {
         "title": "`Hello! Are you human?`",
         "description": "`Welcome to ${interaction.guild.name}! 🎈\nSelect the menu to access the server. 🔐`"
       },
-      "embed3": {
-        "title": "`fail`",
-        "description": "`You didn't setup anything`"
+      "about": {
+        "title": "`About`",
+        "description": "`Create new verify role and then create channel for verify (You can change name of channel).\nuse /setup auth confirm for install`"
       },
       "success_embed": {
         "title": "`You have been verified!`",
         "description": "`✅ You passed the verification successfully. You can now access ${interaction.guild.name}!`"
+      }
+    },
+    "create_voice": {
+      "embed_confirm": {
+        "title": "`Installed`",
+        "field": "`Press this <#${channel.id}> to create your private voice channel.`"
+      },
+      "about": {
+        "title": "`About`",
+        "description": "`Create new voice channel when you join will move you to new private voice channel(You can change name of channel).\nuse /setup create-voice confirm for install`"
+      }
+    },
+    "remove_background": {
+      "embed_confirm": {
+        "title": "`Install`",
+        "field": "`Click <#${channel.id}> to go to the channel.`"
+      },
+      "about": {
+        "title": "`About`",
+        "description": "`Create new channel for REBG (You can change name of channel).\nuse /setup create-voice confirm for install`"
       }
     }
   },
