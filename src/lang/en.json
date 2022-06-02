@@ -44,15 +44,6 @@
     "success": "`Successfully deleted ${amount} messages`"
   },
 
-  "install": {
-    "embed": {
-      "title": "`Installed`",
-      "field3": {
-        "value": "`Click <#${channel2.id}> to play the game`"
-      }
-    }
-  },
-
   "setup": {
     "lang": {
       "embed": {
@@ -71,7 +62,7 @@
       },
       "about": {
         "title": "`About`",
-        "description": "`Create new verify role and then create channel for verify (You can change name of channel).\nuse /setup auth confirm for install`"
+        "description": "`Create new verify role and then create channel for verify (You can change name of channel).\nuse /setup auth confirm for install.`"
       },
       "success_embed": {
         "title": "`You have been verified!`",
@@ -85,18 +76,28 @@
       },
       "about": {
         "title": "`About`",
-        "description": "`Create new voice channel when you join will move you to new private voice channel(You can change name of channel).\nuse /setup create-voice confirm for install`"
+        "description": "`Create new voice channel when you join will move you to new private voice channel(You can change name of channel).\nuse /setup create-voice confirm for install.`"
       }
     },
     "remove_background": {
       "embed_confirm": {
-        "title": "`Install`",
+        "title": "`Installed`",
         "field": "`Click <#${channel.id}> to go to the channel.`"
       },
       "about": {
         "title": "`About`",
-        "description": "`Create new channel for REBG (You can change name of channel).\nuse /setup create-voice confirm for install`"
+        "description": "`Create new channel for REBG (You can change name of channel).\nuse /setup create-voice confirm for install.`"
       }
+    },
+    "wordle-game":{
+      "embed_confirm": {
+        "title": "`installed`",
+        "field": "`Click <#${channel.id}> for play.`"
+      },
+        "about":{
+          "title": "`About`",
+          "description": "`Create channel for play wordle game(You can change name of channel).\nuse /setup wordle-game confirm for install.`"
+        }
     }
   },
 

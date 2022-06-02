@@ -107,12 +107,116 @@ module.exports = {
         },
       ],
     },
+    {
+      name: 'wordle-game',
+      description: 'Wordle Game.',
+      type: 1,
+      options: [
+        {
+          name: 'options',
+          description: 'confirm?',
+          type: 3,
+          required: true,
+          choices: [
+            {
+              name: 'about',
+              value: 'about',
+            },
+            {
+              name: 'confirm',
+              value: 'confirm',
+            }
+          ]
+        }
+      ]
+    },
   ],
   run: async (interaction, client, word) => {
     const { options } = interaction;
     const Sub = options.getSubcommand();
 
     switch (Sub) {
+      case 'wordle-game':
+        {
+          const choice = options.getString('options');
+
+          switch (choice) {
+            case 'about':
+              {
+                const embed = await new MessageEmbed()
+                  .setColor('RED')
+                  .setTitle(eval(word.setup.wordle_game.about.title))
+                  .setDescription(
+                    eval(word.setup.wordle_game.about.description),
+                  )
+                  .setFooter(
+                    `Requested by ${interaction.user.tag}`,
+                    interaction.user.displayAvatarURL(),
+                  );
+                const attachment = new MessageAttachment(
+                  './src/assets/images/about.wordle.png',
+                );
+                interaction.reply({ files: [attachment], embeds: [embed] });
+              }
+              break
+            case 'confirm':
+              {
+                await interaction.deferReply();
+                let channelData;
+                try {
+                  channelData = await channelModel.findOne({
+                    guild_ID: interaction.guild.id,
+                  });
+                  if (!channelData) {
+                    channelData = await channelModel.create({
+                      guild_ID: interaction.guild.id,
+                    });
+                  }
+                } catch (e) {
+                  console.log(e);
+                }
+
+                let category = await interaction.guild.channels.create(
+                  "Humkau's wordle",
+                  {
+                    type: 'GUILD_CATEGORY',
+                  }
+                );
+
+                let channel = await interaction.guild.channels.create(
+                  'play_wordle',
+                  {
+                    type: 'GUILD_TEXT',
+                    parent: category,
+                  }
+                );
+
+                await channelModel.findOneAndUpdate(
+                  { guild_ID: interaction.guild.id },
+                  { wordle_ID: channel.id },
+                );
+
+                await interaction.editReply({
+                  embeds: [
+                    await new MessageEmbed()
+                      .setTitle(
+                        eval(word.setup.wordle_game.embed_confirm.title),
+                      )
+                      .addField(
+                        'Remove Background',
+                        eval(word.setup.wordle_game.embed_confirm.field),
+                      )
+                      .setColor('#0099ff')
+                      .setFooter(
+                        `Requested by ${interaction.user.tag}`,
+                        interaction.user.displayAvatarURL(),
+                      ),
+                  ],
+                });
+              }
+          }
+        }
+        break;
       case 'remove-background':
         {
           const choice = options.getString('options');
