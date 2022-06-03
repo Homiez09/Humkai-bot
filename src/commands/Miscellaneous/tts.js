@@ -104,8 +104,10 @@ module.exports = {
             },
           );
 
-          const connection = voiceDiscord.getVoiceConnection(interaction.guild.id);
-          await connection.destroy()
+          const connection = voiceDiscord.getVoiceConnection(
+            interaction.guild.id,
+          );
+          await connection.destroy();
 
           const embed = new MessageEmbed()
             .setColor('#FF0000')
