@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const ttsModel = require('../../schemas/ttsDB');
+const voiceDiscord = require('@discordjs/voice');
 
 module.exports = {
   name: 'tts',
@@ -94,6 +95,7 @@ module.exports = {
         });
         if (ttsData.ttsStatus === true) {
           await interaction.deferReply();
+
           ttsData = await ttsModel.findOneAndUpdate(
             { guildID: interaction.guild.id },
             {
@@ -101,6 +103,9 @@ module.exports = {
               channelID: interaction.channel.id,
             },
           );
+
+          const connection = voiceDiscord.getVoiceConnection(interaction.guild.id);
+          await connection.destroy()
 
           const embed = new MessageEmbed()
             .setColor('#FF0000')
