@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const chalk = require('chalk');
 
-module.exports = (client) => {
+module.exports = async (client) => {
   console.log(chalk.red.bold(client.user.tag));
 
   client.users.fetch(process.env.OWNER_ID, false).then((user) => {

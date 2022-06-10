@@ -23,7 +23,7 @@ module.exports = async (client, msg) => {
   let lang;
   const langData = await langModel.findOne({ id: msg.guild.id });
 
-  if (!langData) lang = 'en'; 
+  if (!langData) lang = 'en';
   else lang = langData.lang;
 
   const word = require(`../../lang/${lang}.json`);

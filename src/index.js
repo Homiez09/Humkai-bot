@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const { Client, Intents, Collection } = require('discord.js');
 const { DiscordTogether } = require('discord-together');
+const { readdirSync } = require('fs');
 
 const client = new Client({
   shards: 'auto',
@@ -24,9 +25,12 @@ client.commands = new Collection();
 client.aliases = new Collection();
 client.together = new DiscordTogether(client);
 
-['loadEvents', 'loadCommands', 'loadDatabase'].forEach((file) => {
-  require(`./handlers/${file}`)(client);
-});
+// loadHandlers
+readdirSync('./src/handlers/').forEach((dir) => {
+  const fileName = dir.split(".")[0]
+  require(`./handlers/${fileName}`)(client);
+})
+
 
 // Main Function
 void (async () => {

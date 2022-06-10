@@ -7,6 +7,7 @@ module.exports = {
   category: 'Rank',
   botPerms: ['ADMINISTRATOR'],
   run: async (interaction, client) => {
+    await interaction.deferReply();
     const applyText = (canvas, text) => {
       const context = canvas.getContext('2d');
 
@@ -45,10 +46,6 @@ module.exports = {
       });
     }
 
-    /* const expMaxBefore = Math.pow(rankData.rank - 1, 4);
-    const expMaxNow = Math.pow(rankData.rank, 4);
-    const expMax = expMaxNow - expMaxBefore;
-    const expNow = rankData.exp - expMaxBefore; */
     const lvl = rankData.rank;
     const expMax = 5 * lvl ** 2 + 50 * lvl + 100;
     const expNow = rankData.exp;
@@ -122,7 +119,7 @@ module.exports = {
 
     const buffer = await canvas.toBuffer();
     try {
-      await interaction.reply({
+      await interaction.editReply({
         files: [{ attachment: buffer, name: 'rank.png' }],
       });
     } catch (error) {

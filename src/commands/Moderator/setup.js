@@ -454,6 +454,7 @@ module.exports = {
                   ],
                 });
 
+                // สร้าง selector สำหรับผู้ยืนยันตัวตน
                 const row = new MessageActionRow().addComponents(
                   new MessageSelectMenu()
                     .setCustomId('member')
@@ -472,6 +473,7 @@ module.exports = {
                   .setTitle(eval(word.setup.auth.embed.title))
                   .setDescription(eval(word.setup.auth.embed.description))
                   .setColor('GREEN');
+
                 let msg = await channel.send({
                   embeds: [embed],
                   components: [row],
