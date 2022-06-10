@@ -22,15 +22,13 @@ const client = new Client({
 
 client.slash = new Collection();
 client.commands = new Collection();
-client.aliases = new Collection();
 client.together = new DiscordTogether(client);
 
 // loadHandlers
 readdirSync('./src/handlers/').forEach((dir) => {
-  const fileName = dir.split(".")[0]
+  const fileName = dir.split('.')[0];
   require(`./handlers/${fileName}`)(client);
-})
-
+});
 
 // Main Function
 void (async () => {
