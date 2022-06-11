@@ -21,7 +21,6 @@ const client = new Client({
 });
 
 client.slash = new Collection();
-client.commands = new Collection();
 client.together = new DiscordTogether(client);
 
 // loadHandlers
