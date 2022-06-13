@@ -11,7 +11,7 @@ const langModel = require('../../schemas/langDB');
 module.exports = {
   name: 'setup',
   description: 'ตั้งค่าความปลอดภัย',
-  category: 'Moderator',
+  category: 'Administrator',
   userPerms: ['ADMINISTRATOR'],
   botPerms: ['ADMINISTRATOR'],
   options: [

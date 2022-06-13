@@ -1,7 +1,7 @@
 module.exports = {
   name: 'delete',
   description: 'ลบข้อความ',
-  category: 'Moderator',
+  category: 'Administrator',
   userPerms: ['ADMINISTRATOR'],
   botPerms: ['ADMINISTRATOR'],
   options: [
