@@ -18,7 +18,7 @@ module.exports = async (client) => {
         .map((guild) => guild.memberCount)
         .reduce((a, b) => a + b, 0)} users`,
       `${client.guilds.cache.size} servers`,
-      '/setup'
+      '/setup',
     ];
 
     client.user.setPresence({
