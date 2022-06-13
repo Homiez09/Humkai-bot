@@ -11,14 +11,14 @@ module.exports = async (client) => {
 
   let i = 0;
   setInterval(() => {
-    if (i > 1) i = 0;
+    if (i > 2) i = 0;
 
     let Act = [
       `${client.guilds.cache
         .map((guild) => guild.memberCount)
         .reduce((a, b) => a + b, 0)} users`,
       `${client.guilds.cache.size} servers`,
-      '/setup'
+      '/setup',
     ];
 
     client.user.setPresence({
