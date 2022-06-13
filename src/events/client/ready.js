@@ -11,7 +11,7 @@ module.exports = async (client) => {
 
   let i = 0;
   setInterval(() => {
-    if (i > 1) i = 0;
+    if (i > 2) i = 0;
 
     let Act = [
       `${client.guilds.cache
