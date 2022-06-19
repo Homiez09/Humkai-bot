@@ -30,7 +30,7 @@ module.exports = async (client, msg) => {
 
   if (!msg.author.bot) {
     getExp(client, msg, word);
-    convertToThaiNum(client, msg, word);
+    //convertToThaiNum(client, msg, word);
     removeBackground(client, msg, word);
     wordleSystem(client, msg, word);
     textToSpeech(client, msg, word);
