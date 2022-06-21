@@ -1,15 +1,15 @@
 {
-  "test": "This is a test",
+  "test": "นี่คือการเทสระบบ",
 
   "error": {
     "userEmbed": {
-      "title": "`Access Denied`",
-      "description": "`You don't have permission!`"
+      "title": "`ปฎิเสธการใช้งาน`",
+      "description": "`คุณไม่มีสิทธิ์ในการใช้งานคำสั่งนี้!`"
     },
     "botEmbed": {
-      "title": "`Access Denied`",
-      "description": "`I need ${command.botPerms} permission!`",
-      "description2": "`I need ADMINISTRATOR permission!`"
+      "title": "`ปฎิเสธการใช้งาน`",
+      "description": "`ฉันต้องการสิทธิ์ ${command.botPerms}!`",
+      "description2": "`ฉันต้องการสิทธิ์ ADMINISTRATOR!`"
     },
     "ownerEmbed": {
       "title": "`Access Denied`",
@@ -20,83 +20,83 @@
 
   "messageCreate": {
     "rank": {
-      "newData": "`${msg.author} just start from lvl 0`",
-      "msgLvlUp": "`${msg.author} reached lvl ${lvl + 1}`"
+      "newData": "`${msg.author} เริ่มต้นที่เลเวล 0`",
+      "msgLvlUp": "`${msg.author} เพิ่มระดับเป็นเลเวล ${lvl + 1}`"
     },
     "removebg": {
       "status": {
-        "err401": "`CODE:${error.response.status} invalid api key`",
-        "err402": "`CODE:${error.response.status} No credits remaining`",
-        "err400": "`CODE:${error.response.status} Source image file not found`"
+        "err401": "`CODE:${error.response.status} ไม่พบ Api Key`",
+        "err402": "`CODE:${error.response.status} ไม่มีเครดิตเหลืออยู่`",
+        "err400": "`CODE:${error.response.status} อัพโหลดไฟล์ไม่ถูกต้อง`"
       }
     }
   },
 
   "ping": {
     "embed": {
-      "title": "`pong!`",
+      "title": "`ปิงปอง!`",
       "description": "`Latency is ${Date.now() - interaction.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`"
     }
   },
 
   "delete": {
-    "too_many": "`You can't delete more than 100 message and oldest 2 week.`",
-    "success": "`Successfully deleted ${amount} messages`"
+    "too_many": "`ไม่สามารถลบได้เกิน 100 ข้อความหรือข้อความที่มีอายุมากกว่า 2 สัปดาห์`",
+    "success": "`ลบไป ${amount} ข้อความ`"
   },
 
   "setup": {
     "lang": {
       "embed": {
-        "title": "`Installed`",
-        "description": "`Your current language is English.`"
+        "title": "`ติดตั้งเรียบร้อย`",
+        "description": "`ภาษาปัจจุบันของคุณคือ ภาษาไทย`"
       }
     },
     "auth": {
       "embed_confirm": {
-        "title": "`Installed`",
-        "field": "`Click <#${channel.id}> to go to the channel."
+        "title": "`สำเร็จแล้ว`",
+        "field": "`สามารถยืนยันตัวตนได้ที่ <#${channel.id}>`"
       },
       "embed": {
-        "title": "`Hello! Are you human?`",
-        "description": "`Welcome to ${interaction.guild.name}! 🎈\nSelect the menu to access the server. 🔐`"
+        "title": "`ยืนยันตัวตน`",
+        "description": "`ยินดีต้อนรับเข้าสู่ ${interaction.guild.name}! 🎈\nเลือกเมนูข้างล่างเพื่อยืนยันตัวตน 🔐`"
       },
       "about": {
-        "title": "`About`",
-        "description": "`Create new verify role and then create channel for verify (You can change name of channel).\nuse /setup auth confirm for install.`"
+        "title": "`เกี่ยวกับ`",
+        "description": "`ระบบจะสร้าง role verify ขึ้นมา และสร้างแชแนวสำหรับการยืนยันตัวตน(เปลี่ยนชื่อแชแนวได้)\nใช้คำสั่ง /setup auth confirm เพื่อติดตั้งได้เลย`"
       },
       "success_embed": {
         "title": "`You have been verified!`",
-        "description": "`✅ You passed the verification successfully. You can now access ${interaction.guild.name}!`"
+        "description": "`✅ ยืนยันตัวตนสำเร็จแล้ว. ยินดีตอนรับเข้าสู่ ${interaction.guild.name}!`"
       }
     },
     "create_voice": {
       "embed_confirm": {
-        "title": "`Installed`",
-        "field": "`Press this <#${channel.id}> to create your private voice channel.`"
+        "title": "`ติดตั้งแล้ว`",
+        "field": "`คลิก <#${channel.id}> เพื่อสร้างแชแนวเสียงของตัวเอง`"
       },
       "about": {
-        "title": "`About`",
-        "description": "`Create new voice channel when you join will move you to new private voice channel(You can change name of channel).\nuse /setup create-voice confirm for install.`"
+        "title": "`เกี่ยวกับ`",
+        "description": "`ระบบจะสร้างแชแนวเสียงขึ้นมา(สามารถเปลี่ยนชื่อแชแนวได้) พอกดแล้วจะทำการสร้างแชแนวส่วนตัว\nใช้คำสั่ง /setup create-voice confirm เพื่อติดตั้งได้เลย`"
       }
     },
     "remove_background": {
       "embed_confirm": {
-        "title": "`Installed`",
-        "field": "`Click <#${channel.id}> to go to the channel.`"
+        "title": "`ติดตั้งแล้ว`",
+        "field": "`ใช้งานได้ที่ <#${channel.id}>`"
       },
       "about": {
-        "title": "`About`",
-        "description": "`Create new channel for REBG (You can change name of channel).\nuse /setup create-voice confirm for install.`"
+        "title": "`เกี่ยวกับ`",
+        "description": "`ระบบจะสร้างแชแนลขี้นมา(สามารถเปลี่ยนชื่อแชแนลได้) เมื่อส่งรูปจะทำการลบพื้นหลังให้ (จำนวนจำกัด)\nใช้คำสั่ง /setup remove-background confirm เพื่อติดตั้งได้เลย`"
       }
     },
-    "wordle-game": {
+    "wordle_game": {
       "embed_confirm": {
-        "title": "`installed`",
-        "field": "`Click <#${channel.id}> for play.`"
+        "title": "`ติดตั้งแล้ว`",
+        "field": "`เข้าไปเล่นได้ที่ <#${channel.id}>`"
       },
       "about": {
-        "title": "`About`",
-        "description": "`Create channel for play wordle game(You can change name of channel).\nuse /setup wordle-game confirm for install.`"
+        "title": "`เกี่ยวกับ`",
+        "description": "`สร้างห้องสำหรับเล่นเกม Wordle (สามารถเปลียนชื่อห้องได้)\nใช้คำสั่ง /setup wordle-game confirm เพื่อติดตั้งได้เลย`"
       }
     }
   },
@@ -106,21 +106,23 @@
   },
 
   "wordle": {
-    "content1": "`You have to install first (/install wordle-game)",
-    "content2": "`Click <#${channelData.wordle_ID}> to play`",
-    "content3": "`The game is still running. ${wordleData.doing.length}`",
+    "content1": "`กรุณาติดตั้งเกมก่อน (/install wordle-game)`",
+    "content2": "`ไปเล่นที่แชแนวนี้ <#${channelData.wordle_ID}>`",
+    "content3": "`เกมกำลังดำเนินการอยู่ ${wordleData.doing.length}`",
+    "content4": "`เกมของคุณถูกยกเลิกแล้ว`",
+    "content5": "`เกมของคุณไม่ได้กำลังเริ่มอยู่`",
     "msgGame": {
-      "content1": "`You have to type /wordle to create your game.`",
-      "content2": "`Please enter 5 letter.`",
-      "msgLose": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (lose)${output}`",
-      "msgWin": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (win)${output}`"
+      "content1": "`คุณยังไม่ได้สร้างเกม ลองพิมพ์ /wordle ดูสิ`",
+      "content2": "`กรุณาป้อนตัวอักษรให้ครบ 5 ตัว`",
+      "msgLose": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณแพ้)${output}`",
+      "msgWin": "`Wordle ${wordleData.day} ${wordleData.doing.length}/6 (คุณชนะ)${output}`"
     }
   },
 
   "movie": {
     "embed1": {
-      "title": "`Major Cineplex | Total ${lengthOfListA}`",
-      "description": "`[Info](https://majorcineplex.com/movie)`"
+      "title": "`หนังที่กำลังฉาย (Major) | ทั้งหมด ${lengthOfListA} รายการ`",
+      "description": "`[ข้อมูลจาก MajorCineplex](https://majorcineplex.com/movie)`"
     },
     "embed2": {
       "title": "`NO INFO`",
@@ -129,7 +131,7 @@
   },
 
   "tts": {
-    "embedOn": "`✅ Tts Status: Enabled | Active: <#${ttsData.channelID}>`",
-    "embedOff": "`❌ Tts Status: Disabled`"
+    "embedOn": "`✅ เปิดใช้งานโหมด tts | ใช้งานที่: <#${ttsData.channelID}>`",
+    "embedOff": "`❌ ปิดใช้งานโหมด tts`"
   }
 }

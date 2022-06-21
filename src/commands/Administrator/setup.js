@@ -134,7 +134,6 @@ module.exports = {
   run: async (interaction, client, word) => {
     const { options } = interaction;
     const Sub = options.getSubcommand();
-
     switch (Sub) {
       case 'wordle-game':
         {
