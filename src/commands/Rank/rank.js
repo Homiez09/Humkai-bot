@@ -8,8 +8,10 @@ module.exports = {
   botPerms: ['ADMINISTRATOR'],
   options: [
     {
-      name: 'user'
-    }
+      name: 'user',
+      description: "Mention user to get rank!",
+      type: 6
+    },
   ],
   run: async (interaction, client) => {
     await interaction.deferReply();
