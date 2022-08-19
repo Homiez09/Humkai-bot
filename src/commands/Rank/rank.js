@@ -6,6 +6,11 @@ module.exports = {
   description: 'ดูระดับของคุณ',
   category: 'Rank',
   botPerms: ['ADMINISTRATOR'],
+  options: [
+    {
+      name: 'user'
+    }
+  ],
   run: async (interaction, client) => {
     await interaction.deferReply();
     const applyText = (canvas, text) => {

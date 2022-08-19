@@ -13,7 +13,7 @@ module.exports = {
     },
   ],
   run: async (interaction, client) => {
-    const member = interaction.options.getUser('user') || interaction.member;
+    const member = interaction.options.getUser('user') || interaction.user;
     const embed = new MessageEmbed()
       .setTitle(`${member.tag}'s Avatar`)
       .setURL(member.displayAvatarURL({ dynamic: true, size: 4096 }))
