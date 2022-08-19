@@ -9,11 +9,12 @@ module.exports = {
   options: [
     {
       name: 'user',
-      description: "Mention user to get rank!",
-      type: 6
+      description: 'Mention user to get rank!',
+      type: 6,
     },
   ],
   run: async (interaction, client) => {
+    const user = interaction.options.getUser('user') || interaction.user;
     await interaction.deferReply();
     const applyText = (canvas, text) => {
       const context = canvas.getContext('2d');
@@ -27,7 +28,6 @@ module.exports = {
       return context.font;
     };
 
-    const user = interaction.user;
     const avatar = user.displayAvatarURL({ format: 'png', dynamic: true });
     const card = await Canvas.loadImage('./src/assets/images/rank.png');
     const avatarImg = await Canvas.loadImage(avatar);
