@@ -206,7 +206,7 @@ module.exports = {
                     .setFooter({
                       text: `Requested by ${interaction.user.tag}`,
                       iconURL: interaction.user.displayAvatarURL(),
-                    })
+                    }),
                 ],
               });
             }
