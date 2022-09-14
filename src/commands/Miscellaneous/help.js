@@ -12,10 +12,10 @@ module.exports = {
       .setColor('BLUE')
       .setTitle(`${client.user.username}'s Help`)
       .setDescription('**/ Slash Command List **')
-      .setFooter(
-        `request by ${interaction.user.tag}`,
-        interaction.user.displayAvatarURL(),
-      )
+      .setFooter({
+        text: `Requested by ${interaction.user.tag}`,
+        iconURL: interaction.user.displayAvatarURL(),
+      })
       .setThumbnail(client.user.displayAvatarURL());
     for (const category of categories) {
       const commands = client.slash.filter((c) => c.category === category);

@@ -43,10 +43,10 @@ module.exports = {
           .addField('Discord.js Version', `${require('discord.js').version}`)
           .addField('Node.js Version', `${process.version}`)
           .setColor('#0099ff')
-          .setFooter(
-            `Requested by ${interaction.user.tag}`,
-            interaction.user.displayAvatarURL(),
-          ),
+          .setFooter({
+            text: `Requested by ${interaction.user.tag}`,
+            iconURL: interaction.user.displayAvatarURL(),
+          }),
       ],
     });
   },

@@ -69,10 +69,10 @@ module.exports = {
             const embed = new MessageEmbed()
               .setColor('#3CB371')
               .setDescription(eval(word.tts.embedOn))
-              .setFooter(
-                `Request by ${interaction.user.tag}`,
-                interaction.user.displayAvatarURL(),
-              );
+              .setFooter({
+                text: `Request by ${interaction.user.tag}`,
+                iconURL: interaction.user.displayAvatarURL(),
+              });
             await interaction.editReply({ embeds: [embed], ephemeral: false });
           } else {
             ttsData = await ttsModel.findOne({
@@ -81,10 +81,10 @@ module.exports = {
             const embed = new MessageEmbed()
               .setColor('#3CB371')
               .setDescription(eval(word.tts.embedOn))
-              .setFooter(
-                `Request by ${interaction.user.tag}`,
-                interaction.user.displayAvatarURL(),
-              );
+              .setFooter({
+                text: `Request by ${interaction.user.tag}`,
+                iconURL: interaction.user.displayAvatarURL(),
+              });
             await interaction.reply({ embeds: [embed], ephemeral: false });
           }
         }
@@ -112,19 +112,19 @@ module.exports = {
           const embed = new MessageEmbed()
             .setColor('#FF0000')
             .setDescription(eval(word.tts.embedOff))
-            .setFooter(
-              `Request by ${interaction.user.tag}`,
-              interaction.user.displayAvatarURL(),
-            );
+            .setFooter({
+              text: `Request by ${interaction.user.tag}`,
+              iconURL: interaction.user.displayAvatarURL(),
+            });
           await interaction.editReply({ embeds: [embed], ephemeral: false });
         } else {
           const embed = new MessageEmbed()
             .setColor('#FF0000')
             .setDescription(eval(word.tts.embedOff))
-            .setFooter(
-              `Request by ${interaction.user.tag}`,
-              interaction.user.displayAvatarURL(),
-            );
+            .setFooter({
+              text: `Request by ${interaction.user.tag}`,
+              iconURL: interaction.user.displayAvatarURL(),
+            });
           await interaction.reply({ embeds: [embed], ephemeral: false });
         }
       }

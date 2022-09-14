@@ -28,10 +28,10 @@ module.exports = {
       const embed = new MessageEmbed()
         .setColor('GREEN')
         .setTitle(`ผลการค้นหา "${search}"`)
-        .setFooter(
-          `request by ${interaction.user.tag}`,
-          interaction.user.displayAvatarURL(),
-        );
+        .setFooter({
+          text: `Requested by ${interaction.user.tag}`,
+          iconURL: interaction.user.displayAvatarURL(),
+        });
       if (results.length > 0) {
         for (const word of results) {
           embed.setDescription(results.map((f) => `\`${f}\``).join(', '));

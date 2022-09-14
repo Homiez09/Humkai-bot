@@ -148,10 +148,10 @@ module.exports = {
                   .setDescription(
                     eval(word.setup.wordle_game.about.description),
                   )
-                  .setFooter(
-                    `Requested by ${interaction.user.tag}`,
-                    interaction.user.displayAvatarURL(),
-                  );
+                  .setFooter({
+                    text: `Requested by ${interaction.user.tag}`,
+                    iconURL: interaction.user.displayAvatarURL(),
+                  });
                 const attachment = new MessageAttachment(
                   './src/assets/images/about.wordle.png',
                 );
@@ -203,10 +203,10 @@ module.exports = {
                       eval(word.setup.wordle_game.embed_confirm.field),
                     )
                     .setColor('#0099ff')
-                    .setFooter(
-                      `Requested by ${interaction.user.tag}`,
-                      interaction.user.displayAvatarURL(),
-                    ),
+                    .setFooter({
+                      text: `Requested by ${interaction.user.tag}`,
+                      iconURL: interaction.user.displayAvatarURL(),
+                    })
                 ],
               });
             }
@@ -226,10 +226,10 @@ module.exports = {
                   .setDescription(
                     eval(word.setup.remove_background.about.description),
                   )
-                  .setFooter(
-                    `Requested by ${interaction.user.tag}`,
-                    interaction.user.displayAvatarURL(),
-                  );
+                  .setFooter({
+                    text: `Requested by ${interaction.user.tag}`,
+                    iconURL: interaction.user.displayAvatarURL(),
+                  });
                 const attachment = new MessageAttachment(
                   './src/assets/images/about.rebg.png',
                 );
@@ -284,10 +284,10 @@ module.exports = {
                         eval(word.setup.remove_background.embed_confirm.field),
                       )
                       .setColor('#0099ff')
-                      .setFooter(
-                        `Requested by ${interaction.user.tag}`,
-                        interaction.user.displayAvatarURL(),
-                      ),
+                      .setFooter({
+                        text: `Requested by ${interaction.user.tag}`,
+                        iconURL: interaction.user.displayAvatarURL(),
+                      }),
                   ],
                 });
               }
@@ -308,10 +308,10 @@ module.exports = {
                   .setDescription(
                     eval(word.setup.create_voice.about.description),
                   )
-                  .setFooter(
-                    `Requested by ${interaction.user.tag}`,
-                    interaction.user.displayAvatarURL(),
-                  );
+                  .setFooter({
+                    text: `Requested by ${interaction.user.tag}`,
+                    iconURL: interaction.user.displayAvatarURL(),
+                  });
                 const attachment = new MessageAttachment(
                   './src/assets/images/about.voice.png',
                 );
@@ -446,10 +446,10 @@ module.exports = {
                         eval(word.setup.auth.embed_confirm.field),
                       )
                       .setColor('#0099ff')
-                      .setFooter(
-                        `Requested by ${interaction.user.tag}`,
-                        interaction.user.displayAvatarURL(),
-                      ),
+                      .setFooter({
+                        text: `Requested by ${interaction.user.tag}`,
+                        iconURL: interaction.user.displayAvatarURL(),
+                      }),
                   ],
                 });
 
@@ -507,10 +507,10 @@ module.exports = {
                   .setColor('RED')
                   .setTitle(eval(word.setup.auth.about.title))
                   .setDescription(eval(word.setup.auth.about.description))
-                  .setFooter(
-                    `Requested by ${interaction.user.tag}`,
-                    interaction.user.displayAvatarURL(),
-                  );
+                  .setFooter({
+                    text: `Requested by ${interaction.user.tag}`,
+                    iconURL: interaction.user.displayAvatarURL(),
+                  });
                 const attachment = new MessageAttachment(
                   './src/assets/images/about.auth.png',
                 );

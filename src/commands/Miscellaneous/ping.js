@@ -10,10 +10,10 @@ module.exports = {
       .setColor('GREEN')
       .setTitle(eval(word.ping.embed.title))
       .setDescription(eval(word.ping.embed.description))
-      .setFooter(
-        `Requested by ${interaction.user.tag}`,
-        interaction.user.displayAvatarURL(),
-      );
+      .setFooter({
+        text: `Requested by ${interaction.user.tag}`,
+        iconURL: interaction.user.displayAvatarURL(),
+      });
 
     interaction.reply({ embeds: [embed], ephemeral: false });
   },

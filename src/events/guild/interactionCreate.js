@@ -24,10 +24,10 @@ module.exports = async (client, interaction) => {
             .setColor('RED')
             .setTitle(eval(word.error.userEmbed.title))
             .setDescription(eval(word.error.userEmbed.description))
-            .setFooter(
-              interaction.user.tag,
-              interaction.user.displayAvatarURL(),
-            );
+            .setFooter({
+              text: interaction.user.tag,
+              iconURL: interaction.user.displayAvatarURL(),
+            });
 
           return interaction.reply({ embeds: [embed], ephemeral: true });
         }
@@ -39,10 +39,10 @@ module.exports = async (client, interaction) => {
             .setColor('RED')
             .setTitle(eval(word.error.botEmbed.title))
             .setDescription(eval(word.error.botEmbed.description))
-            .setFooter(
-              interaction.user.tag,
-              interaction.user.displayAvatarURL(),
-            );
+            .setFooter({
+              text: interaction.user.tag,
+              iconURL: interaction.user.displayAvatarURL(),
+            });
 
           return interaction.reply({ embeds: [embed], ephemeral: true });
         }
@@ -54,10 +54,10 @@ module.exports = async (client, interaction) => {
             .setColor('RED')
             .setTitle(eval(word.error.ownerEmbed.title))
             .setDescription(eval(word.error.ownerEmbed.description))
-            .setFooter(
-              interaction.user.tag,
-              interaction.user.displayAvatarURL(),
-            );
+            .setFooter({
+              text: interaction.user.tag,
+              iconURL: interaction.user.displayAvatarURL(),
+            });
 
           return interaction.reply({ embeds: [embed], ephemeral: true });
         }
@@ -79,7 +79,10 @@ module.exports = async (client, interaction) => {
         .setColor('RED')
         .setTitle(eval(word.error.botEmbed.title))
         .setDescription(eval(word.error.botEmbed.description2))
-        .setFooter(interaction.user.tag, interaction.user.displayAvatarURL());
+        .setFooter({
+          text: interaction.user.tag,
+          iconURL: interaction.user.displayAvatarURL(),
+        });
 
       return interaction.reply({ embeds: [embed], ephemeral: false });
     }

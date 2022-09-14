@@ -75,10 +75,10 @@ module.exports = {
                 .setTitle(`Day ${wordleData.day}`)
                 .addField('Wordle Game', '```_ _ _ _ _```')
                 .setColor('#0099ff')
-                .setFooter(
-                  `Requested by ${interaction.user.tag}`,
-                  interaction.user.displayAvatarURL(),
-                ),
+                .setFooter({
+                  text: `Requested by ${interaction.user.tag}`,
+                  iconURL: interaction.user.displayAvatarURL(),
+                }),
             ],
           });
         }

@@ -7,7 +7,7 @@ module.exports = {
   botPerms: [],
   run: async (interaction, client) => {
     const attachment = new MessageAttachment(
-      './src/assets/images/talangrean.jpg',
+      './src/assets/images/timetable.jpg',
     );
     interaction.reply({ files: [attachment], ephemeral: false });
   },

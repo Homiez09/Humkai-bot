@@ -18,10 +18,10 @@ module.exports = {
       .setTitle(`${member.tag}'s Avatar`)
       .setURL(member.displayAvatarURL({ dynamic: true, size: 4096 }))
       .setImage(member.displayAvatarURL({ dynamic: true, size: 2048 }))
-      .setFooter(
-        `Requested By: ${interaction.user.tag}`,
-        interaction.user.displayAvatarURL(),
-      );
+      .setFooter({
+        text: `Requested by ${interaction.user.tag}`,
+        iconURL: interaction.user.displayAvatarURL(),
+      });
 
     interaction.reply({ embeds: [embed] });
   },

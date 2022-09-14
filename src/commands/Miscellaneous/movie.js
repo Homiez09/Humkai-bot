@@ -73,10 +73,10 @@ module.exports = {
               .setDescription(eval(word.movie.embed1.description))
               .setColor('#0099ff')
               .setTimestamp()
-              .setFooter(
-                `Requested by ${interaction.user.tag}`,
-                interaction.user.displayAvatarURL(),
-              );
+              .setFooter({
+                text: `Requested by ${interaction.user.tag}`,
+                iconURL: interaction.user.displayAvatarURL(),
+              });
 
             for (let i = 0; i < lengthOfListA; i++) {
               embed.addField(`${listA[i].name[0]}`, `${listA[i].date[0]}`);
@@ -95,10 +95,10 @@ module.exports = {
             .setDescription(eval(word.movie.embed2.description))
             .setColor('#0099ff')
             .setTimestamp()
-            .setFooter(
-              `Requested by ${interaction.user.tag}`,
-              interaction.user.displayAvatarURL(),
-            );
+            .setFooter({
+              text: `Requested by ${interaction.user.tag}`,
+              iconURL: interaction.user.displayAvatarURL(),
+            });
 
           /* for (let i = 0; i < lengthOfListA; i++) {
                         embed.addField(
